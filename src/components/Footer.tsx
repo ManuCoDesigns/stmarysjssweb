@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { GraduationCap, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -14,13 +16,14 @@ const Footer: React.FC = () => {
               <span className="font-bold text-xl">St. Mary's School</span>
             </div>
             <p className="text-gray-300 mb-4">
-              Committed to academic excellence and character development since 1965.
+              Committed to academic excellence and character development since 1996.
             </p>
             <div className="flex space-x-4">
               <Facebook className="h-5 w-5 text-gray-400 hover:text-blue-400 cursor-pointer transition-colors" />
               <Twitter className="h-5 w-5 text-gray-400 hover:text-blue-400 cursor-pointer transition-colors" />
               <Instagram className="h-5 w-5 text-gray-400 hover:text-pink-400 cursor-pointer transition-colors" />
               <Youtube className="h-5 w-5 text-gray-400 hover:text-red-400 cursor-pointer transition-colors" />
+              
             </div>
           </div>
 
@@ -40,7 +43,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-semibold text-lg mb-4">Resources</h3>
             <ul className="space-y-2">
-              <li><Link to="/cbc" className="text-gray-300 hover:text-white transition-colors">CBC Curriculum</Link></li>
+              <li><Link to="/cbc" className="text-gray-300 hover:text-white transition-colors">CBE Curriculum</Link></li>
               <li><Link to="/downloads" className="text-gray-300 hover:text-white transition-colors">Downloads</Link></li>
               <li><Link to="/faq" className="text-gray-300 hover:text-white transition-colors">FAQ</Link></li>
               <li><Link to="/alumni" className="text-gray-300 hover:text-white transition-colors">Alumni</Link></li>
@@ -54,15 +57,15 @@ const Footer: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-blue-400" />
-                <span className="text-gray-300 text-sm">123 Education Street, Nairobi, Kenya</span>
+                <span className="text-gray-300 text-sm">123 Education Street, Bomet, Kenya</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-blue-400" />
-                <span className="text-gray-300 text-sm">+254 712 345 678</span>
+                <span className="text-gray-300 text-sm">+254 721 771 568</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-blue-400" />
-                <span className="text-gray-300 text-sm">info@stmarysschool.ac.ke</span>
+                <span className="text-gray-300 text-sm">stmarysgirlssecbomet@gmail.com</span>
               </div>
             </div>
           </div>
@@ -70,7 +73,15 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 St. Mary's School. All rights reserved.
+            © {currentYear} St. Mary's School. All rights reserved. | Developed and managed by{' '}
+            <a
+              href="https://manuwebdesign.com" // Replace with your actual website link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:underline"
+            >
+              Manuwebdesign
+            </a>
           </p>
         </div>
       </div>
