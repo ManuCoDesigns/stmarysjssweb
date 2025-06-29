@@ -1,10 +1,12 @@
+// server/models/User.js
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
-  name: {
+  username: {
     type: String,
     required: true,
+    unique: true,
     trim: true
   },
   email: {
@@ -21,18 +23,30 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['student', 'teacher', 'parent', 'admin'],
-    required: true
+    enum: ['admin', 'teacher', 'student', 'parent'],
+    default: 'student'
   },
-  avatar: {
+  firstName: {
     type: String,
-    default: ''
+    required: true,
+    trim: true
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true
   },
   phone: {
     type: String,
-    default: ''
+    trim: true
   },
   address: {
+    street: String,
+    city: String,
+    state: String,
+    zipCode: String
+  },
+  profileImage: {
     type: String,
     default: ''
   },
@@ -41,86 +55,18 @@ const userSchema = new mongoose.Schema({
     default: true
   },
   lastLogin: {
-    type: Date,
-    default: Date.now
-  },
-  // Student specific fields
-  studentId: {
-    type: String,
-    sparse: true
-  },
-  grade: {
-    type: String,
-    default: ''
-  },
-  parentId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  // Teacher specific fields
-  employeeId: {
-    type: String,
-    sparse: true
-  },
-  subjects: [{
-    type: String
-  }],
-  qualification: {
-    type: String,
-    default: ''
-  },
-  experience: {
-    type: String,
-    default: ''
-  },
-  department: {
-    type: String,
-    default: ''
-  },
-  hireDate: {
     type: Date
-  },
-  // Parent specific fields
-  children: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  occupation: {
-    type: String,
-    default: ''
-  },
-  // Admin specific fields
-  permissions: [{
-    type: String
-  }],
-  // Common fields
-  emergencyContact: {
-    type: String,
-    default: ''
-  },
-  dateOfBirth: {
-    type: Date
-  },
-  bio: {
-    type: String,
-    default: ''
   }
 }, {
   timestamps: true
 });
 
-// Index for better performance
-userSchema.index({ email: 1 });
-userSchema.index({ role: 1 });
-userSchema.index({ studentId: 1 });
-userSchema.index({ employeeId: 1 });
-
 // Hash password before saving
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
-  
+
   try {
-    const salt = await bcrypt.genSalt(12);
+    const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {
@@ -129,15 +75,15 @@ userSchema.pre('save', async function(next) {
 });
 
 // Compare password method
-userSchema.methods.comparePassword = async function(candidatePassword) {
+userSchema.methods.comparePassword = async function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// Remove password from JSON output
-userSchema.methods.toJSON = function() {
-  const userObject = this.toObject();
-  delete userObject.password;
-  return userObject;
-};
+// Get full name
+userSchema.virtual('fullName').get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
 
-export default mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+export default User;

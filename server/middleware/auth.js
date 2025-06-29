@@ -64,3 +64,5 @@ export const optionalAuth = async (req, res, next) => {
     next();
   }
 };
+
+// This middleware can be used for routes that do not require authentication

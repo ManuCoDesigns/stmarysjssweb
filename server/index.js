@@ -12,6 +12,10 @@ import studentRoutes from './routes/students.js';
 import teacherRoutes from './routes/teachers.js';
 import parentRoutes from './routes/parents.js';
 import adminRoutes from './routes/admin.js';
+import classRoutes from './routes/classes.js';
+import subjectRoutes from './routes/subjects.js';
+import examRoutes from './routes/exams.js';
+import eventRoutes from './routes/events.js';
 import galleryRoutes from './routes/gallery.js';
 import newsRoutes from './routes/news.js';
 import messageRoutes from './routes/messages.js';
@@ -40,7 +44,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Database connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/st-marys-school')
   .then(() => {
     console.log('✅ Connected to MongoDB');
   })
@@ -56,6 +60,10 @@ app.use('/api/students', studentRoutes);
 app.use('/api/teachers', teacherRoutes);
 app.use('/api/parents', parentRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/classes', classRoutes);
+app.use('/api/subjects', subjectRoutes);
+app.use('/api/exams', examRoutes);
+app.use('/api/events', eventRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/messages', messageRoutes);
@@ -89,6 +97,6 @@ app.use('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📊 Environment: ${process.env.NODE_ENV}`);
+  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔗 API URL: http://localhost:${PORT}/api`);
 });

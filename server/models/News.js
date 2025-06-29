@@ -1,93 +1,107 @@
 import mongoose from 'mongoose';
 
-const newsSchema = new mongoose.Schema({
-  title: {
+const messageSchema = new mongoose.Schema({
+  sender: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  recipients: [{
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    readAt: Date,
+    isRead: {
+      type: Boolean,
+      default: false
+    },
+    isArchived: {
+      type: Boolean,
+      default: false
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false
+    }
+  }],
+  subject: {
     type: String,
     required: true,
     trim: true
-  },
-  excerpt: {
-    type: String,
-    required: true
   },
   content: {
     type: String,
     required: true
   },
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+  type: {
+    type: String,
+    enum: ['personal', 'announcement', 'notification', 'system', 'broadcast'],
+    default: 'personal'
+  },
+  priority: {
+    type: String,
+    enum: ['low', 'medium', 'high', 'urgent'],
+    default: 'medium'
   },
   category: {
     type: String,
-    enum: ['Academic', 'Achievement', 'Infrastructure', 'Sports', 'Community', 'Environment', 'Events'],
-    required: true
+    enum: ['academic', 'administrative', 'disciplinary', 'health', 'transport', 'fees', 'general'],
+    default: 'general'
   },
-  image: {
+  attachments: [{
     filename: String,
     originalName: String,
     path: String,
-    url: String
+    size: Number,
+    mimetype: String
+  }],
+  parentMessage: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Message'
   },
-  featured: {
+  thread: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Message'
+  }],
+  scheduledFor: Date,
+  isScheduled: {
     type: Boolean,
     default: false
   },
-  published: {
+  isSent: {
+    type: Boolean,
+    default: true
+  },
+  deliveryStatus: {
+    type: String,
+    enum: ['pending', 'sent', 'delivered', 'failed'],
+    default: 'sent'
+  },
+  readReceipts: {
     type: Boolean,
     default: false
   },
-  publishedAt: {
-    type: Date
-  },
-  tags: [{
-    type: String
-  }],
-  views: {
-    type: Number,
-    default: 0
-  },
-  likes: [{
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    likedAt: {
-      type: Date,
-      default: Date.now
-    }
-  }],
-  comments: [{
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    comment: String,
-    timestamp: {
-      type: Date,
-      default: Date.now
-    },
-    approved: {
-      type: Boolean,
-      default: false
-    }
-  }]
+  expiryDate: Date,
+  tags: [String],
+  metadata: {
+    studentId: String,
+    classId: String,
+    subjectId: String,
+    eventId: String,
+    examId: String
+  }
 }, {
   timestamps: true
 });
 
-// Set publishedAt when published is set to true
-newsSchema.pre('save', function(next) {
-  if (this.isModified('published') && this.published && !this.publishedAt) {
-    this.publishedAt = new Date();
-  }
-  next();
-});
+// Index for efficient queries
+messageSchema.index({ sender: 1 });
+messageSchema.index({ 'recipients.user': 1 });
+messageSchema.index({ createdAt: -1 });
+messageSchema.index({ type: 1 });
+messageSchema.index({ priority: 1 });
+messageSchema.index({ scheduledFor: 1 });
 
-// Indexes for better performance
-newsSchema.index({ category: 1, published: 1 });
-newsSchema.index({ featured: 1, published: 1 });
-newsSchema.index({ publishedAt: -1 });
-
-export default mongoose.model('News', newsSchema);
+export default mongoose.model('Message', messageSchema);

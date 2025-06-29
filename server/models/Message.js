@@ -1,72 +1,107 @@
 import mongoose from 'mongoose';
 
 const messageSchema = new mongoose.Schema({
-  from: {
+  sender: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
-  to: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+  recipients: [{
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    readAt: Date,
+    isRead: {
+      type: Boolean,
+      default: false
+    },
+    isArchived: {
+      type: Boolean,
+      default: false
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false
+    }
   }],
   subject: {
     type: String,
     required: true,
     trim: true
   },
-  message: {
+  content: {
     type: String,
     required: true
   },
   type: {
     type: String,
-    enum: ['personal', 'announcement', 'system'],
+    enum: ['personal', 'announcement', 'notification', 'system', 'broadcast'],
     default: 'personal'
   },
   priority: {
     type: String,
-    enum: ['low', 'normal', 'high', 'urgent'],
-    default: 'normal'
+    enum: ['low', 'medium', 'high', 'urgent'],
+    default: 'medium'
+  },
+  category: {
+    type: String,
+    enum: ['academic', 'administrative', 'disciplinary', 'health', 'transport', 'fees', 'general'],
+    default: 'general'
   },
   attachments: [{
     filename: String,
     originalName: String,
     path: String,
-    size: Number
+    size: Number,
+    mimetype: String
   }],
-  readBy: [{
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    readAt: {
-      type: Date,
-      default: Date.now
-    }
+  parentMessage: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Message'
+  },
+  thread: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Message'
   }],
-  replies: [{
-    from: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    message: String,
-    timestamp: {
-      type: Date,
-      default: Date.now
-    }
-  }],
-  isActive: {
+  scheduledFor: Date,
+  isScheduled: {
+    type: Boolean,
+    default: false
+  },
+  isSent: {
     type: Boolean,
     default: true
+  },
+  deliveryStatus: {
+    type: String,
+    enum: ['pending', 'sent', 'delivered', 'failed'],
+    default: 'sent'
+  },
+  readReceipts: {
+    type: Boolean,
+    default: false
+  },
+  expiryDate: Date,
+  tags: [String],
+  metadata: {
+    studentId: String,
+    classId: String,
+    subjectId: String,
+    eventId: String,
+    examId: String
   }
 }, {
   timestamps: true
 });
 
-// Indexes for better performance
-messageSchema.index({ from: 1, to: 1 });
-messageSchema.index({ type: 1, priority: 1 });
+// Index for efficient queries
+messageSchema.index({ sender: 1 });
+messageSchema.index({ 'recipients.user': 1 });
 messageSchema.index({ createdAt: -1 });
+messageSchema.index({ type: 1 });
+messageSchema.index({ priority: 1 });
+messageSchema.index({ scheduledFor: 1 });
 
 export default mongoose.model('Message', messageSchema);

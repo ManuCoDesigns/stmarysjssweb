@@ -1,178 +1,201 @@
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
-import { authenticate } from '../middleware/auth.js';
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const { auth } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Generate JWT token
-const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
-};
-
-// Register new user
+// Register
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, role, ...otherFields } = req.body;
+    const { username, email, password, role, firstName, lastName, phone, address } = req.body;
 
     // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({
+      $or: [{ email }, { username }]
+    });
+
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists with this email' });
+      return res.status(400).json({
+        success: false,
+        message: 'User with this email or username already exists'
+      });
     }
 
     // Create new user
     const user = new User({
-      name,
+      username,
       email,
       password,
       role,
-      ...otherFields
+      firstName,
+      lastName,
+      phone,
+      address
     });
 
     await user.save();
 
-    // Generate token
-    const token = generateToken(user._id);
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
 
     res.status(201).json({
+      success: true,
       message: 'User registered successfully',
       token,
       user: {
         id: user._id,
-        name: user.name,
+        username: user.username,
         email: user.email,
         role: user.role,
-        avatar: user.avatar
+        firstName: user.firstName,
+        lastName: user.lastName,
+        fullName: user.fullName
       }
     });
   } catch (error) {
-    console.error('Registration error:', error);
-    res.status(500).json({ message: 'Registration failed', error: error.message });
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message
+    });
   }
 });
 
-// Login user
+// Login
 router.post('/login', async (req, res) => {
   try {
-    const { email, password, userType } = req.body;
+    const { email, password } = req.body;
 
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    // Check if user is active
-    if (!user.isActive) {
-      return res.status(401).json({ message: 'Account is deactivated' });
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
     }
 
     // Check password
-    const isPasswordValid = await user.comparePassword(password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    // Check user type/role
-    if (userType && user.role !== userType) {
-      return res.status(401).json({ message: 'Invalid user type' });
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
     }
 
     // Update last login
     user.lastLogin = new Date();
     await user.save();
 
-    // Generate token
-    const token = generateToken(user._id);
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
 
     res.json({
+      success: true,
       message: 'Login successful',
       token,
       user: {
         id: user._id,
-        name: user.name,
+        username: user.username,
         email: user.email,
         role: user.role,
-        avatar: user.avatar,
-        studentId: user.studentId,
-        grade: user.grade,
-        subjects: user.subjects,
-        children: user.children,
-        permissions: user.permissions
+        firstName: user.firstName,
+        lastName: user.lastName,
+        fullName: user.fullName
       }
     });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ message: 'Login failed', error: error.message });
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message
+    });
   }
 });
 
 // Get current user
-router.get('/me', authenticate, async (req, res) => {
+router.get('/me', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id)
-      .populate('children', 'name grade')
-      .populate('parentId', 'name email');
-
-    res.json({ user });
+    const user = await User.findById(req.user.userId).select('-password');
+    res.json({
+      success: true,
+      user
+    });
   } catch (error) {
-    console.error('Get user error:', error);
-    res.status(500).json({ message: 'Failed to get user data', error: error.message });
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message
+    });
   }
 });
 
-// Update user profile
-router.put('/profile', authenticate, async (req, res) => {
+// Update profile
+router.put('/profile', auth, async (req, res) => {
   try {
-    const updates = req.body;
-    delete updates.password; // Don't allow password updates through this route
-    delete updates.role; // Don't allow role changes
-    delete updates.email; // Don't allow email changes
-
+    const { firstName, lastName, phone, address } = req.body;
+    
     const user = await User.findByIdAndUpdate(
-      req.user._id,
-      updates,
+      req.user.userId,
+      { firstName, lastName, phone, address },
       { new: true, runValidators: true }
-    );
+    ).select('-password');
 
     res.json({
+      success: true,
       message: 'Profile updated successfully',
       user
     });
   } catch (error) {
-    console.error('Profile update error:', error);
-    res.status(500).json({ message: 'Profile update failed', error: error.message });
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message
+    });
   }
 });
 
 // Change password
-router.put('/change-password', authenticate, async (req, res) => {
+router.put('/change-password', auth, async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
-
-    const user = await User.findById(req.user._id);
+    
+    const user = await User.findById(req.user.userId);
     
     // Verify current password
-    const isCurrentPasswordValid = await user.comparePassword(currentPassword);
-    if (!isCurrentPasswordValid) {
-      return res.status(400).json({ message: 'Current password is incorrect' });
+    const isMatch = await user.comparePassword(currentPassword);
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: 'Current password is incorrect'
+      });
     }
 
     // Update password
     user.password = newPassword;
     await user.save();
 
-    res.json({ message: 'Password changed successfully' });
+    res.json({
+      success: true,
+      message: 'Password changed successfully'
+    });
   } catch (error) {
-    console.error('Password change error:', error);
-    res.status(500).json({ message: 'Password change failed', error: error.message });
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message
+    });
   }
 });
 
-// Logout (client-side token removal)
-router.post('/logout', authenticate, (req, res) => {
-  res.json({ message: 'Logout successful' });
-});
-
-export default router;
+module.exports = router;
