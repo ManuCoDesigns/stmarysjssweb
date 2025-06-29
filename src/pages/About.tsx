@@ -33,8 +33,8 @@ const About: React.FC = () => {
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">About St. Mary's School - Bomet</h1>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto">
-              Founded in 1965, St. Mary's School has been a beacon of educational excellence for over five decades, 
-              shaping young minds and building character from Pre-Primary through Grade 10 in a nurturing Christian environment.
+              Founded in 1996, St. Mary's School has been a beacon of educational excellence in Bomet Region for over five decades, 
+              shaping young minds and building character from Junior School through Grade 10 in a nurturing Christian environment. 
             </p>
           </div>
         </div>
