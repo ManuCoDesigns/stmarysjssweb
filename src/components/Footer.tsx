@@ -75,7 +75,7 @@ const Footer: React.FC = () => {
           <p className="text-gray-400 text-sm">
             © {currentYear} St. Mary's School. All rights reserved. | Developed and managed by{' '}
             <a
-              href="https://manuwebdesign.com" // Replace with your actual website link
+              href="https://manuwebdesigns.vercel.app/" // Replace with your actual website link
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-400 hover:underline"
