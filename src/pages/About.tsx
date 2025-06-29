@@ -31,7 +31,7 @@ const About: React.FC = () => {
       <section className="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About St. Mary's School</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">About St. Mary's School - Bomet</h1>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto">
               Founded in 1965, St. Mary's School has been a beacon of educational excellence for over five decades, 
               shaping young minds and building character from Pre-Primary through Grade 10 in a nurturing Christian environment.
