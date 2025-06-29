@@ -36,12 +36,12 @@ const Contact: React.FC = () => {
     {
       icon: MapPin,
       title: "Address",
-      details: ["123 Education Street", "Nairobi, Kenya", "P.O. Box 12345-00100"]
+      details: ["123 Education Street", "Bomet, Kenya", "P.O. Box 301-20300"]
     },
     {
       icon: Phone,
       title: "Phone",
-      details: ["+254 712 345 678", "+254 733 456 789"]
+      details: ["+254 721 771 568", "+254 714 749 123"]
     },
     {
       icon: Mail,
@@ -73,7 +73,7 @@ const Contact: React.FC = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto">
               We'd love to hear from you. Get in touch with us for admissions inquiries, 
-              general questions, or to schedule a visit to our campus.
+              general questions, or to schedule a visit to our School.
             </p>
           </div>
         </div>
@@ -216,13 +216,13 @@ const Contact: React.FC = () => {
               <div className="bg-white p-6 rounded-lg shadow-md mb-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Directions</h3>
                 <p className="text-gray-600 mb-4">
-                  St. Mary's School is conveniently located in the heart of Nairobi, easily accessible by public transport and private vehicles.
+                  St. Mary's School is conveniently located in the heart of Bomet Town, easily accessible by public transport and private vehicles.
                 </p>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• 5 minutes from Central Business District</li>
-                  <li>• Near Uhuru Park and University of Nairobi</li>
-                  <li>• Multiple matatu routes available</li>
-                  <li>• Secure parking available on campus</li>
+                  <li>• 5 minutes from Bomet Town</li>
+                  <li>• Near Bomet Police Station</li>
+                  <li>• Tarmaced route to school</li>
+                  <li>• Secure parking available on school</li>
                 </ul>
               </div>
 

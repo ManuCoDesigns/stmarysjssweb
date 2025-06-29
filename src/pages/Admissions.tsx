@@ -52,11 +52,8 @@ const Admissions: React.FC = () => {
   ];
 
   const feeStructure = [
-    { grade: "Pre-Primary (PP1-PP2)", termFee: "45,000", yearFee: "135,000" },
-    { grade: "Lower Primary (Grade 1-3)", termFee: "50,000", yearFee: "150,000" },
-    { grade: "Upper Primary (Grade 4-6)", termFee: "55,000", yearFee: "165,000" },
-    { grade: "Junior Secondary (Grade 7-9)", termFee: "65,000", yearFee: "195,000" },
-    { grade: "Senior Secondary (Grade 10)", termFee: "75,000", yearFee: "225,000" }
+    { grade: "Junior Secondary (Grade 7-9)", term1Fee: "20,000", term2Fee: "20,000", term3Fee: "20,000", yearFee: "60,000" },
+    { grade: "Senior Secondary (Grade 10)", term1Fee: "25,000", term2Fee: "25,000", term3Fee: "25,000", yearFee: "75,000" }
   ];
 
   const requirements = [
@@ -164,14 +161,6 @@ const Admissions: React.FC = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                 >
                   <option value="">Select Grade</option>
-                  <option value="PP1">Pre-Primary 1 (PP1)</option>
-                  <option value="PP2">Pre-Primary 2 (PP2)</option>
-                  <option value="Grade1">Grade 1</option>
-                  <option value="Grade2">Grade 2</option>
-                  <option value="Grade3">Grade 3</option>
-                  <option value="Grade4">Grade 4</option>
-                  <option value="Grade5">Grade 5</option>
-                  <option value="Grade6">Grade 6</option>
                   <option value="Grade7">Grade 7</option>
                   <option value="Grade8">Grade 8</option>
                   <option value="Grade9">Grade 9</option>
@@ -294,7 +283,9 @@ const Admissions: React.FC = () => {
                 <thead className="bg-purple-600 text-white">
                   <tr>
                     <th className="px-6 py-4 text-left">Grade Level</th>
-                    <th className="px-6 py-4 text-left">Term Fee (KES)</th>
+                    <th className="px-6 py-4 text-left">Term 1 Fee (KES)</th>
+                    <th className="px-6 py-4 text-left">Term 2 Fee (KES)</th>
+                    <th className="px-6 py-4 text-left">Term 3 Fee (KES)</th>
                     <th className="px-6 py-4 text-left">Annual Fee (KES)</th>
                   </tr>
                 </thead>
@@ -302,7 +293,9 @@ const Admissions: React.FC = () => {
                   {feeStructure.map((fee, index) => (
                     <tr key={index} className="hover:bg-gray-50">
                       <td className="px-6 py-4 font-medium text-gray-900">{fee.grade}</td>
-                      <td className="px-6 py-4 text-gray-700">{fee.termFee}</td>
+                      <td className="px-6 py-4 text-gray-700">{fee.term1Fee}</td>
+                      <td className="px-6 py-4 text-gray-700">{fee.term2Fee}</td>
+                      <td className="px-6 py-4 text-gray-700">{fee.term3Fee}</td>
                       <td className="px-6 py-4 text-gray-700">{fee.yearFee}</td>
                     </tr>
                   ))}

@@ -29,21 +29,11 @@ const Home: React.FC = () => {
   const stats = [
     { number: "500+", label: "Students" },
     { number: "25+", label: "Teachers" },
-    { number: "50+", label: "Years of Excellence" },
+    { number: "30+", label: "Years of Excellence" },
     { number: "98%", label: "University Admission Rate" }
   ];
 
   const gradeHighlights = [
-    {
-      title: "Pre-Primary Foundation",
-      description: "Play-based learning that builds essential skills for academic success",
-      grades: "PP1 - PP2"
-    },
-    {
-      title: "Primary Excellence",
-      description: "Strong foundation in core subjects with CBC methodology",
-      grades: "Grade 1 - 6"
-    },
     {
       title: "Junior Secondary",
       description: "Career pathway introduction and advanced skill development",
@@ -53,6 +43,11 @@ const Home: React.FC = () => {
       title: "Senior Secondary",
       description: "University preparation with specialized pathway focus",
       grades: "Grade 10"
+    },
+    {
+      title: "High School - Girls",
+      description: "The 8-4-4 system cohort, currently Form 2-4",
+      grades: "8-4-4"
     }
   ];
 
@@ -68,7 +63,7 @@ const Home: React.FC = () => {
               <span className="block text-yellow-400">Leaders Today</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
-              At St. Mary's School, we provide exceptional education from Pre-Primary through Grade 10, 
+              At St. Mary's School, we provide exceptional education from Junior School (Grade 7-9) through Grade 10, 
               nurturing academic excellence, character development, and lifelong learning in a supportive Christian environment.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -166,13 +161,17 @@ const Home: React.FC = () => {
                 Grade 10 - Senior Secondary Excellence
               </h2>
               <p className="text-xl text-gray-200 mb-8">
-                Our Grade 10 program represents the pinnacle of CBC education, offering specialized pathways 
+                Our Grade 10 program represents the pinnacle of CBE education, offering specialized pathways 
                 that prepare students for university entrance and career success.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <div className="w-3 h-3 bg-yellow-400 rounded-full mr-4"></div>
-                  <span className="text-gray-200">STEM, Arts & Humanities, and Business pathways</span>
+                  <span className="text-gray-200">STEM, Sports & Arts, and Social Sciences</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-yellow-400 rounded-full mr-4"></div>
+                  <span className="text-gray-200">Center for ICT and Innovation</span>
                 </div>
                 <div className="flex items-center">
                   <div className="w-3 h-3 bg-yellow-400 rounded-full mr-4"></div>
