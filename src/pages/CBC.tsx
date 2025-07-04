@@ -104,6 +104,39 @@ const CBC: React.FC = () => {
     "University Entrance Preparation - Grade 10 specialized assessments"
   ];
 
+  const pathwayOverview = [
+    {
+      title: "Arts & Sports",
+      description: "This pathway nurtures creativity, performance skills, and physical excellence. Ideal for learners with artistic talents or a passion for sports.",
+      highlights: [
+        "Develops communication, creativity, and teamwork",
+        "Encourages cultural exploration and self-expression",
+        "Prepares students for careers in arts, sports, and recreation"
+      ],
+      support: "Parents can support by encouraging participation in artistic activities, sports, and exposure to cultural experiences."
+    },
+    {
+      title: "Social Sciences",
+      description: "This pathway is designed for learners interested in human behavior, languages, history, and global issues.",
+      highlights: [
+        "Builds critical thinking, communication, and research skills",
+        "Fosters social responsibility and global awareness",
+        "Opens doors to careers in law, diplomacy, business, and journalism"
+      ],
+      support: "Parents can support by promoting reading, cultural studies, debates, and community engagement."
+    },
+    {
+      title: "STEM",
+      description: "The Science, Technology, Engineering, and Mathematics pathway develops analytical, technical, and problem-solving skills.",
+      highlights: [
+        "Emphasizes scientific research, innovation, and technology",
+        "Prepares learners for high-demand technical careers",
+        "Includes applied, pure, and technical science options"
+      ],
+      support: "Parents can support by encouraging curiosity, scientific exploration, and participation in STEM clubs and projects."
+    }
+  ];
+
   const pathways = [
     {
       title: "Arts and Sports Science",
@@ -143,6 +176,8 @@ const CBC: React.FC = () => {
       description: "Collaborations with universities and industries to provide real-world experience and mentorship opportunities."
     }
   ];
+
+
 
   return (
     <div>
@@ -281,6 +316,34 @@ const CBC: React.FC = () => {
                 className="rounded-lg shadow-lg w-full"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pathway Overview for Parents Section */}
+      <section className="py-20 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Understanding the Pathways</h2>
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+              In the Competency-Based Education system, students can specialize in pathways that align with their talents, interests, and future aspirations.
+              Here’s how each pathway can shape your child’s learning journey and career.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {pathwayOverview.map((pathway, index) => (
+              <div key={index} className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <h3 className="text-2xl font-bold text-blue-700 mb-4">{pathway.title}</h3>
+                <p className="text-gray-700 mb-4">{pathway.description}</p>
+                <ul className="list-disc list-inside text-gray-600 mb-4">
+                  {pathway.highlights.map((highlight, idx) => (
+                    <li key={idx}>{highlight}</li>
+                  ))}
+                </ul>
+                <p className="text-sm text-gray-500">{pathway.support}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

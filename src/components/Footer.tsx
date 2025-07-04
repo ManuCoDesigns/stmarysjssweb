@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
               <span className="font-bold text-xl">St. Mary's School</span>
             </div>
             <p className="text-gray-300 mb-4">
-              Committed to academic excellence and character development since 1996.
+              Committed to academic excellence and character development since 1990.
             </p>
             <div className="flex space-x-4">
               <Facebook className="h-5 w-5 text-gray-400 hover:text-blue-400 cursor-pointer transition-colors" />
@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-blue-400" />
-                <span className="text-gray-300 text-sm">123 Education Street, Bomet, Kenya</span>
+                <span className="text-gray-300 text-sm">329-20400, Bomet, Kenya</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-blue-400" />
@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-blue-400" />
-                <span className="text-gray-300 text-sm">stmarysgirlssecbomet@gmail.com</span>
+                <span className="text-gray-300 text-sm">stmaryssecbomet@gmail.com</span>
               </div>
             </div>
           </div>

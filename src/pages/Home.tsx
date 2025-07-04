@@ -148,7 +148,7 @@ const Home: React.FC = () => {
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
               <div className="inline-flex items-center bg-yellow-500/20 text-yellow-300 px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
                 <Star className="w-4 h-4 mr-2" />
-                30+ Years of Educational Excellence
+                35+ Years of Educational Excellence
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -159,7 +159,7 @@ const Home: React.FC = () => {
               </h1>
               
               <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl leading-relaxed">
-                At St. Mary's School, we provide exceptional education from Junior School (Grade 7-9) through Grade 10, 
+                At St. Mary's Mixed Junior and Senior School - Bomet, we provide exceptional education from Junior School (Grade 7-9) through Grade 10, 
                 nurturing academic excellence, character development, and lifelong learning in a supportive Christian environment.
               </p>
               
@@ -184,15 +184,15 @@ const Home: React.FC = () => {
               <div className="flex flex-wrap gap-6 text-sm text-gray-300">
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
-                  +254 123 456 789
+                  +254 721 771 568
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-4 h-4 mr-2" />
-                  info@stmarysschool.ac.ke
+                  stmaryssecbomet@gmail.com
                 </div>
                 <div className="flex items-center">
                   <MapPin className="w-4 h-4 mr-2" />
-                  Nairobi, Kenya
+                  Bomet, Kenya
                 </div>
               </div>
             </div>
@@ -518,7 +518,7 @@ const Home: React.FC = () => {
               
               <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-xl transform -rotate-12 hover:rotate-0 transition-transform duration-300">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">A+</div>
+                  <div className="text-2xl font-bold text-green-600">E.E</div>
                   <div className="text-xs text-gray-600">Average Grade</div>
                 </div>
               </div>
@@ -663,7 +663,7 @@ const Home: React.FC = () => {
           </h2>
           
           <p className="text-xl md:text-2xl mb-12 text-gray-200 max-w-4xl mx-auto leading-relaxed">
-            Take the first step towards your child's bright future. From Pre-Primary through Grade 10, 
+            Take the first step towards your child's bright future. From Junior School through Grade 10, 
             our admissions team is ready to guide you through the process.
           </p>
           
@@ -689,17 +689,17 @@ const Home: React.FC = () => {
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <Phone className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
               <div className="text-sm text-gray-300 mb-1">Call Us</div>
-              <div className="font-semibold">+254 123 456 789</div>
+              <div className="font-semibold">+254 721 771 568</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <Mail className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
               <div className="text-sm text-gray-300 mb-1">Email Us</div>
-              <div className="font-semibold">info@stmarysschool.ac.ke</div>
+              <div className="font-semibold">stmaryssecbomet@gmail.com</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <MapPin className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
               <div className="text-sm text-gray-300 mb-1">Visit Us</div>
-              <div className="font-semibold">Nairobi, Kenya</div>
+              <div className="font-semibold">Bomet, Kenya</div>
             </div>
           </div>
         </div>

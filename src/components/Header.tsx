@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, GraduationCap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,10 +24,16 @@ const Header: React.FC = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 text-blue-900 hover:text-blue-700 transition-colors">
-            <GraduationCap className="h-8 w-8" />
+            <img src="/images/JSS HD.png" alt="School Logo" className="h-8 w-8 object-contain" />
             <span className="font-bold text-xl">St. Mary's School</span>
           </Link>
+
+          {/* <Link to="/" className="flex items-center space-x-2 text-blue-900 hover:text-blue-700 transition-colors">
+            <GraduationCap className="h-8 w-8" />
+            <span className="font-bold text-xl">St. Mary's School</span>
+          </Link> */}
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
@@ -35,11 +41,10 @@ const Header: React.FC = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                  isActive(item.href)
+                className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${isActive(item.href)
                     ? 'text-blue-600 border-b-2 border-blue-600'
                     : 'text-gray-700 hover:text-blue-600 hover:border-b-2 hover:border-blue-600'
-                }`}
+                  }`}
               >
                 {item.name}
               </Link>
@@ -76,11 +81,10 @@ const Header: React.FC = () => {
                   key={item.name}
                   to={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${
-                    isActive(item.href)
+                  className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${isActive(item.href)
                       ? 'text-blue-600 bg-blue-50'
                       : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                  }`}
+                    }`}
                 >
                   {item.name}
                 </Link>

@@ -34,7 +34,7 @@ const About: React.FC = () => {
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">About St. Mary's School - Bomet</h1>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto">
-              Founded in 1996, St. Mary's School has been a beacon of educational excellence in Bomet Region for over five decades,
+              Founded in 1990, St. Mary's School has been a beacon of educational excellence in Bomet Region for over five decades,
               shaping young minds and building character from Junior School through Grade 10 in a nurturing Christian environment.
             </p>
           </div>
@@ -48,7 +48,7 @@ const About: React.FC = () => {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our History</h2>
               <p className="text-gray-600 mb-6">
-                St. Mary's School was established in 1996 by the Congregation of the Fransiscan Sisters of St. Joseph (FSSJ) Asumbi, who recognized the need for quality education in our region. What started as a small institution with just 50 students has grown into one of the most respected schools in Kenya.
+                St. Mary's School was established in 1990 by the Congregation of the Fransiscan Sisters of St. Joseph (FSSJ) Asumbi; Sr. Francis Xaviour, who recognized the need for quality education in our region. What started as a small institution with just 50 students has grown into one of the most respected schools in Kenya.
               </p>
               <p className="text-gray-600 mb-6">
                 Over the years, we have maintained our commitment to academic excellence while adapting to modern
@@ -167,7 +167,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src={`/images/principal.jpg`}
+                src={`/images/principal2.jpg`}
                 alt="Principal"
                 className="rounded-lg shadow-lg w-full max-w-md mx-auto"
               />
@@ -211,10 +211,16 @@ const About: React.FC = () => {
             {[
               { name: "Dr. Sr. Mary Gabriel C.", position: "Principal", image: "principal.jpg" },
               { name: "Md. Kiama M.W", position: "Deputy Principal", image: "deputy.jpg" },
-              { name: "Md. Bevaline C.", position: "Head of JSS", image: "head_of_jss.jpg" },
-              { name: "Mr. Emmanuel O.", position: "Examination Officer", image: "Exams.jpg" },
-              { name: "Mr. Emmanuel O.", position: "Examination Officer", image: "Exams.jpg" },
-              { name: "Mr. Emmanuel O.", position: "Examination Officer", image: "Exams.jpg" }
+               { name: "Dr. Johnson Bulowa.", position: "Senior Teacher", image: "" },
+              { name: "Md. Bevaline C.", position: "Head of JSS", image: "" },
+              { name: "Md. Winnie C.", position: "IQASO", image: " " },
+              { name: "Mr. Cyrus L.", position: "Director Of Studies JSS", image: " " },
+              { name: "Md. Eunice G.", position: "Director Of Studies High School", image: " " },
+              { name: "Mr. Emmanuel O.", position: "Examination Officer", image: "Exams1.jpg" },
+              { name: "Mr. Fred O.", position: "H.O.D - Sciences", image: " " },
+              { name: "Mr. Geoffrey B..", position: "Boarding Master ", image: " " },
+              { name: "Mr. Emmanuel O.", position: "Examination Officer", image: " " },
+              { name: "Mr. Emmanuel O.", position: "Examination Officer", image: " " }
             ].map((leader, index) => (
               <div key={index} className="text-center bg-white p-6 rounded-lg shadow-md">
                 <img

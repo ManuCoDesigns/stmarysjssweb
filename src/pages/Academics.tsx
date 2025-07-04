@@ -271,7 +271,7 @@ const Academics: React.FC = () => {
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
               <div className="inline-flex items-center bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
                 <Award className="w-4 h-4 mr-2" />
-                CBE Excellence Since 1994
+                CBE Excellence Since 1990
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -550,7 +550,7 @@ const Academics: React.FC = () => {
 
                   <div className="pt-6 border-t border-gray-100">
                     <Link
-                      to="/admissions"
+                      to="/cbc"
                       className={`w-full bg-gradient-to-r ${track.color} text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 block text-center`}
                     >
                       Learn More About This Track
@@ -672,7 +672,7 @@ const Academics: React.FC = () => {
               
               <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-xl">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-sky-600">A</div>
+                  <div className="text-2xl font-bold text-sky-600">E.E</div>
                   <div className="text-xs text-gray-600">Average Grade</div>
                 </div>
               </div>
@@ -772,7 +772,7 @@ const Academics: React.FC = () => {
               className="group border-2 border-white/30 text-white px-10 py-5 rounded-xl font-bold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm text-lg"
             >
               <Calendar className="mr-3 h-6 w-6 inline" />
-              Schedule Campus Visit
+              Schedule School Visit
             </Link>
           </div>
 
@@ -786,11 +786,11 @@ const Academics: React.FC = () => {
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <Users className="w-8 h-8 text-blue-400 mx-auto mb-3" />
               <div className="text-sm text-gray-300 mb-1">Admissions</div>
-              <div className="font-semibold">+254 123 456 789</div>
+              <div className="font-semibold">+254 721 771 568</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <MapPin className="w-8 h-8 text-indigo-400 mx-auto mb-3" />
-              <div className="text-sm text-gray-300 mb-1">Campus Tours</div>
+              <div className="text-sm text-gray-300 mb-1">School Tours</div>
               <div className="font-semibold">Mon-Fri 9AM-4PM</div>
             </div>
           </div>
