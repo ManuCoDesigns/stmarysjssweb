@@ -13,7 +13,6 @@ import {
   Microscope,
   Calculator,
   Palette,
-  Music,
   Trophy,
   Brain,
   Zap,
@@ -29,7 +28,6 @@ import {
 
 const Academics: React.FC = () => {
   const [activePathway, setActivePathway] = useState(0);
-  const [activeTab, setActiveTab] = useState('overview');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
