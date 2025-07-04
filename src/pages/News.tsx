@@ -5,9 +5,9 @@ const News: React.FC = () => {
   const newsArticles = [
     {
       id: 1,
-      title: "Outstanding KCPE Results 2024",
-      excerpt: "Our Grade 6 students have achieved exceptional results in the Kenya Certificate of Primary Education examinations, with 95% scoring above 300 marks.",
-      content: "We are proud to announce that our Grade 6 students have excelled in the 2024 KCPE examinations. Out of 87 candidates, 83 students scored above 300 marks, demonstrating the quality of education and dedication of our teaching staff.",
+      title: "Outstanding KCSE Results 2024",
+      excerpt: "Our Form 4 Students(2024) students have achieved exceptional results in the Kenya Certificate of Secondary Education examinations, with 65% University Transition.",
+      content: "We are proud to announce that our Form 4 candidates have excelled in the 2024 KCSE examinations. Out of 87 candidates, 45 students scored above C+, demonstrating the quality of education and dedication of our teaching staff.",
       date: "2024-03-15",
       author: "Academic Department",
       image: "https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=600",

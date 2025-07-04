@@ -28,7 +28,7 @@ const CBC: React.FC = () => {
   const learningAreas = [
     {
       name: "Languages",
-      subjects: ["English", "Kiswahili", "Kenya Sign Language (Optional)", "Foreign Languages (Grade 10)"],
+      subjects: ["English", "Kiswahili", "Foreign Languages (Grade 10)"],
       description: "Developing communication skills and cultural understanding"
     },
     {
@@ -150,7 +150,7 @@ const CBC: React.FC = () => {
       <section className="bg-gradient-to-r from-cyan-800 to-cyan-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Competency-Based Curriculum</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Competency-Based Education</h1>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto">
               Understanding Kenya's transformative education system that focuses on developing competencies 
               and skills for the 21st century learner, from Pre-Primary through Grade 10.
@@ -163,9 +163,9 @@ const CBC: React.FC = () => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What is CBC?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What is CBE?</h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-              The Competency-Based Curriculum (CBC) is Kenya's new education system that emphasizes the development 
+              The Competency-Based Education (CBE) is Kenya's new education system that emphasizes the development 
               of competencies, skills, and values rather than just knowledge acquisition. It prepares learners 
               to be productive and competitive in the global economy, with Grade 10 serving as the bridge to higher education.
             </p>
@@ -190,7 +190,7 @@ const CBC: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Grade 10 - Senior Secondary Excellence</h2>
-            <p className="text-xl text-gray-600">The culmination of CBC education, preparing students for university and career success</p>
+            <p className="text-xl text-gray-600">The culmination of CBE education, preparing students for university and career success</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -239,7 +239,7 @@ const CBC: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Core Competencies</h2>
-            <p className="text-xl text-gray-600">Essential skills and abilities developed through CBC</p>
+            <p className="text-xl text-gray-600">Essential skills and abilities developed through CBE</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -258,9 +258,9 @@ const CBC: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Assessment in CBC</h2>
+              <h2 className="text-3xl font-bold mb-6">Assessment in CBE</h2>
               <p className="text-gray-200 mb-8">
-                CBC uses diverse assessment methods to evaluate learner progress holistically, 
+                CBE uses diverse assessment methods to evaluate learner progress holistically, 
                 focusing on competency development rather than just test scores. Grade 10 includes 
                 specialized university preparation assessments.
               </p>
@@ -290,7 +290,7 @@ const CBC: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Career Pathways</h2>
-            <p className="text-xl text-gray-600">CBC prepares students for diverse career opportunities through specialized pathways, culminating in Grade 10</p>
+            <p className="text-xl text-gray-600">CBE prepares students for diverse career opportunities through specialized pathways, culminating in Grade 10</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -325,14 +325,14 @@ const CBC: React.FC = () => {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">CBC Implementation at St. Mary's</h2>
-            <p className="text-xl text-gray-600">How we bring the CBC vision to life in our school through Grade 10</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">CBE Implementation at St. Mary's</h2>
+            <p className="text-xl text-gray-600">How we bring the CBE vision to life in our school through Grade 10</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Trained Teachers</h3>
-              <p className="text-gray-600">Our faculty has undergone comprehensive CBC training, including Grade 10 specialization, to effectively implement the new curriculum.</p>
+              <p className="text-gray-600">Our faculty has undergone comprehensive CBE training, including Grade 10 specialization, to effectively implement the new curriculum.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Modern Facilities</h3>
@@ -348,7 +348,7 @@ const CBC: React.FC = () => {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Parent Partnership</h3>
-              <p className="text-gray-600">Active involvement of parents in understanding and supporting their child's CBC journey through Grade 10.</p>
+              <p className="text-gray-600">Active involvement of parents in understanding and supporting their child's CBE journey through Grade 10.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">University Partnerships</h3>
@@ -363,7 +363,7 @@ const CBC: React.FC = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready for the Future?</h2>
           <p className="text-xl text-gray-200 mb-8">
-            Give your child the advantage of a complete CBC education at St. Mary's School, from Pre-Primary through Grade 10. 
+            Give your child the advantage of a complete CBE education at St. Mary's School, from Junior School through Grade 10. 
             Our experienced team is ready to guide them on their learning journey to university and beyond.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
