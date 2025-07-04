@@ -201,7 +201,7 @@ const Home: React.FC = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl transform rotate-6 scale-105 opacity-20"></div>
                 <img
-                  src="https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/images/students1.jpg"
                   alt="St. Mary's School students"
                   className="relative rounded-3xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
                 />
