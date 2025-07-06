@@ -110,13 +110,13 @@ const Academics: React.FC = () => {
       duration: "3 Years"
     },
     {
-      title: "Senior Secondary (Grade 10)",
+      title: "Senior Secondary (Grade 10,11 & 12)",
       description: "Specialized learning in chosen career pathways with university preparation",
       features: ["Pathway specialization", "University entrance preparation", "Advanced research projects", "Industry partnerships"],
       icon: Target,
       color: "from-indigo-500 to-blue-500",
       students: "150+",
-      duration: "1 Year"
+      duration: "3 Year"
     },
     {
       title: "High School (Form 2-4)",
@@ -421,7 +421,7 @@ const Academics: React.FC = () => {
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
               <div className="inline-flex items-center bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
                 <Award className="w-4 h-4 mr-2" />
-                CBE Excellence Since 1994
+                CBE Excellence Since 1990
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
