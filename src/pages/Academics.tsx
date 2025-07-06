@@ -23,7 +23,9 @@ import {
   Play,
   Download,
   Calendar,
-  MapPin
+  MapPin,
+  GraduationCap,
+  Layers
 } from 'lucide-react';
 
 const Academics: React.FC = () => {
@@ -133,15 +135,44 @@ const Academics: React.FC = () => {
       tracks: [
         {
           name: "Arts Track",
-          subjects: ["Fine Arts", "Theatre & Film", "Literature in English", "Music & Dance", "French", "German"],
-          careers: ["Creative Director", "Film Producer", "Writer", "Artist", "Cultural Ambassador"],
+          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          combinationGroups: [
+            {
+              commonSubjects: "Fine Arts, Theatre & Film",
+              combinations: ["Literature in English"]
+            },
+            {
+              commonSubjects: "Theatre & Film, Music & Dance",
+              combinations: ["French", "German"]
+            }
+          ],
+          careers: [
+            "Creative Director", "Film Producer", "Writer", "Artist", "Cultural Ambassador", 
+            "Art Therapist", "Museum Curator", "Graphic Designer", "Animation Director", 
+            "Theatre Director", "Art Gallery Manager", "Creative Writing Teacher", 
+            "Film Editor", "Costume Designer", "Set Designer", "Arts Administrator",
+            "Digital Media Specialist", "Content Creator", "Brand Designer", "Illustrator"
+          ],
           icon: Palette,
           color: "from-blue-500 to-indigo-500"
         },
         {
           name: "Sports & Recreation",
-          subjects: ["Sports & Recreation", "Biology", "Computer Studies", "Mandarin", "Advanced Mathematics"],
-          careers: ["Sports Management", "Athletic Training", "Sports Medicine", "Recreation Therapy"],
+          coreSubjects: ["English", "Kiswahili", "Mathematics", "Biology"],
+          combinationGroups: [
+            {
+              commonSubjects: "Sports & Recreation, Biology",
+              combinations: ["Computer Studies", "Mandarin", "Advanced Mathematics"]
+            }
+          ],
+          careers: [
+            "Sports Management", "Athletic Training", "Sports Medicine", "Recreation Therapy", 
+            "Fitness Instructor", "Sports Psychologist", "Physical Education Teacher", 
+            "Sports Journalist", "Sports Marketing Manager", "Athletic Director", 
+            "Sports Nutritionist", "Physiotherapist", "Sports Event Coordinator", 
+            "Fitness Center Manager", "Sports Equipment Designer", "Sports Analyst",
+            "Olympic Coach", "Sports Broadcaster", "Wellness Consultant", "Yoga Instructor"
+          ],
           icon: Trophy,
           color: "from-sky-500 to-blue-500"
         }
@@ -152,15 +183,65 @@ const Academics: React.FC = () => {
       tracks: [
         {
           name: "Humanities & Business Studies",
-          subjects: ["Business Studies", "History & Citizenship", "Computer Studies", "German", "French", "CRE", "Geography", "Literature in English", "Fasihi ya Kiswahili", "Advanced Mathematics"],
-          careers: ["Business Management", "International Relations", "Law", "Journalism", "Diplomacy"],
+          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          combinationGroups: [
+            {
+              commonSubjects: "Business Studies, History & Citizenship",
+              combinations: ["Computer Studies", "German", "French"]
+            },
+            {
+              commonSubjects: "CRE, Business Studies",
+              combinations: ["Computer Studies", "Fasihi ya Kiswahili", "History & Citizenship"]
+            },
+            {
+              commonSubjects: "CRE, History & Citizenship",
+              combinations: ["French", "Literature in English", "Mandarin"]
+            },
+            {
+              commonSubjects: "Geography, Business Studies",
+              combinations: ["Fasihi ya Kiswahili", "Advanced Mathematics"]
+            },
+            {
+              commonSubjects: "History & Citizenship, Geography",
+              combinations: ["Literature in English"]
+            },
+            {
+              commonSubjects: "CRE, Geography",
+              combinations: ["French"]
+            }
+          ],
+          careers: [
+            "Business Management", "International Relations", "Law", "Journalism", 
+            "Diplomacy", "Social Work", "Public Administration", "Human Resources Manager", 
+            "Marketing Director", "Political Analyst", "Corporate Lawyer", "NGO Director", 
+            "Government Official", "Policy Analyst", "International Trade Specialist", 
+            "Embassy Officer", "News Anchor", "Public Relations Manager", "Event Planner",
+            "Business Consultant", "Project Manager", "Sales Director", "Brand Manager"
+          ],
           icon: Users,
           color: "from-indigo-500 to-blue-600"
         },
         {
           name: "Languages & Literature",
-          subjects: ["French", "German", "Computer Studies", "Literature in English", "Fasihi ya Kiswahili", "Mandarin"],
-          careers: ["Translation", "International Business", "Cultural Studies", "Linguistics", "Education"],
+          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          combinationGroups: [
+            {
+              commonSubjects: "French, German",
+              combinations: ["Computer Studies"]
+            },
+            {
+              commonSubjects: "Literature in English, Fasihi ya Kiswahili",
+              combinations: ["French", "Mandarin"]
+            }
+          ],
+          careers: [
+            "Translation", "International Business", "Cultural Studies", "Linguistics", 
+            "Education", "Journalism", "Publishing", "Interpreter", "Language Teacher", 
+            "Cultural Attaché", "Travel Writer", "International Correspondent", 
+            "Literary Agent", "Book Editor", "Content Writer", "Foreign Service Officer",
+            "Tour Guide", "Language Consultant", "Cross-Cultural Trainer", "Diplomat",
+            "International Marketing Specialist", "Global Communications Manager"
+          ],
           icon: Globe,
           color: "from-cyan-500 to-blue-500"
         }
@@ -171,22 +252,91 @@ const Academics: React.FC = () => {
       tracks: [
         {
           name: "Applied Sciences",
-          subjects: ["Agriculture", "Business Studies", "Biology", "Geography", "Computer Studies", "Home Science", "Advanced Mathematics"],
-          careers: ["Agricultural Engineering", "Environmental Science", "Biotechnology", "Food Science"],
+          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          combinationGroups: [
+            {
+              commonSubjects: "Agriculture, Business Studies",
+              combinations: ["Biology", "Geography"]
+            },
+            {
+              commonSubjects: "Agriculture, Geography",
+              combinations: ["Biology"]
+            },
+            {
+              commonSubjects: "Agriculture, Home Science",
+              combinations: ["Biology"]
+            },
+            {
+              commonSubjects: "Computer Studies, Business Studies",
+              combinations: ["Biology", "Geography", "Advanced Mathematics"]
+            },
+            {
+              commonSubjects: "Computer Studies, Geography",
+              combinations: ["Advanced Mathematics", "Physics"]
+            }
+          ],
+          careers: [
+            "Agricultural Engineering", "Environmental Science", "Biotechnology", 
+            "Food Science", "Veterinary Medicine", "Agricultural Economics", 
+            "Sustainable Agriculture Specialist", "Food Safety Inspector", 
+            "Agricultural Research Scientist", "Farm Manager", "Soil Scientist", 
+            "Plant Pathologist", "Agricultural Extension Officer", "Crop Consultant",
+            "Greenhouse Manager", "Agricultural Technology Developer", "Food Technologist",
+            "Environmental Consultant", "Conservation Scientist", "Agricultural Economist"
+          ],
           icon: Microscope,
           color: "from-blue-600 to-indigo-600"
         },
         {
           name: "Pure Sciences",
-          subjects: ["Advanced Mathematics", "Biology", "Chemistry", "Physics", "Agriculture", "Computer Studies", "Home Science"],
-          careers: ["Medicine", "Engineering", "Research Scientist", "Biotechnology", "Pharmaceutical Sciences"],
+          coreSubjects: ["English", "Kiswahili", "Advanced Mathematics", "Computer Studies"],
+          combinationGroups: [
+            {
+              commonSubjects: "Advanced Mathematics, Biology",
+              combinations: ["Agriculture", "Chemistry", "Geography", "Home Science"]
+            },
+            {
+              commonSubjects: "Advanced Mathematics, Chemistry",
+              combinations: ["Physics"]
+            },
+            {
+              commonSubjects: "Biology, Chemistry",
+              combinations: ["Agriculture", "Computer Studies"]
+            }
+          ],
+          careers: [
+            "Medicine", "Engineering", "Research Scientist", "Biotechnology", 
+            "Pharmaceutical Sciences", "Data Science", "Astronomy", "Biomedical Engineer", 
+            "Clinical Research Coordinator", "Laboratory Technician", "Medical Doctor", 
+            "Surgeon", "Pharmacist", "Biochemist", "Microbiologist", "Geneticist",
+            "Neuroscientist", "Epidemiologist", "Medical Researcher", "Pathologist",
+            "Radiologist", "Anesthesiologist", "Pediatrician", "Cardiologist"
+          ],
           icon: Zap,
           color: "from-sky-600 to-blue-600"
         },
         {
           name: "Technical Studies",
-          subjects: ["Building Construction", "Business Studies", "Computer Studies", "Electricity", "Biology"],
-          careers: ["Civil Engineering", "Electrical Engineering", "Architecture", "Construction Management"],
+          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          combinationGroups: [
+            {
+              commonSubjects: "Building Construction, Business Studies",
+              combinations: ["Computer Studies"]
+            },
+            {
+              commonSubjects: "Electricity, Business Studies",
+              combinations: ["Biology"]
+            }
+          ],
+          careers: [
+            "Civil Engineering", "Electrical Engineering", "Architecture", 
+            "Construction Management", "Software Development", "IT Consulting", 
+            "Structural Engineer", "Project Manager", "Building Inspector", 
+            "Quantity Surveyor", "Urban Planner", "Interior Designer", 
+            "Mechanical Engineer", "Systems Analyst", "Network Administrator",
+            "Database Administrator", "Cybersecurity Specialist", "Web Developer",
+            "Mobile App Developer", "Cloud Solutions Architect", "DevOps Engineer"
+          ],
           icon: Brain,
           color: "from-indigo-600 to-blue-700"
         }
@@ -271,7 +421,7 @@ const Academics: React.FC = () => {
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
               <div className="inline-flex items-center bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
                 <Award className="w-4 h-4 mr-2" />
-                CBE Excellence Since 1990
+                CBE Excellence Since 1994
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -469,20 +619,20 @@ const Academics: React.FC = () => {
         </div>
       </section>
 
-      {/* Enhanced Career Pathways with Subject Combinations */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-sky-50">
+      {/* Optimized Career Pathways with Enhanced Subject Combination Cards */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-sky-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <div className="inline-flex items-center bg-indigo-100 text-indigo-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <Target className="w-4 h-4 mr-2" />
               Grade 10 Specialization
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Career Pathways & Subject Combinations</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Choose from 40+ specialized subject combinations across three major pathways</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Career Pathways & Subject Combinations</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Choose from 40+ specialized subject combinations across three major pathways</p>
           </div>
 
           {/* Pathway Navigation */}
-          <div className="flex justify-center mb-12">
+          <div className="flex justify-center mb-10">
             <div className="bg-white rounded-2xl p-2 shadow-lg border border-gray-200">
               {pathwayTracks.map((pathway, index) => (
                 <button
@@ -500,16 +650,17 @@ const Academics: React.FC = () => {
             </div>
           </div>
 
-          {/* Active Pathway Content */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Active Pathway Content - Enhanced Layout */}
+          <div className="space-y-8">
             {pathwayTracks[activePathway].tracks.map((track, index) => (
-              <div key={index} className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden">
-                <div className={`h-2 bg-gradient-to-r ${track.color}`}></div>
+              <div key={index} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
+                <div className={`h-1 bg-gradient-to-r ${track.color}`}></div>
                 
-                <div className="p-8">
+                <div className="p-6">
+                  {/* Compact Track Header */}
                   <div className="flex items-center mb-6">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${track.color} mr-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <track.icon className="h-8 w-8 text-white" />
+                    <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-r ${track.color} mr-4 group-hover:scale-105 transition-transform duration-300`}>
+                      <track.icon className="h-7 w-7 text-white" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
@@ -519,41 +670,90 @@ const Academics: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="mb-8">
-                    <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                      <BookOpen className="w-4 h-4 mr-2 text-blue-600" />
-                      Core Subjects:
-                    </h4>
-                    <div className="grid grid-cols-2 gap-2">
-                      {track.subjects.map((subject, subjectIndex) => (
-                        <div key={subjectIndex} className="text-sm text-gray-700 bg-gray-50 px-3 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors duration-300">
-                          {subject}
+                  {/* Optimized Two Column Layout */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Left Column - Core Subjects & Career Opportunities */}
+                    <div className="space-y-6">
+                      {/* Compact Core Subjects */}
+                      <div>
+                        <h4 className="font-bold text-lg text-gray-900 mb-4 flex items-center">
+                          <GraduationCap className="w-5 h-5 mr-2 text-blue-600" />
+                          Core Subjects
+                          <span className="ml-2 text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Required</span>
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {track.coreSubjects.map((subject, subjectIndex) => (
+                            <div key={subjectIndex} className="bg-gradient-to-r from-blue-50 to-sky-50 border border-blue-200 px-3 py-2 rounded-lg text-sm font-medium text-blue-800 hover:from-blue-100 hover:to-sky-100 transition-colors duration-300">
+                              {subject}
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
+
+                      {/* Enhanced Career Opportunities */}
+                      <div>
+                        <h4 className="font-bold text-lg text-gray-900 mb-4 flex items-center">
+                          <Target className="w-5 h-5 mr-2 text-blue-600" />
+                          Career Opportunities
+                          <span className="ml-2 text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">{track.careers.length}+ Careers</span>
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-80 overflow-y-auto">
+                          {track.careers.map((career, careerIndex) => (
+                            <div key={careerIndex} className="flex items-center text-gray-700 bg-gray-50 px-3 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors duration-300">
+                              <ChevronRight className="w-4 h-4 text-blue-500 mr-2 flex-shrink-0" />
+                              <span className="text-sm font-medium">{career}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Column - Enhanced Subject Combinations */}
+                    <div>
+                      <h4 className="font-bold text-lg text-gray-900 mb-4 flex items-center">
+                        <Layers className="w-5 h-5 mr-2 text-blue-600" />
+                        Subject Combinations
+                        <span className="ml-2 text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">
+                          {track.combinationGroups.reduce((total, group) => total + group.combinations.length, 0)} Options
+                        </span>
+                      </h4>
+                      <div className="space-y-4">
+                        {track.combinationGroups.map((group, groupIndex) => (
+                          <div key={groupIndex} className="bg-gradient-to-br from-white to-blue-50 border-2 border-blue-200 rounded-xl p-5 hover:shadow-lg transition-all duration-300 hover:border-blue-300 hover:from-blue-50 hover:to-blue-100">
+                            {/* Enhanced Common Subjects Header */}
+                            <div className="mb-4">
+                              <h5 className="font-bold text-base text-gray-900 mb-2 flex items-center">
+                                <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-sky-500 rounded-full mr-3"></div>
+                                <span className="bg-gradient-to-r from-blue-600 to-sky-600 bg-clip-text text-transparent">
+                                  {group.commonSubjects}
+                                </span>
+                              </h5>
+                              <div className="text-xs text-gray-600 font-medium mb-3 bg-blue-100 px-2 py-1 rounded-full inline-block">
+                                + one of the following:
+                              </div>
+                            </div>
+                            
+                            {/* Enhanced Third Subject Options */}
+                            <div className="flex flex-wrap gap-2">
+                              {group.combinations.map((thirdSubject, combIndex) => (
+                                <div key={combIndex} className="text-sm font-medium text-blue-700 bg-white px-3 py-2 rounded-lg border-2 border-blue-300 hover:border-blue-500 hover:bg-blue-50 transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105">
+                                  {thirdSubject}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                      <Target className="w-4 h-4 mr-2 text-blue-600" />
-                      Career Opportunities:
-                    </h4>
-                    <div className="space-y-2">
-                      {track.careers.map((career, careerIndex) => (
-                        <div key={careerIndex} className="flex items-center text-sm text-gray-600">
-                          <ChevronRight className="w-4 h-4 text-blue-500 mr-2 flex-shrink-0" />
-                          {career}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-6 border-t border-gray-100">
+                  {/* Compact Call to Action */}
+                  <div className="mt-6 pt-4 border-t border-gray-200">
                     <Link
-                      to="/cbc"
-                      className={`w-full bg-gradient-to-r ${track.color} text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 block text-center`}
+                      to="/admissions"
+                      className={`w-full bg-gradient-to-r ${track.color} text-white py-3 rounded-lg font-semibold hover:shadow-md transition-all duration-300 transform hover:scale-[1.02] block text-center`}
                     >
-                      Learn More About This Track
+                      Apply for {track.name} Track
                     </Link>
                   </div>
                 </div>
@@ -672,7 +872,7 @@ const Academics: React.FC = () => {
               
               <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-xl">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-sky-600">E.E</div>
+                  <div className="text-2xl font-bold text-sky-600">A</div>
                   <div className="text-xs text-gray-600">Average Grade</div>
                 </div>
               </div>
@@ -772,7 +972,7 @@ const Academics: React.FC = () => {
               className="group border-2 border-white/30 text-white px-10 py-5 rounded-xl font-bold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm text-lg"
             >
               <Calendar className="mr-3 h-6 w-6 inline" />
-              Schedule School Visit
+              Schedule Campus Visit
             </Link>
           </div>
 
@@ -786,11 +986,11 @@ const Academics: React.FC = () => {
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <Users className="w-8 h-8 text-blue-400 mx-auto mb-3" />
               <div className="text-sm text-gray-300 mb-1">Admissions</div>
-              <div className="font-semibold">+254 721 771 568</div>
+              <div className="font-semibold">+254 123 456 789</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <MapPin className="w-8 h-8 text-indigo-400 mx-auto mb-3" />
-              <div className="text-sm text-gray-300 mb-1">School Tours</div>
+              <div className="text-sm text-gray-300 mb-1">Campus Tours</div>
               <div className="font-semibold">Mon-Fri 9AM-4PM</div>
             </div>
           </div>
