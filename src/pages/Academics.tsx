@@ -135,7 +135,7 @@ const Academics: React.FC = () => {
       tracks: [
         {
           name: "Arts Track",
-          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
           combinationGroups: [
             {
               commonSubjects: "Fine Arts, Theatre & Film",
@@ -157,8 +157,8 @@ const Academics: React.FC = () => {
           color: "from-blue-500 to-indigo-500"
         },
         {
-          name: "Sports & Recreation",
-          coreSubjects: ["English", "Kiswahili", "Mathematics", "Biology"],
+          name: "Sports & Recreation Track",
+          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
           combinationGroups: [
             {
               commonSubjects: "Sports & Recreation, Biology",
@@ -182,8 +182,8 @@ const Academics: React.FC = () => {
       pathway: "SOCIAL SCIENCES",
       tracks: [
         {
-          name: "Humanities & Business Studies",
-          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          name: "Humanities & Business Studies Track",
+          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
           combinationGroups: [
             {
               commonSubjects: "Business Studies, History & Citizenship",
@@ -222,8 +222,8 @@ const Academics: React.FC = () => {
           color: "from-indigo-500 to-blue-600"
         },
         {
-          name: "Languages & Literature",
-          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          name: "Languages & Literature Track",
+          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
           combinationGroups: [
             {
               commonSubjects: "French, German",
@@ -251,8 +251,8 @@ const Academics: React.FC = () => {
       pathway: "STEM",
       tracks: [
         {
-          name: "Applied Sciences",
-          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          name: "Applied Sciences Track",
+          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
           combinationGroups: [
             {
               commonSubjects: "Agriculture, Business Studies",
@@ -288,8 +288,8 @@ const Academics: React.FC = () => {
           color: "from-blue-600 to-indigo-600"
         },
         {
-          name: "Pure Sciences",
-          coreSubjects: ["English", "Kiswahili", "Advanced Mathematics", "Computer Studies"],
+          name: "Pure Sciences Track",
+          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
           combinationGroups: [
             {
               commonSubjects: "Advanced Mathematics, Biology",
@@ -316,8 +316,8 @@ const Academics: React.FC = () => {
           color: "from-sky-600 to-blue-600"
         },
         {
-          name: "Technical Studies",
-          coreSubjects: ["English", "Kiswahili", "Mathematics", "Computer Studies"],
+          name: "Technical Studies Track",
+          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
           combinationGroups: [
             {
               commonSubjects: "Building Construction, Business Studies",
