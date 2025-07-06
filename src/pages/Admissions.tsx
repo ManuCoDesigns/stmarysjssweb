@@ -160,8 +160,8 @@ const Admissions: React.FC = () => {
   const achievements = [
     { number: "500+", label: "Students Enrolled", icon: Users },
     { number: "95%", label: "Success Rate", icon: Trophy },
-    { number: "15+", label: "Years Experience", icon: Award },
-    { number: "50+", label: "Expert Teachers", icon: GraduationCap }
+    { number: "30+", label: "Years Experience", icon: Award },
+    { number: "20+", label: "Expert Teachers", icon: GraduationCap }
   ];
 
   return (
@@ -223,7 +223,7 @@ const Admissions: React.FC = () => {
             <p className="text-xl md:text-2xl text-purple-100 max-w-4xl mx-auto leading-relaxed">
               Join our vibrant school community and give your child the foundation for a 
               <span className="text-yellow-300 font-semibold"> bright future</span>. 
-              We welcome applications for all grades from Pre-Primary through Grade 10.
+              We welcome applications for all grades from Junior School(Grade 7-9) through Grade 10.
             </p>
             <div className="mt-12 flex justify-center space-x-8">
               {achievements.map((achievement, index) => (
