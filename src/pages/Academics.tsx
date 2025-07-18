@@ -135,7 +135,7 @@ const Academics: React.FC = () => {
       tracks: [
         {
           name: "Arts Track",
-          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
+          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
           combinationGroups: [
             {
               commonSubjects: "Fine Arts, Theatre & Film",
@@ -183,7 +183,7 @@ const Academics: React.FC = () => {
       tracks: [
         {
           name: "Humanities & Business Studies Track",
-          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
+          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education","ICT Skills"],
           combinationGroups: [
             {
               commonSubjects: "Business Studies, History & Citizenship",
@@ -223,7 +223,7 @@ const Academics: React.FC = () => {
         },
         {
           name: "Languages & Literature Track",
-          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
+          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
           combinationGroups: [
             {
               commonSubjects: "French, German",
@@ -252,7 +252,7 @@ const Academics: React.FC = () => {
       tracks: [
         {
           name: "Applied Sciences Track",
-          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
+          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
           combinationGroups: [
             {
               commonSubjects: "Agriculture, Business Studies",
@@ -289,7 +289,7 @@ const Academics: React.FC = () => {
         },
         {
           name: "Pure Sciences Track",
-          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
+          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
           combinationGroups: [
             {
               commonSubjects: "Advanced Mathematics, Biology",
@@ -317,7 +317,7 @@ const Academics: React.FC = () => {
         },
         {
           name: "Technical Studies Track",
-          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
+          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
           combinationGroups: [
             {
               commonSubjects: "Building Construction, Business Studies",
@@ -474,8 +474,8 @@ const Academics: React.FC = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-400 rounded-3xl transform rotate-6 scale-105 opacity-20"></div>
                 <img
-                  src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Academic excellence"
+                  src="/images/Academicteachers.jpg"
+                  alt="St. Mary's School students"
                   className="relative rounded-3xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
                 />
                 

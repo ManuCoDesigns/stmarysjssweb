@@ -1,15 +1,33 @@
-import React, { useState } from 'react';
-import { X, Upload, Video, Image, Play, Pause, Volume2, VolumeX, MoreVertical, Download, Share, Edit, Trash2, Filter, Search, Plus } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { X, Upload, Video, Image as ImageIcon, Play, MoreVertical, Share, Filter, Search, Plus, Shield } from 'lucide-react';
+import PrivacyCard from '../components/PrivacyCard';
+//import PrivacyCard from './components/PrivacyCard';
+
+interface MediaItem {
+  id: number;
+  type: 'image' | 'video';
+  src: string;
+  thumbnail: string;
+  alt: string;
+  category: string;
+  title: string;
+  description: string;
+  uploadDate: string;
+  uploadedBy: string;
+  duration?: string;
+}
 
 const Gallery: React.FC = () => {
   const [selectedMedia, setSelectedMedia] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [mediaType, setMediaType] = useState('All'); // All, Photos, Videos
+  const [mediaType, setMediaType] = useState('All');
   const [showUploadModal, setShowUploadModal] = useState(false);
+  const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [uploadType, setUploadType] = useState<'photo' | 'video'>('photo');
   const [searchTerm, setSearchTerm] = useState('');
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
+  const [verificationError, setVerificationError] = useState('');
 
   const [uploadForm, setUploadForm] = useState({
     title: '',
@@ -18,7 +36,125 @@ const Gallery: React.FC = () => {
     file: null as File | null
   });
 
-  const galleryMedia = [
+  // Content Protection Effects
+  useEffect(() => {
+    // Disable right-click context menu
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+      return false;
+    };
+
+    // Disable keyboard shortcuts
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Disable F12 (Developer Tools)
+      if (e.keyCode === 123) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Disable Ctrl+U (View Source)
+      if (e.ctrlKey && e.keyCode === 85) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Disable Ctrl+S (Save)
+      if (e.ctrlKey && e.keyCode === 83) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Disable Ctrl+Shift+I (Developer Tools)
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Disable Ctrl+Shift+C (Inspect Element)
+      if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+        e.preventDefault();
+        return false;
+      }
+      
+      // Disable Ctrl+A (Select All)
+      if (e.ctrlKey && e.keyCode === 65) {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    // Disable text selection
+    const handleSelectStart = (e: Event) => {
+      e.preventDefault();
+      return false;
+    };
+
+    // Disable drag and drop
+    const handleDragStart = (e: DragEvent) => {
+      e.preventDefault();
+      return false;
+    };
+
+    // Disable printing
+    const handleBeforePrint = (e: Event) => {
+      e.preventDefault();
+      alert('Printing is disabled for this content.');
+      return false;
+    };
+
+    // Add event listeners
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('selectstart', handleSelectStart);
+    document.addEventListener('dragstart', handleDragStart);
+    window.addEventListener('beforeprint', handleBeforePrint);
+
+    // Add CSS protection
+    const style = document.createElement('style');
+    style.textContent = `
+      * {
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+        -webkit-user-drag: none !important;
+        -khtml-user-drag: none !important;
+        -moz-user-drag: none !important;
+        -o-user-drag: none !important;
+        user-drag: none !important;
+      }
+      
+      img, video {
+        pointer-events: none !important;
+      }
+      
+      @media print {
+        * {
+          display: none !important;
+        }
+        body::before {
+          content: "Printing is not allowed for this content." !important;
+          display: block !important;
+          font-size: 24px !important;
+          text-align: center !important;
+          margin-top: 50px !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('selectstart', handleSelectStart);
+      document.removeEventListener('dragstart', handleDragStart);
+      window.removeEventListener('beforeprint', handleBeforePrint);
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  const galleryMedia: MediaItem[] = [
     {
       id: 1,
       type: 'image',
@@ -163,7 +299,6 @@ const Gallery: React.FC = () => {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Validate file type
       const isImage = file.type.startsWith('image/');
       const isVideo = file.type.startsWith('video/');
       
@@ -172,7 +307,6 @@ const Gallery: React.FC = () => {
         return;
       }
       
-      // Validate file size (max 50MB for videos, 10MB for images)
       const maxSize = uploadType === 'video' ? 50 * 1024 * 1024 : 10 * 1024 * 1024;
       if (file.size > maxSize) {
         alert(`File size must be less than ${uploadType === 'video' ? '50MB' : '10MB'}.`);
@@ -184,28 +318,48 @@ const Gallery: React.FC = () => {
   };
 
   const handleUploadSubmit = () => {
+    if (!isVerified) {
+      alert('Please verify your authorization first.');
+      return;
+    }
+    
     if (!uploadForm.title || !uploadForm.file) {
       alert('Please fill in all required fields and select a file.');
       return;
     }
     
-    // Simulate upload process
     console.log('Uploading:', uploadForm);
     alert(`${uploadType === 'photo' ? 'Photo' : 'Video'} uploaded successfully!`);
     
-    // Reset form
     setUploadForm({ title: '', description: '', category: 'Campus', file: null });
     setShowUploadModal(false);
   };
 
-  const handleDownload = (media: any) => {
-    // Simulate download
-    console.log('Downloading:', media.title);
-    alert(`Downloading ${media.title}...`);
+  const handleUploadClick = () => {
+    if (!isVerified) {
+      setShowVerificationModal(true);
+    } else {
+      setShowUploadModal(true);
+    }
   };
 
-  const handleShare = (media: any) => {
-    // Simulate sharing
+  const handleVerification = () => {
+    // Simple verification codes - you can change these
+    const validCodes = ['SCHOOL2024', 'ADMIN123', 'TEACHER2024', 'STAFF123'];
+    
+    if (validCodes.includes(verificationCode.toUpperCase())) {
+      setIsVerified(true);
+      setShowVerificationModal(false);
+      setShowUploadModal(true);
+      setVerificationCode('');
+      setVerificationError('');
+      alert('Verification successful! You can now upload media.');
+    } else {
+      setVerificationError('Invalid verification code. Please contact the school administration.');
+    }
+  };
+
+  const handleShare = (media: MediaItem) => {
     if (navigator.share) {
       navigator.share({
         title: media.title,
@@ -213,27 +367,120 @@ const Gallery: React.FC = () => {
         url: window.location.href
       });
     } else {
-      // Fallback - copy to clipboard
       navigator.clipboard.writeText(window.location.href);
       alert('Link copied to clipboard!');
     }
   };
 
-  const VideoPlayer = ({ media }: { media: any }) => {
+  // Secure Image Component with Canvas Protection
+  const SecureImage: React.FC<{ src: string; alt: string; className?: string; onClick?: () => void }> = ({ 
+    src, 
+    alt, 
+    className, 
+    onClick 
+  }) => {
+    const [canvasDataUrl, setCanvasDataUrl] = useState<string>('');
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    useEffect(() => {
+      const img = new window.Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const canvas = canvasRef.current;
+        if (canvas) {
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            
+            // Add watermark
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.font = '20px Arial';
+            ctx.fillText('St. Mary\'s School', 20, 40);
+            
+            // Add protective overlay pattern
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.02)';
+            for (let i = 0; i < canvas.width; i += 50) {
+              for (let j = 0; j < canvas.height; j += 50) {
+                ctx.fillRect(i, j, 2, 2);
+              }
+            }
+            
+            setCanvasDataUrl(canvas.toDataURL('image/jpeg', 0.8));
+          }
+        }
+      };
+      img.onerror = () => {
+        console.error('Failed to load image:', src);
+      };
+      img.src = src;
+    }, [src]);
+
+    return (
+      <div className="relative">
+        <canvas ref={canvasRef} className="hidden" />
+        {canvasDataUrl && (
+          <img
+            src={canvasDataUrl}
+            alt={alt}
+            className={className}
+            onClick={onClick}
+            onDragStart={(e) => e.preventDefault()}
+            onContextMenu={(e) => e.preventDefault()}
+            style={{ 
+              userSelect: 'none',
+              pointerEvents: onClick ? 'auto' : 'none'
+            }}
+          />
+        )}
+        {/* Invisible overlay to prevent right-click */}
+        <div 
+          className="absolute inset-0 bg-transparent cursor-pointer"
+          onClick={onClick}
+          style={{ userSelect: 'none' }}
+        />
+      </div>
+    );
+  };
+
+  // Secure Video Component
+  const SecureVideo: React.FC<{ media: MediaItem }> = ({ media }) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+      const video = videoRef.current;
+      if (video) {
+        video.addEventListener('contextmenu', (e) => e.preventDefault());
+        
+        // Use setAttribute to set controlsList to avoid TypeScript errors
+        video.setAttribute('controlsList', 'nodownload noremoteplayback');
+      }
+    }, []);
+
     return (
       <div className="relative bg-black rounded-lg overflow-hidden">
         <video
+          ref={videoRef}
           className="w-full h-auto max-h-96"
           controls
           poster={media.thumbnail}
           preload="metadata"
+          onContextMenu={(e) => e.preventDefault()}
+          style={{ userSelect: 'none' }}
         >
           <source src={media.src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
+        {/* Invisible overlay for additional protection */}
+        <div 
+          className="absolute inset-0 bg-transparent pointer-events-none"
+          style={{ userSelect: 'none' }}
+        />
+        
         {/* Video Info Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 pointer-events-none">
           <h3 className="text-white font-semibold text-lg">{media.title}</h3>
           <p className="text-gray-300 text-sm">{media.description}</p>
           <div className="flex items-center justify-between mt-2">
@@ -246,14 +493,17 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="select-none" style={{ userSelect: 'none' }}>
+      {/* Privacy Protection Card */}
+      <PrivacyCard />
+
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-teal-800 to-teal-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Media Gallery</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Secure Media Gallery</h1>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto">
-              Explore our vibrant school community through photos and videos that capture the essence of learning, 
+              Explore our vibrant school community through protected photos and videos that capture the essence of learning, 
               growth, and memorable moments at St. Mary's School.
             </p>
           </div>
@@ -278,7 +528,6 @@ const Gallery: React.FC = () => {
 
             {/* Filters */}
             <div className="flex flex-wrap gap-4 items-center">
-              {/* Media Type Filter */}
               <div className="flex items-center space-x-2">
                 <Filter className="h-5 w-5 text-gray-600" />
                 <select
@@ -292,7 +541,6 @@ const Gallery: React.FC = () => {
                 </select>
               </div>
 
-              {/* Category Filter */}
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
@@ -303,13 +551,25 @@ const Gallery: React.FC = () => {
                 ))}
               </select>
 
-              {/* Upload Button */}
               <button
-                onClick={() => setShowUploadModal(true)}
-                className="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 transition-colors flex items-center"
+                onClick={handleUploadClick}
+                className={`px-6 py-2 rounded-lg transition-colors flex items-center ${
+                  isVerified 
+                    ? 'bg-teal-600 text-white hover:bg-teal-700' 
+                    : 'bg-gray-400 text-white hover:bg-gray-500'
+                }`}
               >
-                <Plus className="h-5 w-5 mr-2" />
-                Upload Media
+                {isVerified ? (
+                  <>
+                    <Plus className="h-5 w-5 mr-2" />
+                    Upload Media
+                  </>
+                ) : (
+                  <>
+                    <Shield className="h-5 w-5 mr-2" />
+                    Verify to Upload
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -347,14 +607,14 @@ const Gallery: React.FC = () => {
                   className="relative h-64 overflow-hidden"
                   onClick={() => setSelectedMedia(index)}
                 >
-                  <img
+                  <SecureImage
                     src={media.thumbnail}
                     alt={media.alt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   
                   {/* Media Type Indicator */}
-                  <div className="absolute top-2 left-2">
+                  <div className="absolute top-2 left-2 pointer-events-none">
                     {media.type === 'video' ? (
                       <div className="bg-black bg-opacity-70 text-white px-2 py-1 rounded flex items-center text-xs">
                         <Video className="h-3 w-3 mr-1" />
@@ -362,7 +622,7 @@ const Gallery: React.FC = () => {
                       </div>
                     ) : (
                       <div className="bg-black bg-opacity-70 text-white px-2 py-1 rounded flex items-center text-xs">
-                        <Image className="h-3 w-3 mr-1" />
+                        <ImageIcon className="h-3 w-3 mr-1" />
                         Photo
                       </div>
                     )}
@@ -370,15 +630,15 @@ const Gallery: React.FC = () => {
 
                   {/* Play Button for Videos */}
                   {media.type === 'video' && (
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                       <div className="bg-white bg-opacity-90 rounded-full p-3">
                         <Play className="h-8 w-8 text-teal-600" />
                       </div>
                     </div>
                   )}
 
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300"></div>
+                  {/* Protection Overlay */}
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 pointer-events-none"></div>
                 </div>
 
                 {/* Media Info */}
@@ -404,16 +664,6 @@ const Gallery: React.FC = () => {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleDownload(media);
-                      }}
-                      className="bg-white bg-opacity-90 text-gray-700 p-2 rounded-full hover:bg-opacity-100 transition-colors"
-                      title="Download"
-                    >
-                      <Download className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
                         handleShare(media);
                       }}
                       className="bg-white bg-opacity-90 text-gray-700 p-2 rounded-full hover:bg-opacity-100 transition-colors"
@@ -430,7 +680,7 @@ const Gallery: React.FC = () => {
           {filteredMedia.length === 0 && (
             <div className="text-center py-12">
               <div className="text-gray-400 mb-4">
-                {mediaType === 'Videos' ? <Video className="h-16 w-16 mx-auto" /> : <Image className="h-16 w-16 mx-auto" />}
+                {mediaType === 'Videos' ? <Video className="h-16 w-16 mx-auto" /> : <ImageIcon className="h-16 w-16 mx-auto" />}
               </div>
               <p className="text-gray-500 text-lg">No {mediaType.toLowerCase()} found matching your criteria.</p>
               <button
@@ -460,15 +710,15 @@ const Gallery: React.FC = () => {
             </button>
             
             {filteredMedia[selectedMedia].type === 'video' ? (
-              <VideoPlayer media={filteredMedia[selectedMedia]} />
+              <SecureVideo media={filteredMedia[selectedMedia]} />
             ) : (
               <div className="relative">
-                <img
+                <SecureImage
                   src={filteredMedia[selectedMedia].src}
                   alt={filteredMedia[selectedMedia].alt}
                   className="max-w-full max-h-screen object-contain rounded-lg"
                 />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
+                <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
                   <h3 className="text-xl font-semibold mb-2">{filteredMedia[selectedMedia].title}</h3>
                   <p className="text-gray-300">{filteredMedia[selectedMedia].description}</p>
                   <div className="flex justify-between items-center mt-2">
@@ -501,13 +751,6 @@ const Gallery: React.FC = () => {
             {/* Media Actions */}
             <div className="absolute bottom-4 right-4 flex space-x-2">
               <button
-                onClick={() => handleDownload(filteredMedia[selectedMedia])}
-                className="bg-white bg-opacity-20 text-white p-3 rounded-full hover:bg-opacity-30 transition-colors"
-                title="Download"
-              >
-                <Download className="h-5 w-5" />
-              </button>
-              <button
                 onClick={() => handleShare(filteredMedia[selectedMedia])}
                 className="bg-white bg-opacity-20 text-white p-3 rounded-full hover:bg-opacity-30 transition-colors"
                 title="Share"
@@ -519,19 +762,123 @@ const Gallery: React.FC = () => {
         </div>
       )}
 
-      {/* Upload Modal */}
-      {showUploadModal && (
+      {/* Verification Modal */}
+      {showVerificationModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-md w-full p-6">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-medium">Upload Media</h3>
-              <button onClick={() => setShowUploadModal(false)}>
+              <h3 className="text-lg font-medium flex items-center">
+                <Shield className="h-5 w-5 mr-2 text-teal-600" />
+                Upload Verification Required
+              </h3>
+              <button onClick={() => {
+                setShowVerificationModal(false);
+                setVerificationCode('');
+                setVerificationError('');
+              }}>
                 <X className="h-5 w-5 text-gray-400" />
               </button>
             </div>
 
             <div className="space-y-4">
-              {/* Upload Type Selection */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <svg className="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <h4 className="text-sm font-medium text-blue-800">
+                      Authorization Required
+                    </h4>
+                    <p className="text-sm text-blue-700 mt-1">
+                      To maintain content quality and prevent spam, uploading requires a verification code. 
+                      Contact the school administration to obtain an upload code.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Verification Code
+                </label>
+                <input
+                  type="text"
+                  value={verificationCode}
+                  onChange={(e) => {
+                    setVerificationCode(e.target.value);
+                    setVerificationError('');
+                  }}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  placeholder="Enter verification code"
+                  onKeyPress={(e) => e.key === 'Enter' && handleVerification()}
+                />
+                {verificationError && (
+                  <p className="text-red-600 text-sm mt-1">{verificationError}</p>
+                )}
+              </div>
+
+              <div className="bg-gray-50 rounded-lg p-3">
+                <p className="text-xs text-gray-600">
+                  <strong>Need a verification code?</strong><br />
+                  Contact the school office at: <br />
+                  📧 admin@stmarysschool.edu<br />
+                  📞 (555) 123-4567
+                </p>
+              </div>
+
+              <div className="flex space-x-3 pt-4">
+                <button
+                  onClick={handleVerification}
+                  disabled={!verificationCode.trim()}
+                  className="flex-1 bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                >
+                  Verify & Continue
+                </button>
+                <button
+                  onClick={() => {
+                    setShowVerificationModal(false);
+                    setVerificationCode('');
+                    setVerificationError('');
+                  }}
+                  className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Upload Modal */}
+      {showUploadModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-md w-full p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-medium flex items-center">
+                <Upload className="h-5 w-5 mr-2 text-teal-600" />
+                Upload Media
+              </h3>
+              <button onClick={() => setShowUploadModal(false)}>
+                <X className="h-5 w-5 text-gray-400" />
+              </button>
+            </div>
+
+            {isVerified && (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+                <div className="flex items-center">
+                  <svg className="h-4 w-4 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-green-800 font-medium">Verified - Upload authorized</span>
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Media Type</label>
                 <div className="flex space-x-4">
@@ -541,7 +888,7 @@ const Gallery: React.FC = () => {
                       uploadType === 'photo' ? 'border-teal-500 bg-teal-50' : 'border-gray-300'
                     }`}
                   >
-                    <Image className="h-5 w-5 mr-2" />
+                    <ImageIcon className="h-5 w-5 mr-2" />
                     Photo
                   </button>
                   <button
@@ -556,7 +903,6 @@ const Gallery: React.FC = () => {
                 </div>
               </div>
 
-              {/* File Upload */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Select {uploadType === 'photo' ? 'Image' : 'Video'} File
@@ -586,7 +932,6 @@ const Gallery: React.FC = () => {
                 </div>
               </div>
 
-              {/* Title */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Title *</label>
                 <input
@@ -598,7 +943,6 @@ const Gallery: React.FC = () => {
                 />
               </div>
 
-              {/* Description */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
                 <textarea
@@ -610,7 +954,6 @@ const Gallery: React.FC = () => {
                 />
               </div>
 
-              {/* Category */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
                 <select
@@ -624,7 +967,6 @@ const Gallery: React.FC = () => {
                 </select>
               </div>
 
-              {/* Upload Button */}
               <div className="flex space-x-3 pt-4">
                 <button
                   onClick={handleUploadSubmit}

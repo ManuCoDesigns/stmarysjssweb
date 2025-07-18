@@ -123,6 +123,7 @@ const About: React.FC = () => {
     { name: "Mr. Cyrus L.", position: "Director Of Studies JSS", image: "", department: "Junior Secondary" },
     { name: "Md. Eunice G.", position: "Director Of Studies High School", image: "", department: "High School" },
     { name: "Mr. Emmanuel O.", position: "Examination Officer", image: "Exams1.jpg", department: "Examinations" },
+    { name: "Md. Kellong", position: "Guidance and Counselling", image: "", department: "Guidance" },
     { name: "Mr. Fred O.", position: "H.O.D - Sciences", image: "", department: "Sciences" },
     { name: "Mr. Geoffrey B.", position: "Boarding Master", image: "", department: "Boarding" },
   ]
@@ -143,14 +144,14 @@ const About: React.FC = () => {
       color: "from-green-500 to-emerald-500",
     },
     {
-      year: "2000",
+      year: "2020",
       event: "Major Expansion",
       description: "New dormitories and laboratory facilities added",
       icon: Building,
       color: "from-purple-500 to-violet-500",
     },
     {
-      year: "2010",
+      year: "2024",
       event: "Excellence Award",
       description: "Top performing school in the region recognition",
       icon: Award,

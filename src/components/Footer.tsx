@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GraduationCap, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import {
+  GraduationCap, Phone, Mail, MapPin,
+  Facebook, Twitter, Instagram, Youtube
+} from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -23,7 +26,6 @@ const Footer: React.FC = () => {
               <Twitter className="h-5 w-5 text-gray-400 hover:text-blue-400 cursor-pointer transition-colors" />
               <Instagram className="h-5 w-5 text-gray-400 hover:text-pink-400 cursor-pointer transition-colors" />
               <Youtube className="h-5 w-5 text-gray-400 hover:text-red-400 cursor-pointer transition-colors" />
-              
             </div>
           </div>
 
@@ -31,11 +33,11 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/academics" className="text-gray-300 hover:text-white transition-colors">Academics</Link></li>
-              <li><Link to="/admissions" className="text-gray-300 hover:text-white transition-colors">Admissions</Link></li>
-              <li><Link to="/news" className="text-gray-300 hover:text-white transition-colors">News</Link></li>
-              <li><Link to="/careers" className="text-gray-300 hover:text-white transition-colors">Careers</Link></li>
+              <li><Link to="/about" className="text-gray-300 hover:text-white">About Us</Link></li>
+              <li><Link to="/academics" className="text-gray-300 hover:text-white">Academics</Link></li>
+              <li><Link to="/admissions" className="text-gray-300 hover:text-white">Admissions</Link></li>
+              <li><Link to="/news" className="text-gray-300 hover:text-white">News</Link></li>
+              <li><Link to="/careers" className="text-gray-300 hover:text-white">Careers</Link></li>
             </ul>
           </div>
 
@@ -43,11 +45,12 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-semibold text-lg mb-4">Resources</h3>
             <ul className="space-y-2">
-              <li><Link to="/cbc" className="text-gray-300 hover:text-white transition-colors">CBE Curriculum</Link></li>
-              <li><Link to="/downloads" className="text-gray-300 hover:text-white transition-colors">Downloads</Link></li>
-              <li><Link to="/faq" className="text-gray-300 hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link to="/alumni" className="text-gray-300 hover:text-white transition-colors">Alumni</Link></li>
-              <li><Link to="/login" className="text-gray-300 hover:text-white transition-colors">Student Portal</Link></li>
+              <li><Link to="/cbc" className="text-gray-300 hover:text-white">CBE Curriculum</Link></li>
+              <li><Link to="/downloads" className="text-gray-300 hover:text-white">Downloads</Link></li>
+              <li><Link to="/faq" className="text-gray-300 hover:text-white">FAQ</Link></li>
+              <li><Link to="/alumni" className="text-gray-300 hover:text-white">Alumni</Link></li>
+              <li><Link to="/login" className="text-gray-300 hover:text-white">Student Portal</Link></li>
+              <li><Link to="/privacy-policy" className="text-gray-300 hover:text-white">Privacy & Copyright</Link></li>
             </ul>
           </div>
 
@@ -71,11 +74,23 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            © {currentYear} St. Mary's School. All rights reserved. | Developed and managed by{' '}
+        {/* Footer Bottom Section */}
+        <div className="border-t border-gray-800 mt-8 pt-6 text-center text-sm text-gray-400">
+          <p className="mb-2">
+            &copy; {currentYear} St. Mary’s Junior and Senior School – Bomet. All rights reserved.
+          </p>
+          <p className="mb-2">
+            This website complies with Kenya's Data Protection Act (2019). Media shared here is for educational use only and published with prior parental consent.
+          </p>
+          {/* <p className="mb-2">
+            <Link to="/privacy-policy" className="text-blue-400 hover:underline">
+              View full privacy & copyright policy
+            </Link>
+          </p> */}
+          <p className="mt-4">
+            Developed and managed by{' '}
             <a
-              href="https://manuwebdesigns.vercel.app/" // Replace with your actual website link
+              href="https://manuwebdesigns.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-400 hover:underline"
