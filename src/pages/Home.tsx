@@ -96,33 +96,33 @@ const Home: React.FC = () => {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Ann Jepngetich",
       role: "Parent of Grade 10 Student",
       content: "St. Mary's has transformed my daughter's approach to learning. The CBE program has given her confidence and critical thinking skills that will serve her well in university.",
       rating: 5,
-      image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150"
+      image: ""
     },
     {
-      name: "Michael Chen",
+      name: "Abiagel Chemutai",
       role: "Grade 10 Graduate",
       content: "The STEM pathway at St. Mary's opened doors I never knew existed. I'm now studying Engineering at university, thanks to the solid foundation I received here.",
       rating: 5,
-      image: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150"
+      image: "" // "https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     {
-      name: "Dr. Patricia Williams",
+      name: "Sr. Dr. Alice S.",
       role: "Education Consultant",
       content: "St. Mary's School represents the gold standard in CBE implementation. Their holistic approach to education is truly remarkable.",
       rating: 5,
-      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150"
+      image: ""
     }
   ];
 
   const achievements = [
-    { title: "National Science Fair Winners", year: "2024", icon: Award },
-    { title: "Best CBE Implementation", year: "2023", icon: Star },
-    { title: "Community Service Excellence", year: "2024", icon: Heart },
-    { title: "Innovation in Education", year: "2023", icon: Lightbulb }
+    { title: "Kenya Music Festivals, Band-National Level", year: "2025", icon: Award },
+    { title: "Best CBE Implementation", year: "2025", icon: Star },
+    { title: "Community Service Excellence", year: "2025", icon: Heart },
+    { title: "Top 5 performing school-KCSE 2024-Bomet region", year: "2024", icon: TrendingUp }
   ];
 
   return (

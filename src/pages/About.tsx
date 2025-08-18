@@ -23,6 +23,7 @@ import {
   Building,
   Shield,
   Handshake,
+  Link,
 } from "lucide-react"
 
 const About: React.FC = () => {
@@ -839,6 +840,7 @@ const About: React.FC = () => {
             Join St. Mary's School and become part of a legacy of excellence that has been shaping young minds for over
             three decades.
           </p>
+          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
             <button className="group bg-gradient-to-r from-blue-500 to-purple-500 text-white px-10 py-5 rounded-xl font-bold hover:from-blue-400 hover:to-purple-400 transition-all duration-300 transform hover:scale-105 shadow-xl text-lg">
               Apply for Admission
