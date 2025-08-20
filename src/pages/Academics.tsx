@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { 
-  BookOpen, 
-  Users, 
-  Clock, 
-  Award, 
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  BookOpen,
+  Users,
+  Clock,
+  Award,
   ChevronRight,
   Star,
   Target,
@@ -25,8 +25,11 @@ import {
   Calendar,
   MapPin,
   GraduationCap,
-  Layers
-} from 'lucide-react';
+  Layers,
+  Book,
+  Leaf,
+  Music,
+} from "lucide-react";
 
 const Academics: React.FC = () => {
   const [activePathway, setActivePathway] = useState(0);
@@ -37,96 +40,112 @@ const Academics: React.FC = () => {
   }, []);
 
   const subjects = [
-    { 
-      name: "English Language", 
+    {
+      name: "English Language",
       description: "Developing communication skills and literary appreciation",
       icon: BookOpen,
-      color: "from-blue-500 to-blue-600"
+      color: "from-blue-500 to-blue-600",
     },
-    { 
-      name: "Kiswahili", 
+    {
+      name: "Kiswahili",
       description: "National language proficiency and cultural understanding",
       icon: Globe,
-      color: "from-sky-500 to-sky-600"
+      color: "from-sky-500 to-sky-600",
     },
-    { 
-      name: "Mathematics", 
+    {
+      name: "Mathematics",
       description: "Building analytical and problem-solving capabilities",
       icon: Calculator,
-      color: "from-indigo-500 to-indigo-600"
+      color: "from-indigo-500 to-indigo-600",
     },
-    { 
-      name: "Science & Technology", 
+    {
+      name: "Science & Technology",
       description: "Integrated science with hands-on experiments",
       icon: Microscope,
-      color: "from-cyan-500 to-cyan-600"
+      color: "from-cyan-500 to-cyan-600",
     },
-    { 
-      name: "Social Studies", 
+    {
+      name: "Social Studies",
       description: "Understanding society, history, and geography",
       icon: Users,
-      color: "from-blue-600 to-blue-700"
+      color: "from-blue-600 to-blue-700",
     },
-    { 
-      name: "Religious Education", 
+    {
+      name: "Religious Education",
       description: "Moral and spiritual development",
       icon: Heart,
-      color: "from-sky-600 to-sky-700"
+      color: "from-sky-600 to-sky-700",
     },
-    { 
-      name: "Creative Arts", 
+    {
+      name: "Creative Arts",
       description: "Music, art, and creative expression",
       icon: Palette,
-      color: "from-indigo-600 to-indigo-700"
+      color: "from-indigo-600 to-indigo-700",
     },
-    { 
-      name: "Physical Education", 
+    {
+      name: "Physical Education",
       description: "Health, fitness, and sports development",
       icon: Trophy,
-      color: "from-cyan-600 to-cyan-700"
+      color: "from-cyan-600 to-cyan-700",
     },
-    { 
-      name: "Life Skills", 
+    {
+      name: "Life Skills",
       description: "Practical skills for daily living and decision making",
       icon: Lightbulb,
-      color: "from-blue-700 to-blue-800"
+      color: "from-blue-700 to-blue-800",
     },
-    { 
-      name: "Foreign Languages", 
+    {
+      name: "Foreign Languages",
       description: "French and German language options",
       icon: Globe,
-      color: "from-sky-700 to-sky-800"
-    }
+      color: "from-sky-700 to-sky-800",
+    },
   ];
 
   const levels = [
     {
       title: "Junior Secondary (Grade 7-9)",
       description: "Comprehensive secondary foundation with career pathways",
-      features: ["Career pathways introduction", "Advanced projects", "Mentorship programs", "University preparation"],
+      features: [
+        "Career pathways introduction",
+        "Advanced projects",
+        "Mentorship programs",
+        "University preparation",
+      ],
       icon: BookOpen,
       color: "from-blue-500 to-cyan-500",
       students: "200+",
-      duration: "3 Years"
+      duration: "3 Years",
     },
     {
       title: "Senior Secondary (Grade 10,11 & 12)",
-      description: "Specialized learning in chosen career pathways with university preparation",
-      features: ["Pathway specialization", "University entrance preparation", "Advanced research projects", "Industry partnerships"],
+      description:
+        "Specialized learning in chosen career pathways with university preparation",
+      features: [
+        "Pathway specialization",
+        "University entrance preparation",
+        "Advanced research projects",
+        "Industry partnerships",
+      ],
       icon: Target,
       color: "from-indigo-500 to-blue-500",
       students: "150+",
-      duration: "3 Year"
+      duration: "3 Year",
     },
     {
       title: "High School (Form 2-4)",
       description: "8-4-4 learning system for girls",
-      features: ["University entrance preparation", "Advanced research projects", "Industry partnerships", "Leadership development"],
+      features: [
+        "University entrance preparation",
+        "Advanced research projects",
+        "Industry partnerships",
+        "Leadership development",
+      ],
       icon: Heart,
       color: "from-sky-500 to-blue-500",
       students: "100+",
-      duration: "3 Years"
-    }
+      duration: "3 Years",
+    },
   ];
 
   const pathwayTracks = [
@@ -135,213 +154,371 @@ const Academics: React.FC = () => {
       tracks: [
         {
           name: "Arts Track",
-          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
+          coreSubjects: [
+            "English",
+            "Kiswahili",
+            "Core/Essential Mathematics",
+            "Physical Education",
+          ],
           combinationGroups: [
             {
               commonSubjects: "Fine Arts, Theatre & Film",
-              combinations: ["Literature in English"]
+              combinations: ["Literature in English"],
             },
             {
               commonSubjects: "Theatre & Film, Music & Dance",
-              combinations: ["French", "German"]
-            }
+              combinations: ["French", "German"],
+            },
           ],
           careers: [
-            "Creative Director", "Film Producer", "Writer", "Artist", "Cultural Ambassador", 
-            "Art Therapist", "Museum Curator", "Graphic Designer", "Animation Director", 
-            "Theatre Director", "Art Gallery Manager", "Creative Writing Teacher", 
-            "Film Editor", "Costume Designer", "Set Designer", "Arts Administrator",
-            "Digital Media Specialist", "Content Creator", "Brand Designer", "Illustrator"
+            "Creative Director",
+            "Film Producer",
+            "Writer",
+            "Artist",
+            "Cultural Ambassador",
+            "Art Therapist",
+            "Museum Curator",
+            "Graphic Designer",
+            "Animation Director",
+            "Theatre Director",
+            "Art Gallery Manager",
+            "Creative Writing Teacher",
+            "Film Editor",
+            "Costume Designer",
+            "Set Designer",
+            "Arts Administrator",
+            "Digital Media Specialist",
+            "Content Creator",
+            "Brand Designer",
+            "Illustrator",
           ],
           icon: Palette,
-          color: "from-blue-500 to-indigo-500"
+          color: "from-blue-500 to-indigo-500",
         },
         {
           name: "Sports & Recreation Track",
-          coreSubjects: ["English", "Kiswahili/Sign Language", "Mathematics", "Community Service Learnig","Physical Education","ICT Skills"],
+          coreSubjects: [
+            "English",
+            "Kiswahili/Sign Language",
+            "Mathematics",
+            "Community Service Learnig",
+            "Physical Education",
+            "ICT Skills",
+          ],
           combinationGroups: [
             {
               commonSubjects: "Sports & Recreation, Biology",
-              combinations: ["Computer Studies", "Mandarin", "Advanced Mathematics"]
-            }
+              combinations: [
+                "Computer Studies",
+                "Mandarin",
+                "Advanced Mathematics",
+              ],
+            },
           ],
           careers: [
-            "Sports Management", "Athletic Training", "Sports Medicine", "Recreation Therapy", 
-            "Fitness Instructor", "Sports Psychologist", "Physical Education Teacher", 
-            "Sports Journalist", "Sports Marketing Manager", "Athletic Director", 
-            "Sports Nutritionist", "Physiotherapist", "Sports Event Coordinator", 
-            "Fitness Center Manager", "Sports Equipment Designer", "Sports Analyst",
-            "Olympic Coach", "Sports Broadcaster", "Wellness Consultant", "Yoga Instructor"
+            "Sports Management",
+            "Athletic Training",
+            "Sports Medicine",
+            "Recreation Therapy",
+            "Fitness Instructor",
+            "Sports Psychologist",
+            "Physical Education Teacher",
+            "Sports Journalist",
+            "Sports Marketing Manager",
+            "Athletic Director",
+            "Sports Nutritionist",
+            "Physiotherapist",
+            "Sports Event Coordinator",
+            "Fitness Center Manager",
+            "Sports Equipment Designer",
+            "Sports Analyst",
+            "Olympic Coach",
+            "Sports Broadcaster",
+            "Wellness Consultant",
+            "Yoga Instructor",
           ],
           icon: Trophy,
-          color: "from-sky-500 to-blue-500"
-        }
-      ]
+          color: "from-sky-500 to-blue-500",
+        },
+      ],
     },
     {
       pathway: "SOCIAL SCIENCES",
       tracks: [
         {
           name: "Humanities & Business Studies Track",
-          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education","ICT Skills"],
+          coreSubjects: [
+            "English",
+            "Kiswahili",
+            "Core/Essential Mathematics",
+            "Physical Education",
+            "ICT Skills",
+          ],
           combinationGroups: [
             {
               commonSubjects: "Business Studies, History & Citizenship",
-              combinations: ["Computer Studies", "German", "French"]
+              combinations: ["Computer Studies", "German", "French"],
             },
             {
               commonSubjects: "CRE, Business Studies",
-              combinations: ["Computer Studies", "Fasihi ya Kiswahili", "History & Citizenship"]
+              combinations: [
+                "Computer Studies",
+                "Fasihi ya Kiswahili",
+                "History & Citizenship",
+              ],
             },
             {
               commonSubjects: "CRE, History & Citizenship",
-              combinations: ["French", "Literature in English", "Mandarin"]
+              combinations: ["French", "Literature in English", "Mandarin"],
             },
             {
               commonSubjects: "Geography, Business Studies",
-              combinations: ["Fasihi ya Kiswahili", "Advanced Mathematics"]
+              combinations: ["Fasihi ya Kiswahili", "Advanced Mathematics"],
             },
             {
               commonSubjects: "History & Citizenship, Geography",
-              combinations: ["Literature in English"]
+              combinations: ["Literature in English"],
             },
             {
               commonSubjects: "CRE, Geography",
-              combinations: ["French"]
-            }
+              combinations: ["French"],
+            },
           ],
           careers: [
-            "Business Management", "International Relations", "Law", "Journalism", 
-            "Diplomacy", "Social Work", "Public Administration", "Human Resources Manager", 
-            "Marketing Director", "Political Analyst", "Corporate Lawyer", "NGO Director", 
-            "Government Official", "Policy Analyst", "International Trade Specialist", 
-            "Embassy Officer", "News Anchor", "Public Relations Manager", "Event Planner",
-            "Business Consultant", "Project Manager", "Sales Director", "Brand Manager"
+            "Business Management",
+            "International Relations",
+            "Law",
+            "Journalism",
+            "Diplomacy",
+            "Social Work",
+            "Public Administration",
+            "Human Resources Manager",
+            "Marketing Director",
+            "Political Analyst",
+            "Corporate Lawyer",
+            "NGO Director",
+            "Government Official",
+            "Policy Analyst",
+            "International Trade Specialist",
+            "Embassy Officer",
+            "News Anchor",
+            "Public Relations Manager",
+            "Event Planner",
+            "Business Consultant",
+            "Project Manager",
+            "Sales Director",
+            "Brand Manager",
           ],
           icon: Users,
-          color: "from-indigo-500 to-blue-600"
+          color: "from-indigo-500 to-blue-600",
         },
         {
           name: "Languages & Literature Track",
-          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
+          coreSubjects: [
+            "English",
+            "Kiswahili",
+            "Core/Essential Mathematics",
+            "Physical Education",
+          ],
           combinationGroups: [
             {
               commonSubjects: "French, German",
-              combinations: ["Computer Studies"]
+              combinations: ["Computer Studies"],
             },
             {
               commonSubjects: "Literature in English, Fasihi ya Kiswahili",
-              combinations: ["French", "Mandarin"]
-            }
+              combinations: ["French", "Mandarin"],
+            },
           ],
           careers: [
-            "Translation", "International Business", "Cultural Studies", "Linguistics", 
-            "Education", "Journalism", "Publishing", "Interpreter", "Language Teacher", 
-            "Cultural Attaché", "Travel Writer", "International Correspondent", 
-            "Literary Agent", "Book Editor", "Content Writer", "Foreign Service Officer",
-            "Tour Guide", "Language Consultant", "Cross-Cultural Trainer", "Diplomat",
-            "International Marketing Specialist", "Global Communications Manager"
+            "Translation",
+            "International Business",
+            "Cultural Studies",
+            "Linguistics",
+            "Education",
+            "Journalism",
+            "Publishing",
+            "Interpreter",
+            "Language Teacher",
+            "Cultural Attaché",
+            "Travel Writer",
+            "International Correspondent",
+            "Literary Agent",
+            "Book Editor",
+            "Content Writer",
+            "Foreign Service Officer",
+            "Tour Guide",
+            "Language Consultant",
+            "Cross-Cultural Trainer",
+            "Diplomat",
+            "International Marketing Specialist",
+            "Global Communications Manager",
           ],
           icon: Globe,
-          color: "from-cyan-500 to-blue-500"
-        }
-      ]
+          color: "from-cyan-500 to-blue-500",
+        },
+      ],
     },
     {
       pathway: "STEM",
       tracks: [
         {
           name: "Applied Sciences Track",
-          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
+          coreSubjects: [
+            "English",
+            "Kiswahili",
+            "Core/Essential Mathematics",
+            "Physical Education",
+          ],
           combinationGroups: [
             {
               commonSubjects: "Agriculture, Business Studies",
-              combinations: ["Biology", "Geography"]
+              combinations: ["Biology", "Geography"],
             },
             {
               commonSubjects: "Agriculture, Geography",
-              combinations: ["Biology"]
+              combinations: ["Biology"],
             },
             {
               commonSubjects: "Agriculture, Home Science",
-              combinations: ["Biology"]
+              combinations: ["Biology"],
             },
             {
               commonSubjects: "Computer Studies, Business Studies",
-              combinations: ["Biology", "Geography", "Advanced Mathematics"]
+              combinations: ["Biology", "Geography", "Advanced Mathematics"],
             },
             {
               commonSubjects: "Computer Studies, Geography",
-              combinations: ["Advanced Mathematics", "Physics"]
-            }
+              combinations: ["Advanced Mathematics", "Physics"],
+            },
           ],
           careers: [
-            "Agricultural Engineering", "Environmental Science", "Biotechnology", 
-            "Food Science", "Veterinary Medicine", "Agricultural Economics", 
-            "Sustainable Agriculture Specialist", "Food Safety Inspector", 
-            "Agricultural Research Scientist", "Farm Manager", "Soil Scientist", 
-            "Plant Pathologist", "Agricultural Extension Officer", "Crop Consultant",
-            "Greenhouse Manager", "Agricultural Technology Developer", "Food Technologist",
-            "Environmental Consultant", "Conservation Scientist", "Agricultural Economist"
+            "Agricultural Engineering",
+            "Environmental Science",
+            "Biotechnology",
+            "Food Science",
+            "Veterinary Medicine",
+            "Agricultural Economics",
+            "Sustainable Agriculture Specialist",
+            "Food Safety Inspector",
+            "Agricultural Research Scientist",
+            "Farm Manager",
+            "Soil Scientist",
+            "Plant Pathologist",
+            "Agricultural Extension Officer",
+            "Crop Consultant",
+            "Greenhouse Manager",
+            "Agricultural Technology Developer",
+            "Food Technologist",
+            "Environmental Consultant",
+            "Conservation Scientist",
+            "Agricultural Economist",
           ],
           icon: Microscope,
-          color: "from-blue-600 to-indigo-600"
+          color: "from-blue-600 to-indigo-600",
         },
         {
           name: "Pure Sciences Track",
-          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
+          coreSubjects: [
+            "English",
+            "Kiswahili",
+            "Core/Essential Mathematics",
+            "Physical Education",
+          ],
           combinationGroups: [
             {
               commonSubjects: "Advanced Mathematics, Biology",
-              combinations: ["Agriculture", "Chemistry", "Geography", "Home Science"]
+              combinations: [
+                "Agriculture",
+                "Chemistry",
+                "Geography",
+                "Home Science",
+              ],
             },
             {
               commonSubjects: "Advanced Mathematics, Chemistry",
-              combinations: ["Physics"]
+              combinations: ["Physics"],
             },
             {
               commonSubjects: "Biology, Chemistry",
-              combinations: ["Agriculture", "Computer Studies"]
-            }
+              combinations: ["Agriculture", "Computer Studies"],
+            },
           ],
           careers: [
-            "Medicine", "Engineering", "Research Scientist", "Biotechnology", 
-            "Pharmaceutical Sciences", "Data Science", "Astronomy", "Biomedical Engineer", 
-            "Clinical Research Coordinator", "Laboratory Technician", "Medical Doctor", 
-            "Surgeon", "Pharmacist", "Biochemist", "Microbiologist", "Geneticist",
-            "Neuroscientist", "Epidemiologist", "Medical Researcher", "Pathologist",
-            "Radiologist", "Anesthesiologist", "Pediatrician", "Cardiologist"
+            "Medicine",
+            "Engineering",
+            "Research Scientist",
+            "Biotechnology",
+            "Pharmaceutical Sciences",
+            "Data Science",
+            "Astronomy",
+            "Biomedical Engineer",
+            "Clinical Research Coordinator",
+            "Laboratory Technician",
+            "Medical Doctor",
+            "Surgeon",
+            "Pharmacist",
+            "Biochemist",
+            "Microbiologist",
+            "Geneticist",
+            "Neuroscientist",
+            "Epidemiologist",
+            "Medical Researcher",
+            "Pathologist",
+            "Radiologist",
+            "Anesthesiologist",
+            "Pediatrician",
+            "Cardiologist",
           ],
           icon: Zap,
-          color: "from-sky-600 to-blue-600"
+          color: "from-sky-600 to-blue-600",
         },
         {
           name: "Technical Studies Track",
-          coreSubjects: ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"],
+          coreSubjects: [
+            "English",
+            "Kiswahili",
+            "Core/Essential Mathematics",
+            "Physical Education",
+          ],
           combinationGroups: [
             {
               commonSubjects: "Building Construction, Business Studies",
-              combinations: ["Computer Studies"]
+              combinations: ["Computer Studies"],
             },
             {
               commonSubjects: "Electricity, Business Studies",
-              combinations: ["Biology"]
-            }
+              combinations: ["Biology"],
+            },
           ],
           careers: [
-            "Civil Engineering", "Electrical Engineering", "Architecture", 
-            "Construction Management", "Software Development", "IT Consulting", 
-            "Structural Engineer", "Project Manager", "Building Inspector", 
-            "Quantity Surveyor", "Urban Planner", "Interior Designer", 
-            "Mechanical Engineer", "Systems Analyst", "Network Administrator",
-            "Database Administrator", "Cybersecurity Specialist", "Web Developer",
-            "Mobile App Developer", "Cloud Solutions Architect", "DevOps Engineer"
+            "Civil Engineering",
+            "Electrical Engineering",
+            "Architecture",
+            "Construction Management",
+            "Software Development",
+            "IT Consulting",
+            "Structural Engineer",
+            "Project Manager",
+            "Building Inspector",
+            "Quantity Surveyor",
+            "Urban Planner",
+            "Interior Designer",
+            "Mechanical Engineer",
+            "Systems Analyst",
+            "Network Administrator",
+            "Database Administrator",
+            "Cybersecurity Specialist",
+            "Web Developer",
+            "Mobile App Developer",
+            "Cloud Solutions Architect",
+            "DevOps Engineer",
           ],
           icon: Brain,
-          color: "from-indigo-600 to-blue-700"
-        }
-      ]
-    }
+          color: "from-indigo-600 to-blue-700",
+        },
+      ],
+    },
   ];
 
   const assessmentFeatures = [
@@ -349,53 +526,73 @@ const Academics: React.FC = () => {
       title: "Continuous Assessment",
       description: "Regular evaluation throughout the learning process",
       icon: Clock,
-      color: "text-blue-600"
+      color: "text-blue-600",
     },
     {
       title: "Portfolio Documentation",
       description: "Comprehensive record of student learning journey",
       icon: BookOpen,
-      color: "text-sky-600"
+      color: "text-sky-600",
     },
     {
       title: "Parent Consultations",
       description: "Regular meetings to discuss student progress",
       icon: Users,
-      color: "text-indigo-600"
+      color: "text-indigo-600",
     },
     {
       title: "University Preparation",
       description: "Specialized preparation for higher education",
       icon: Target,
-      color: "text-cyan-600"
-    }
+      color: "text-cyan-600",
+    },
   ];
 
   const supportServices = [
     {
       title: "Learning Support",
-      description: "Individualized support for students with different learning needs and styles",
+      description:
+        "Individualized support for students with different learning needs and styles",
       icon: Heart,
-      features: ["One-on-one tutoring", "Learning disability support", "Study skills training"]
+      features: [
+        "One-on-one tutoring",
+        "Learning disability support",
+        "Study skills training",
+      ],
     },
     {
       title: "Remedial Classes",
-      description: "Additional support classes for students who need extra help in specific subjects",
+      description:
+        "Additional support classes for students who need extra help in specific subjects",
       icon: BookOpen,
-      features: ["After-school sessions", "Weekend workshops", "Peer tutoring programs"]
+      features: [
+        "After-school sessions",
+        "Weekend workshops",
+        "Peer tutoring programs",
+      ],
     },
     {
       title: "Gifted Program",
-      description: "Enrichment activities and advanced learning opportunities for exceptional students",
+      description:
+        "Enrichment activities and advanced learning opportunities for exceptional students",
       icon: Star,
-      features: ["Advanced coursework", "Research projects", "Competition preparation"]
+      features: [
+        "Advanced coursework",
+        "Research projects",
+        "Competition preparation",
+      ],
     },
     {
       title: "University Prep",
-      description: "Specialized preparation for university entrance exams and application processes",
+      description:
+        "Specialized preparation for university entrance exams and application processes",
       icon: Target,
-      features: ["SAT/ACT prep", "Application guidance", "Scholarship assistance"]
-    }
+      features: [
+        "SAT/ACT prep",
+        "Application guidance",
+        "Scholarship assistance",
+      ],
+    },
   ];
 
   return (
@@ -411,31 +608,42 @@ const Academics: React.FC = () => {
 
         {/* Geometric Pattern Overlay */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M30 30l15-15v30l-15-15zm-15 0l15 15v-30l-15 15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
+          <div
+            className="absolute top-0 left-0 w-full h-full"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M30 30l15-15v30l-15-15zm-15 0l15 15v-30l-15 15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          ></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 flex items-center min-h-screen">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-            <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
+            <div
+              className={`transform transition-all duration-1000 ${
+                isVisible
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-10 opacity-0"
+              }`}
+            >
               <div className="inline-flex items-center bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
                 <Award className="w-4 h-4 mr-2" />
                 CBE Excellence Since 1990
               </div>
-              
+
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 Academic
                 <span className="block bg-gradient-to-r from-sky-400 to-blue-400 bg-clip-text text-transparent">
                   Excellence
                 </span>
               </h1>
-              
+
               <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl leading-relaxed">
-                Our comprehensive CBE curriculum spans from Junior School to Grade 10, designed to develop critical thinking, creativity,
-                and practical skills that prepare students for success in higher education and beyond.
+                Our comprehensive CBE curriculum spans from Junior School to
+                Grade 10, designed to develop critical thinking, creativity, and
+                practical skills that prepare students for success in higher
+                education and beyond.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Link
                   to="/admissions"
@@ -457,7 +665,9 @@ const Academics: React.FC = () => {
               <div className="grid grid-cols-3 gap-6 text-center">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
                   <div className="text-2xl font-bold text-sky-400">40+</div>
-                  <div className="text-sm text-gray-300">Subject Combinations</div>
+                  <div className="text-sm text-gray-300">
+                    Subject Combinations
+                  </div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
                   <div className="text-2xl font-bold text-blue-400">3</div>
@@ -470,27 +680,37 @@ const Academics: React.FC = () => {
               </div>
             </div>
 
-            <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+            <div
+              className={`transform transition-all duration-1000 delay-300 ${
+                isVisible
+                  ? "translate-x-0 opacity-100"
+                  : "translate-x-10 opacity-0"
+              }`}
+            >
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-400 rounded-3xl transform rotate-6 scale-105 opacity-20"></div>
                 <img
-                  src="/images/Academicteachers.jpg"
+                  src="/images/Academics_2.jpg"
                   alt="St. Mary's School students"
-                  className="relative rounded-3xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
+                  className="relative rounded-3xl shadow-2xl w-full h-[420px] object-cover transform hover:scale-110 transition-transform duration-500"
                 />
-                
+
                 {/* Floating Achievement Cards */}
                 <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-4 shadow-xl transform rotate-12 hover:rotate-0 transition-transform duration-300">
                   <div className="text-center">
                     <Award className="w-6 h-6 text-blue-600 mx-auto mb-1" />
-                    <div className="text-xs font-semibold text-gray-600">CBE Certified</div>
+                    <div className="text-xs font-semibold text-gray-600">
+                      CBE Certified
+                    </div>
                   </div>
                 </div>
-                
+
                 <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-xl transform -rotate-12 hover:rotate-0 transition-transform duration-300">
                   <div className="text-center">
                     <Star className="w-6 h-6 text-yellow-500 mx-auto mb-1" />
-                    <div className="text-xs font-semibold text-gray-600">Excellence Award</div>
+                    <div className="text-xs font-semibold text-gray-600">
+                      Excellence Award
+                    </div>
                   </div>
                 </div>
               </div>
@@ -511,8 +731,10 @@ const Academics: React.FC = () => {
               Competency-Based Education (CBE)
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              We have fully embraced Kenya's CBE system from Junior School (Grade 7-9) through Grade 10, focusing on competency development
-              rather than content coverage, ensuring our students are well-prepared for university and career success.
+              We have fully embraced Kenya's CBE system from Junior School
+              (Grade 7-9) through Grade 10, focusing on competency development
+              rather than content coverage, ensuring our students are
+              well-prepared for university and career success.
             </p>
           </div>
 
@@ -521,40 +743,54 @@ const Academics: React.FC = () => {
               {
                 icon: BookOpen,
                 title: "Competency-Based",
-                description: "Focus on skills and abilities rather than just knowledge",
-                color: "from-blue-500 to-sky-500"
+                description:
+                  "Focus on skills and abilities rather than just knowledge",
+                color: "from-blue-500 to-sky-500",
               },
               {
                 icon: Users,
                 title: "Learner-Centered",
                 description: "Individualized learning paths for every student",
-                color: "from-indigo-500 to-blue-500"
+                color: "from-indigo-500 to-blue-500",
               },
               {
                 icon: Clock,
                 title: "Flexible Pacing",
                 description: "Students progress at their own optimal pace",
-                color: "from-sky-500 to-cyan-500"
+                color: "from-sky-500 to-cyan-500",
               },
               {
                 icon: Award,
                 title: "Continuous Assessment",
                 description: "Regular evaluation and feedback for improvement",
-                color: "from-cyan-500 to-blue-500"
-              }
+                color: "from-cyan-500 to-blue-500",
+              },
             ].map((feature, index) => (
-              <div key={index} className="group relative bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100">
-                <div className={`absolute inset-0 bg-gradient-to-r ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`}></div>
-                
+              <div
+                key={index}
+                className="group relative bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100"
+              >
+                <div
+                  className={`absolute inset-0 bg-gradient-to-r ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`}
+                ></div>
+
                 <div className="relative text-center">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <div
+                    className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                  >
                     <feature.icon className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                  
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
+
                   <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className={`h-1 bg-gradient-to-r ${feature.color} rounded-full`}></div>
+                    <div
+                      className={`h-1 bg-gradient-to-r ${feature.color} rounded-full`}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -571,44 +807,65 @@ const Academics: React.FC = () => {
               <Target className="w-4 h-4 mr-2" />
               Academic Structure
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Academic Levels</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive education from early years through senior secondary</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Academic Levels
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Comprehensive education from early years through senior secondary
+            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {levels.map((level, index) => (
-              <div key={index} className="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-br ${level.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-                
+              <div
+                key={index}
+                className="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden"
+              >
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${level.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                ></div>
+
                 <div className="relative p-8">
                   <div className="flex items-center justify-between mb-6">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${level.color} group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${level.color} group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <level.icon className="h-8 w-8 text-white" />
                     </div>
                     <div className="text-right">
                       <div className="text-sm text-gray-500">Students</div>
-                      <div className="text-lg font-bold text-gray-900">{level.students}</div>
+                      <div className="text-lg font-bold text-gray-900">
+                        {level.students}
+                      </div>
                     </div>
                   </div>
-                  
+
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
                     {level.title}
                   </h3>
-                  
-                  <p className="text-gray-600 mb-6 leading-relaxed">{level.description}</p>
-                  
+
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {level.description}
+                  </p>
+
                   <div className="space-y-3 mb-6">
                     {level.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-center text-sm text-gray-600">
+                      <div
+                        key={featureIndex}
+                        className="flex items-center text-sm text-gray-600"
+                      >
                         <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                         {feature}
                       </div>
                     ))}
                   </div>
-                  
+
                   <div className="flex items-center justify-between pt-6 border-t border-gray-100">
                     <div className="text-sm text-gray-500">
-                      Duration: <span className="font-semibold text-gray-900">{level.duration}</span>
+                      Duration:{" "}
+                      <span className="font-semibold text-gray-900">
+                        {level.duration}
+                      </span>
                     </div>
                     <ArrowRight className="w-5 h-5 text-blue-600 group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
@@ -627,8 +884,13 @@ const Academics: React.FC = () => {
               <Target className="w-4 h-4 mr-2" />
               Grade 10 Specialization
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Career Pathways & Subject Combinations</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">Choose from 40+ specialized subject combinations across three major pathways</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Career Pathways & Subject Combinations
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Choose from 40+ specialized subject combinations across three
+              major pathways
+            </p>
           </div>
 
           {/* Pathway Navigation */}
@@ -640,8 +902,8 @@ const Academics: React.FC = () => {
                   onClick={() => setActivePathway(index)}
                   className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
                     activePathway === index
-                      ? 'bg-gradient-to-r from-blue-500 to-sky-500 text-white shadow-lg'
-                      : 'text-gray-600 hover:text-blue-600'
+                      ? "bg-gradient-to-r from-blue-500 to-sky-500 text-white shadow-lg"
+                      : "text-gray-600 hover:text-blue-600"
                   }`}
                 >
                   {pathway.pathway}
@@ -653,20 +915,27 @@ const Academics: React.FC = () => {
           {/* Active Pathway Content - Enhanced Layout */}
           <div className="space-y-8">
             {pathwayTracks[activePathway].tracks.map((track, index) => (
-              <div key={index} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
+              <div
+                key={index}
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden"
+              >
                 <div className={`h-1 bg-gradient-to-r ${track.color}`}></div>
-                
+
                 <div className="p-6">
                   {/* Compact Track Header */}
                   <div className="flex items-center mb-6">
-                    <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-r ${track.color} mr-4 group-hover:scale-105 transition-transform duration-300`}>
+                    <div
+                      className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-r ${track.color} mr-4 group-hover:scale-105 transition-transform duration-300`}
+                    >
                       <track.icon className="h-7 w-7 text-white" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                         {track.name}
                       </h3>
-                      <div className="text-sm text-gray-500">{pathwayTracks[activePathway].pathway}</div>
+                      <div className="text-sm text-gray-500">
+                        {pathwayTracks[activePathway].pathway}
+                      </div>
                     </div>
                   </div>
 
@@ -679,11 +948,16 @@ const Academics: React.FC = () => {
                         <h4 className="font-bold text-lg text-gray-900 mb-4 flex items-center">
                           <GraduationCap className="w-5 h-5 mr-2 text-blue-600" />
                           Core Subjects
-                          <span className="ml-2 text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Required</span>
+                          <span className="ml-2 text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
+                            Required
+                          </span>
                         </h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {track.coreSubjects.map((subject, subjectIndex) => (
-                            <div key={subjectIndex} className="bg-gradient-to-r from-blue-50 to-sky-50 border border-blue-200 px-3 py-2 rounded-lg text-sm font-medium text-blue-800 hover:from-blue-100 hover:to-sky-100 transition-colors duration-300">
+                            <div
+                              key={subjectIndex}
+                              className="bg-gradient-to-r from-blue-50 to-sky-50 border border-blue-200 px-3 py-2 rounded-lg text-sm font-medium text-blue-800 hover:from-blue-100 hover:to-sky-100 transition-colors duration-300"
+                            >
                               {subject}
                             </div>
                           ))}
@@ -695,13 +969,20 @@ const Academics: React.FC = () => {
                         <h4 className="font-bold text-lg text-gray-900 mb-4 flex items-center">
                           <Target className="w-5 h-5 mr-2 text-blue-600" />
                           Career Opportunities
-                          <span className="ml-2 text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">{track.careers.length}+ Careers</span>
+                          <span className="ml-2 text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">
+                            {track.careers.length}+ Careers
+                          </span>
                         </h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-80 overflow-y-auto">
                           {track.careers.map((career, careerIndex) => (
-                            <div key={careerIndex} className="flex items-center text-gray-700 bg-gray-50 px-3 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors duration-300">
+                            <div
+                              key={careerIndex}
+                              className="flex items-center text-gray-700 bg-gray-50 px-3 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors duration-300"
+                            >
                               <ChevronRight className="w-4 h-4 text-blue-500 mr-2 flex-shrink-0" />
-                              <span className="text-sm font-medium">{career}</span>
+                              <span className="text-sm font-medium">
+                                {career}
+                              </span>
                             </div>
                           ))}
                         </div>
@@ -714,12 +995,19 @@ const Academics: React.FC = () => {
                         <Layers className="w-5 h-5 mr-2 text-blue-600" />
                         Subject Combinations
                         <span className="ml-2 text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">
-                          {track.combinationGroups.reduce((total, group) => total + group.combinations.length, 0)} Options
+                          {track.combinationGroups.reduce(
+                            (total, group) => total + group.combinations.length,
+                            0
+                          )}{" "}
+                          Options
                         </span>
                       </h4>
                       <div className="space-y-4">
                         {track.combinationGroups.map((group, groupIndex) => (
-                          <div key={groupIndex} className="bg-gradient-to-br from-white to-blue-50 border-2 border-blue-200 rounded-xl p-5 hover:shadow-lg transition-all duration-300 hover:border-blue-300 hover:from-blue-50 hover:to-blue-100">
+                          <div
+                            key={groupIndex}
+                            className="bg-gradient-to-br from-white to-blue-50 border-2 border-blue-200 rounded-xl p-5 hover:shadow-lg transition-all duration-300 hover:border-blue-300 hover:from-blue-50 hover:to-blue-100"
+                          >
                             {/* Enhanced Common Subjects Header */}
                             <div className="mb-4">
                               <h5 className="font-bold text-base text-gray-900 mb-2 flex items-center">
@@ -732,14 +1020,19 @@ const Academics: React.FC = () => {
                                 + one of the following:
                               </div>
                             </div>
-                            
+
                             {/* Enhanced Third Subject Options */}
                             <div className="flex flex-wrap gap-2">
-                              {group.combinations.map((thirdSubject, combIndex) => (
-                                <div key={combIndex} className="text-sm font-medium text-blue-700 bg-white px-3 py-2 rounded-lg border-2 border-blue-300 hover:border-blue-500 hover:bg-blue-50 transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105">
-                                  {thirdSubject}
-                                </div>
-                              ))}
+                              {group.combinations.map(
+                                (thirdSubject, combIndex) => (
+                                  <div
+                                    key={combIndex}
+                                    className="text-sm font-medium text-blue-700 bg-white px-3 py-2 rounded-lg border-2 border-blue-300 hover:border-blue-500 hover:bg-blue-50 transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105"
+                                  >
+                                    {thirdSubject}
+                                  </div>
+                                )
+                              )}
                             </div>
                           </div>
                         ))}
@@ -771,28 +1064,41 @@ const Academics: React.FC = () => {
               <BookOpen className="w-4 h-4 mr-2" />
               Core Curriculum
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Subjects</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive curriculum covering all essential learning areas</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Our Subjects
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Comprehensive curriculum covering all essential learning areas
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {subjects.map((subject, index) => (
-              <div key={index} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+              <div
+                key={index}
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden"
+              >
                 <div className={`h-1 bg-gradient-to-r ${subject.color}`}></div>
-                
+
                 <div className="p-6">
                   <div className="flex items-center mb-4">
-                    <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${subject.color} mr-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${subject.color} mr-4 group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <subject.icon className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                       {subject.name}
                     </h3>
                   </div>
-                  <p className="text-gray-600 leading-relaxed">{subject.description}</p>
-                  
+                  <p className="text-gray-600 leading-relaxed">
+                    {subject.description}
+                  </p>
+
                   <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className={`h-1 bg-gradient-to-r ${subject.color} rounded-full`}></div>
+                    <div
+                      className={`h-1 bg-gradient-to-r ${subject.color} rounded-full`}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -815,25 +1121,34 @@ const Academics: React.FC = () => {
                 <Award className="w-4 h-4 mr-2" />
                 Assessment Excellence
               </div>
-              
+
               <h2 className="text-4xl font-bold mb-6 leading-tight">
-                Assessment & 
+                Assessment &
                 <span className="block bg-gradient-to-r from-sky-400 to-blue-400 bg-clip-text text-transparent">
                   Reporting
                 </span>
               </h2>
-              
+
               <p className="text-gray-200 mb-8 text-lg leading-relaxed">
-                Our assessment system is designed to track student progress comprehensively,
-                focusing on competency development and preparing students for national examinations and university entrance.
+                Our assessment system is designed to track student progress
+                comprehensively, focusing on competency development and
+                preparing students for national examinations and university
+                entrance.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {assessmentFeatures.map((feature, index) => (
-                  <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
+                  <div
+                    key={index}
+                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300"
+                  >
                     <feature.icon className={`w-8 h-8 ${feature.color} mb-3`} />
-                    <h4 className="font-semibold text-white mb-2">{feature.title}</h4>
-                    <p className="text-gray-300 text-sm">{feature.description}</p>
+                    <h4 className="font-semibold text-white mb-2">
+                      {feature.title}
+                    </h4>
+                    <p className="text-gray-300 text-sm">
+                      {feature.description}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -853,7 +1168,7 @@ const Academics: React.FC = () => {
                 </Link>
               </div>
             </div>
-            
+
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-400 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
               <img
@@ -861,7 +1176,7 @@ const Academics: React.FC = () => {
                 alt="Student assessment"
                 className="relative rounded-3xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
               />
-              
+
               {/* Floating Stats */}
               <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-4 shadow-xl">
                 <div className="text-center">
@@ -869,7 +1184,7 @@ const Academics: React.FC = () => {
                   <div className="text-xs text-gray-600">Pass Rate</div>
                 </div>
               </div>
-              
+
               <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-xl">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-sky-600">A</div>
@@ -882,36 +1197,118 @@ const Academics: React.FC = () => {
       </section>
 
       {/* Enhanced Academic Support Services */}
+      {/* CBE-Based Academic Support Services (Kenya Context) */}
       <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center bg-indigo-100 text-indigo-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
               <Heart className="w-4 h-4 mr-2" />
-              Student Support
+              Student Support (CBC Pathways)
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Academic Support Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Comprehensive support to ensure every student succeeds</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Competency-Based Support Services
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Tailored academic and co-curricular support to nurture every
+              learner’s potential under Kenya’s Competency-Based Curriculum
+              (CBC).
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {supportServices.map((service, index) => (
-              <div key={index} className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden">
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "STEM Pathway Enrichment",
+                description:
+                  "Hands-on learning opportunities in Science, Technology, Engineering, and Mathematics (STEM) for learners preparing for the Science & Technology pathway.",
+                features: [
+                  "Robotics and coding clubs",
+                  "STEM lab practical sessions",
+                  "National science fair participation",
+                ],
+                icon: Book,
+              },
+              {
+                title: "Arts & Sports Development",
+                description:
+                  "Nurturing creativity and talent through music, drama, fine arts, and competitive sports in line with the Arts & Sports pathway.",
+                features: [
+                  "School band & cultural music training",
+                  "Drama festivals and visual arts exhibitions",
+                  "Sports academies and regional competitions",
+                ],
+                icon: Music,
+              },
+              {
+                title: "Social Sciences & Entrepreneurship",
+                description:
+                  "Strengthening problem-solving, leadership, and innovation skills under the Social Sciences pathway with a focus on Kenyan context.",
+                features: [
+                  "CBC project-based assessments",
+                  "Entrepreneurship and agribusiness clubs",
+                  "Civic education and debate forums",
+                ],
+                icon: Users,
+              },
+              {
+                title: "Agriculture & Environmental Stewardship",
+                description:
+                  "Promoting sustainable practices and practical agricultural projects to support learners pursuing agriculture-based competencies.",
+                features: [
+                  "School farm projects and kitchen gardens",
+                  "Agri-business skills development",
+                  "CBC continuous assessment activities",
+                ],
+                icon: Leaf,
+              },
+              {
+                title: "Life Skills & Guidance",
+                description:
+                  "Supporting learners’ emotional, moral, and social development through mentorship, counseling, and guidance programs.",
+                features: [
+                  "Career guidance for CBC pathways",
+                  "Peer mentorship & counseling",
+                  "Value-based education and leadership training",
+                ],
+                icon: Star,
+              },
+              {
+                title: "Inclusive Education Support",
+                description:
+                  "Ensuring every learner, including those with special educational needs, receives adequate support to thrive.",
+                features: [
+                  "Individualized learning support",
+                  "Assistive technology integration",
+                  "Special needs teacher support",
+                ],
+                icon: Globe,
+              },
+            ].map((service, index) => (
+              <div
+                key={index}
+                className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden"
+              >
                 <div className="p-8">
                   <div className="bg-gradient-to-r from-blue-500 to-sky-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                     <service.icon className="h-8 w-8 text-white" />
                   </div>
-                  
+
                   <h3 className="text-xl font-bold text-gray-900 mb-4 text-center group-hover:text-blue-600 transition-colors duration-300">
                     {service.title}
                   </h3>
-                  
+
                   <p className="text-gray-600 mb-6 text-center leading-relaxed">
                     {service.description}
                   </p>
 
                   <div className="space-y-2">
                     {service.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-center text-sm text-gray-600">
+                      <div
+                        key={featureIndex}
+                        className="flex items-center text-sm text-gray-600"
+                      >
                         <CheckCircle className="w-4 h-4 text-blue-500 mr-2 flex-shrink-0" />
                         {feature}
                       </div>
@@ -923,7 +1320,7 @@ const Academics: React.FC = () => {
                       to="/contact"
                       className="w-full text-blue-600 hover:text-blue-700 font-medium flex items-center justify-center group-hover:translate-x-2 transition-transform duration-300"
                     >
-                      Learn More 
+                      Learn More
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </div>
@@ -946,19 +1343,20 @@ const Academics: React.FC = () => {
             <Star className="w-4 h-4 mr-2" />
             Start Your Academic Journey
           </div>
-          
+
           <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-            Ready to Excel in 
+            Ready to Excel in
             <span className="block bg-gradient-to-r from-sky-400 to-blue-400 bg-clip-text text-transparent">
               Academics?
             </span>
           </h2>
-          
+
           <p className="text-xl md:text-2xl mb-12 text-gray-200 max-w-4xl mx-auto leading-relaxed">
-            Join St. Mary's School and experience world-class education with personalized pathways 
-            that prepare you for university and career success.
+            Join St. Mary's School and experience world-class education with
+            personalized pathways that prepare you for university and career
+            success.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
             <Link
               to="/admissions"
