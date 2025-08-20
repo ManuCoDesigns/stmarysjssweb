@@ -696,31 +696,31 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                title: "Grade 10 Students Excel in University Entrance Exams",
-                date: "March 20, 2024",
-                category: "Academic Achievement",
+                title: "Grade 7 Learners Excel in Agriculture Assessment",
+                date: "July 12, 2025",
+                category: "Academic Excellence",
                 excerpt:
-                  "Our first cohort of Grade 10 students achieved outstanding results in university entrance examinations, with 98% gaining admission to top universities.",
-                image: "band1.jpg", // public/images/band1.jpg
-                color: "bg-blue-100 text-blue-600",
+                  "Grade 7 students showcased creativity and hands-on skills during their CBC Agriculture assessment, turning classroom knowledge into practical learning.",
+                image: "Grade 7 agric.jpg", // public/images/Grade 7 agric.jpg
+                color: "bg-purple-100 text-purple-600",
               },
               {
-                title: "New STEM Laboratory Opens for Grade 10",
-                date: "March 15, 2024",
-                category: "Infrastructure",
+                title: "Band Represents School at Catholic Youth Rally",
+                date: "July 05, 2025",
+                category: "Faith & Culture",
                 excerpt:
-                  "State-of-the-art STEM laboratory equipped with advanced technology to support our Grade 10 science and technology pathway students.",
-                image: "band2.jpg", // public/images/lab.jpg
+                  "The school band proudly represented St. Mary’s at the Catholic Diocese of Kericho Youth Rally 2025, inspiring hundreds with uplifting music and youthful spirit.",
+                image: "band2.jpg", // public/images/band2.jpg
                 color: "bg-green-100 text-green-600",
               },
               {
-                title: "Student Excellence Awards Ceremony",
-                date: "March 10, 2024",
-                category: "Recognition",
+                title: "School Band Shines at Rift Valley Regional Sports",
+                date: "March 27, 2025",
+                category: "Co-Curricular",
                 excerpt:
-                  "Celebrating our outstanding students across all grade levels who have shown exceptional performance in academics and extracurricular activities.",
-                image: "awards.jpg", // public/images/awards.jpg
-                color: "bg-purple-100 text-purple-600",
+                  "Our talented school band added color and pride to the Rift Valley Regional Sports held at Bomet Stadium, captivating the crowd with their vibrant performance.",
+                image: "band1.jpg", // public/images/band1.jpg
+                color: "bg-blue-100 text-blue-600",
               },
             ].map((item, index) => (
               <article
