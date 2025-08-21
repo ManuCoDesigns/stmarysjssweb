@@ -19,6 +19,9 @@ import {
   Heart,
   Shield,
   Lightbulb,
+  Bell,
+  AlertCircle,
+  CalendarCheck,
 } from "lucide-react";
 
 const Home: React.FC = () => {
@@ -162,10 +165,162 @@ const Home: React.FC = () => {
     },
   ];
 
+  // Scrolling News Data
+  const scrollingNews = [
+    {
+      type: "opening",
+      icon: CalendarCheck,
+      text: "School Opens on 26th August 2025 for Term 3– Grade 10 Admission Applications Now Open for 2025/2026 Academic Year",
+      link: "/admissions",
+    },
+    {
+      type: "achievement",
+      icon: Award,
+      text: "St. Mary's School Band Qualifies for Kenya Music Festivals National Finals 2025",
+      link: "/news",
+    },
+
+    {
+      type: "event",
+      icon: Calendar,
+      text: "Parent-Teacher Conference Scheduled for August 15, 2025",
+      link: "/events",
+    },
+    {
+      type: "announcement",
+      icon: Bell,
+      text: "New ICT Innovation Lab Opens - Enhancing Digital Learning Experience",
+      link: "/news",
+    },
+
+    {
+      type: "breaking",
+      icon: AlertCircle,
+      text: "Grade 10 Admission Applications Now Open for 2025/2026 Academic Year",
+      link: "/admissions",
+    },
+    {
+      type: "announcement",
+      icon: Bell,
+      text: "School Band Qualifies for Kenya Music Festivals National Finals 2025",
+      link: "/news",
+    },
+    {
+      type: "achievement",
+      icon: Award,
+      text: "98% University Admission Rate for 2024 Grade 10 Graduates",
+      link: "/academics",
+    },
+    {
+      type: "event",
+      icon: Calendar,
+      text: "Parent-Teacher Conference Scheduled for August 15, 2025",
+      link: "/events",
+    },
+    {
+      type: "announcement",
+      icon: Bell,
+      text: "New ICT Innovation Lab Opens - Enhancing Digital Learning Experience",
+      link: "/news",
+    },
+    {
+      type: "achievement",
+      icon: Star,
+      text: "St. Mary's Recognized as Top CBE Implementation School in Rift Valley Region",
+      link: "/about",
+    },
+  ];
+
   return (
     <div className="overflow-hidden">
-      {/* Hero Section with Enhanced Design */}
-      <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white overflow-hidden">
+      {/* Hero Section with Floating Breaking News Ticker */}
+      <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white overflow-hidden pt-8">
+        {/* Floating Breaking News Ticker */}
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-11/12 z-40 bg-white/10 backdrop-blur-md text-white py-2 overflow-hidden rounded-xl shadow-lg">
+          <div className="relative flex items-center">
+            {/* Left Badge */}
+            <div className="flex-shrink-0 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-r-full">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                <span className="font-bold text-sm tracking-wider">
+                  BREAKING NEWS
+                </span>
+              </div>
+            </div>
+
+            {/* Scrolling ticker */}
+            <div className="flex-1 overflow-hidden mx-2">
+              <div className="scroll-left whitespace-nowrap py-1 inline-block">
+                <div className="inline-flex items-center space-x-12">
+                  {[...scrollingNews, ...scrollingNews].map((news, index) => (
+                    <Link
+                      key={index}
+                      to={news.link}
+                      className="inline-flex items-center space-x-3 hover:text-yellow-200 transition-colors duration-300 px-4"
+                    >
+                      <news.icon
+                        className={`w-4 h-4 flex-shrink-0 ${
+                          news.type === "breaking"
+                            ? "text-red-200"
+                            : news.type === "achievement"
+                            ? "text-green-200"
+                            : news.type === "event"
+                            ? "text-blue-200"
+                            : "text-yellow-200"
+                        }`}
+                      />
+                      <span className="text-sm font-medium">{news.text}</span>
+                      <div
+                        className={`w-1 h-1 rounded-full ${
+                          news.type === "breaking"
+                            ? "bg-red-300"
+                            : news.type === "achievement"
+                            ? "bg-green-300"
+                            : news.type === "event"
+                            ? "bg-blue-300"
+                            : "bg-yellow-300"
+                        }`}
+                      ></div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Badge */}
+            <div className="flex-shrink-0 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-l-full">
+              <Link
+                to="/news"
+                className="flex items-center space-x-2 hover:text-yellow-200 transition-colors duration-300"
+              >
+                <span className="text-xs font-medium">VIEW ALL</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Inline animation styles */}
+          <style>
+            {`
+              @keyframes scroll-left {
+                0% {
+                  transform: translateX(0);
+                }
+                100% {
+                  transform: translateX(-50%);
+                }
+              }
+              .scroll-left {
+                display: inline-block;
+                animation: scroll-left 30s linear infinite;
+              }
+              .scroll-left:hover {
+                animation-play-state: paused;
+              }
+            `}
+          </style>
+        </div>
+
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -183,8 +338,10 @@ const Home: React.FC = () => {
           ></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 flex items-center min-h-screen">
+        {/* Hero Content */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex items-center min-h-screen">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+            {/* Left Hero Content */}
             <div
               className={`transform transition-all duration-1000 ${
                 isVisible
@@ -197,14 +354,14 @@ const Home: React.FC = () => {
                 35+ Years of Educational Excellence
               </div>
 
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                 Shaping Tomorrow's
                 <span className="block bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
                   Leaders Today
                 </span>
               </h1>
 
-              <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl leading-relaxed">
+              <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-2xl leading-relaxed">
                 At St. Mary's Mixed Junior and Senior School - Bomet, we provide
                 exceptional education from Junior School (Grade 7-9) through
                 Grade 10, nurturing academic excellence, character development,
@@ -245,6 +402,7 @@ const Home: React.FC = () => {
               </div>
             </div>
 
+            {/* Right Hero Content */}
             <div
               className={`transform transition-all duration-1000 delay-300 ${
                 isVisible
@@ -709,7 +867,7 @@ const Home: React.FC = () => {
                 date: "July 05, 2025",
                 category: "Faith & Culture",
                 excerpt:
-                  "The school band proudly represented St. Mary’s at the Catholic Diocese of Kericho Youth Rally 2025, inspiring hundreds with uplifting music and youthful spirit.",
+                  "The school band proudly represented St. Mary's at the Catholic Diocese of Kericho Youth Rally 2025, inspiring hundreds with uplifting music and youthful spirit.",
                 image: "band2.jpg", // public/images/band2.jpg
                 color: "bg-green-100 text-green-600",
               },
