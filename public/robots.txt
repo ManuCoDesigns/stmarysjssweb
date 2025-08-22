@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://stmarysseniorschoolbomet.co.ke/sitemap.xml
+Host: https://stmarysseniorschoolbomet.co.ke
