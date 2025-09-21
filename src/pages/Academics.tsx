@@ -199,11 +199,9 @@ const Academics: React.FC = () => {
           name: "Sports & Recreation Track",
           coreSubjects: [
             "English",
-            "Kiswahili/Sign Language",
-            "Mathematics",
-            "Community Service Learnig",
+            "Kiswahili",
+            "Core/Essential Mathematics",
             "Physical Education",
-            "ICT Skills",
           ],
           combinationGroups: [
             {
@@ -252,7 +250,6 @@ const Academics: React.FC = () => {
             "Kiswahili",
             "Core/Essential Mathematics",
             "Physical Education",
-            "ICT Skills",
           ],
           combinationGroups: [
             {

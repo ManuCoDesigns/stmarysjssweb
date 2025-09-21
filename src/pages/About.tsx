@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect } from "react"
+import type React from "react";
+import { useState, useEffect } from "react";
 import {
   Award,
   Heart,
@@ -23,23 +23,22 @@ import {
   Building,
   Shield,
   Handshake,
-  Link,
-} from "lucide-react"
+} from "lucide-react";
 
 const About: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const [activeValue, setActiveValue] = useState(0)
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeValue, setActiveValue] = useState(0);
 
   useEffect(() => {
-    setIsVisible(true)
+    setIsVisible(true);
     // Auto-rotate values
     const valueInterval = setInterval(() => {
-      setActiveValue((prev) => (prev + 1) % values.length)
-    }, 3000)
+      setActiveValue((prev) => (prev + 1) % values.length);
+    }, 3000);
     return () => {
-      clearInterval(valueInterval)
-    }
-  }, [])
+      clearInterval(valueInterval);
+    };
+  }, []);
 
   const values = [
     {
@@ -63,7 +62,8 @@ const About: React.FC = () => {
     {
       icon: Target,
       title: "Integrity",
-      description: "We uphold honesty, transparency, and moral principles in all our actions and decisions.",
+      description:
+        "We uphold honesty, transparency, and moral principles in all our actions and decisions.",
       color: "from-green-500 to-emerald-600",
       bgColor: "bg-green-50",
       iconColor: "text-green-600",
@@ -71,69 +71,200 @@ const About: React.FC = () => {
     {
       icon: Users,
       title: "Community",
-      description: "We build strong partnerships between students, families, teachers, and the wider community.",
+      description:
+        "We build strong partnerships between students, families, teachers, and the wider community.",
       color: "from-purple-500 to-indigo-600",
       bgColor: "bg-purple-50",
       iconColor: "text-purple-600",
     },
-  ]
+  ];
 
   const achievements = [
-    { number: "500+", label: "Students Enrolled", icon: Users, color: "text-blue-600" },
-    { number: "98%", label: "University Success", icon: Trophy, color: "text-green-600" },
-    { number: "30+", label: "Years Excellence", icon: Award, color: "text-purple-600" },
-    { number: "20+", label: "Expert Teachers", icon: GraduationCap, color: "text-orange-600" },
-  ]
+    {
+      number: "500+",
+      label: "Students Enrolled",
+      icon: Users,
+      color: "text-blue-600",
+    },
+    {
+      number: "98%",
+      label: "University Success",
+      icon: Trophy,
+      color: "text-green-600",
+    },
+    {
+      number: "30+",
+      label: "Years Excellence",
+      icon: Award,
+      color: "text-purple-600",
+    },
+    {
+      number: "20+",
+      label: "Expert Teachers",
+      icon: GraduationCap,
+      color: "text-orange-600",
+    },
+  ];
 
   const educationLevels = [
     {
       level: "7-9",
       title: "Junior Secondary",
-      description: "Career pathway introduction and advanced skill development with mentorship",
+      description:
+        "Career pathway introduction and advanced skill development with mentorship",
       icon: Target,
       color: "from-green-500 to-emerald-500",
       students: "150+",
-      features: ["Career Pathways", "Advanced Skills", "Mentorship", "Leadership"],
+      features: [
+        "Career Pathways",
+        "Advanced Skills",
+        "Mentorship",
+        "Leadership",
+      ],
     },
     {
       level: "10",
       title: "Senior Secondary",
-      description: "University preparation with specialized pathways and advanced research projects",
+      description:
+        "University preparation with specialized pathways and advanced research projects",
       icon: GraduationCap,
       color: "from-purple-500 to-indigo-500",
       students: "70+",
-      features: ["University Prep", "Specialized Tracks", "Research Projects", "Global Standards"],
+      features: [
+        "University Prep",
+        "Specialized Tracks",
+        "Research Projects",
+        "Global Standards",
+      ],
     },
     {
       level: "Form 2-4",
       title: "8-4-4 Secondary",
-      description: "University preparation with specialized pathways and advanced research projects",
+      description:
+        "University preparation with specialized pathways and advanced research projects",
       icon: GraduationCap,
       color: "from-purple-500 to-indigo-500",
       students: "70+",
-      features: ["University Prep", "Specialized Tracks", "Research Projects", "Global Standards"],
+      features: [
+        "University Prep",
+        "Specialized Tracks",
+        "Research Projects",
+        "Global Standards",
+      ],
     },
-  ]
+  ];
 
   const leadership = [
-    { name: "Dr. Sr. Mary Gabriel C.", position: "Principal", image: "principal.jpg", department: "Administration" },
-    { name: "Md. Kiama M.W", position: "Deputy Principal", image: "deputy.jpg", department: "Administration" },
-    { name: "Dr. Johnson Bulowa", position: "Senior Teacher", image: "", department: "Academic" },
-    { name: "Md. Bevaline C.", position: "Head of JSS", image: "", department: "Junior Secondary" },
-    { name: "Md. Winnie C.", position: "IQASO", image: "", department: "Quality Assurance" },
-    { name: "Mr. Cyrus L.", position: "Director Of Studies JSS", image: "", department: "Junior Secondary" },
-    { name: "Md. Eunice G.", position: "Director Of Studies High School", image: "", department: "High School" },
-    { name: "Mr. Emmanuel O.", position: "Examination Officer", image: "Exams1.jpg", department: "Examinations" },
-    { name: "Md. Kellong", position: "Guidance and Counselling", image: "", department: "Guidance" },
-    { name: "Mr. Fred O.", position: "H.O.D - Sciences", image: "", department: "Sciences" },
-    { name: "Mr. Geoffrey B.", position: "Boarding Master", image: "", department: "Boarding" },
-  ]
+    {
+      name: "Sr. Dr. Mary Gabriel C.",
+      position: "Principal",
+      image: "sr.JPG",
+      department: "Administration",
+    },
+    {
+      name: "Md. Kiama M.W",
+      position: "Deputy Principal",
+      image: "dp.JPG",
+      department: "Administration",
+    },
+    {
+      name: "Dr. Johnson Bulowa",
+      position: "Senior Teacher",
+      image: "",
+      department: "Academic",
+    },
+    {
+      name: "Md. Bevaline C.",
+      position: "Head of JSS",
+      image: "",
+      department: "Junior Secondary",
+    },
+    {
+      name: "Mr. Cyrus L.",
+      position: "Director Of Studies JSS",
+      image: "langat.JPG",
+      department: "Junior Secondary",
+    },
+    {
+      name: "Md. Winnie C.",
+      position: "IQASO",
+      image: "",
+      department: "Quality Assurance",
+    },
+    {
+      name: "Mr. Emmanuel O.",
+      position: "Examination Officer",
+      image: "Exams1.jpg",
+      department: "Examinations",
+    },
+    {
+      name: "Md. Eunice G.",
+      position: "Director Of Studies High School",
+      image: "",
+      department: "High School",
+    },
+    {
+      name: "Mr. Fred O.",
+      position: "H.O.D - Sciences",
+      image: "",
+      department: "Guidance",
+    },
+    {
+      name: "Md. Kellong",
+      position: "Guidance and Counselling",
+      image: "",
+      department: "Guidance",
+    },
+    {
+      name: "Md. Felista C.",
+      position: "Class Teacher - Form 3",
+      image: "",
+      department: "Languages",
+    },
+    {
+      name: "Mr. Geoffrey B.",
+      position: "Boarding Master",
+      image: "",
+      department: "Boarding",
+    },
+    {
+      name: "Md. Marble K.",
+      position: "Boarding Mistress",
+      image: "",
+      department: "Boarding",
+    },
+    {
+      name: "Md. Martha O.",
+      position: "",
+      image: "",
+      department: "Technicals",
+    },
+    {
+      name: "Mr. Korir D.",
+      position: "",
+      image: "korir.JPG",
+      department: "Mathematics",
+    },
+    {
+      name: "Md. Faith S.",
+      position: "H.O.D - Languages",
+      image: "faith.jpg",
+      department: "Languages",
+    },
+    {
+      name: "Mr. Odhiambo M.",
+      position: "Guidance and Counselling",
+      image: "mose.jpg",
+      department: "Guidance",
+    },
+  ];
 
   const milestones = [
     {
       year: "1990",
       event: "Foundation",
-      description: "Established by Franciscan Sisters of St. Joseph with 50 students",
+      description:
+        "Established by Franciscan Sisters of St. Joseph with 50 students",
       icon: Building,
       color: "from-blue-500 to-cyan-500",
     },
@@ -172,7 +303,7 @@ const About: React.FC = () => {
       icon: BookOpen,
       color: " from-teal-500 to-cyan-500",
     },
-  ]
+  ];
 
   const coreValues = [
     {
@@ -200,14 +331,24 @@ const About: React.FC = () => {
       title: "Accountability",
       description: "Commitment to excellence and integrity",
     },
-  ]
+  ];
 
   const stats = [
-    { number: "1990", label: "Founded", icon: Calendar, color: "text-blue-600" },
+    {
+      number: "1990",
+      label: "Founded",
+      icon: Calendar,
+      color: "text-blue-600",
+    },
     { number: "500+", label: "Students", icon: Users, color: "text-green-600" },
     { number: "34", label: "Years", icon: Clock, color: "text-purple-600" },
-    { number: "95%", label: "Success Rate", icon: Award, color: "text-orange-600" },
-  ]
+    {
+      number: "95%",
+      label: "Success Rate",
+      icon: Award,
+      color: "text-orange-600",
+    },
+  ];
 
   return (
     <div className="overflow-hidden">
@@ -215,40 +356,47 @@ const About: React.FC = () => {
       <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-sky-900 text-white overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-40 right-10 w-96 h-96 bg-sky-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-20 w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-4000"></div>
+          <div className="absolute top-20 left-10 w-[28rem] h-[28rem] bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+          <div className="absolute top-40 right-10 w-[28rem] h-[28rem] bg-sky-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-20 w-[28rem] h-[28rem] bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-4000"></div>
         </div>
-        {/* Geometric Pattern Overlay */}
+
+        {/* Pattern Overlay */}
         <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute top-0 left-0 w-full h-full"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='0.1'%3E%3Cpath d='M30 30l15-15v30l-15-15zm-15 0l15 15v-30l-15 15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          ></div>
+          <div className="absolute top-0 left-0 w-full h-full"></div>
         </div>
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 flex items-center min-h-screen">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+            {/* Left Content */}
             <div
-              className={`transform transition-all duration-1000 ${isVisible ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"}`}
+              className={`transform transition-all duration-1000 ${
+                isVisible
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-10 opacity-0"
+              }`}
             >
-              <div className="inline-flex items-center bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
-                <Award className="w-4 h-4 mr-2" />
+              <div className="inline-flex items-center bg-blue-500/20 text-blue-300 px-5 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
+                <Award className="w-5 h-5 mr-2" />
                 Excellence Since 1990
               </div>
+
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 About
                 <span className="block bg-gradient-to-r from-sky-400 to-blue-400 bg-clip-text text-transparent">
-                  St. Mary's
+                  St. Mary&apos;s
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl leading-relaxed">
-                Founded in 1990, St. Mary's School has been a beacon of educational excellence in Bomet Region, shaping
-                young minds and building character from Pre-Primary through Grade 10 in a nurturing Christian
-                environment.
+
+              <p className="text-lg md:text-2xl mb-8 text-gray-200 max-w-2xl leading-relaxed">
+                Founded in 1990, St. Mary&apos;s School has been a beacon of
+                educational excellence in Bomet Region, shaping young minds and
+                building character from Junior School through Grade 10 in a
+                nurturing Christian environment.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
                 <button className="group bg-gradient-to-r from-blue-500 to-sky-500 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-400 hover:to-sky-400 transition-all duration-300 flex items-center justify-center transform hover:scale-105 shadow-lg">
                   <BookOpen className="mr-2 h-5 w-5" />
                   Our Story
@@ -258,41 +406,59 @@ const About: React.FC = () => {
                   Meet Our Team
                 </button>
               </div>
+
               {/* Quick Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {achievements.map((achievement, index) => (
                   <div
                     key={index}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center"
+                    className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20 text-center hover:scale-105 transition-transform duration-300"
                   >
-                    <achievement.icon className={`w-6 h-6 ${achievement.color} mx-auto mb-2`} />
-                    <div className="text-xl font-bold text-white">{achievement.number}</div>
-                    <div className="text-xs text-gray-300">{achievement.label}</div>
+                    <achievement.icon
+                      className={`w-7 h-7 ${achievement.color} mx-auto mb-2`}
+                    />
+                    <div className="text-2xl font-bold text-white">
+                      {achievement.number}
+                    </div>
+                    <div className="text-sm text-gray-300">
+                      {achievement.label}
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Right Image */}
             <div
-              className={`transform transition-all duration-1000 delay-300 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"}`}
+              className={`transform transition-all duration-1000 delay-300 ${
+                isVisible
+                  ? "translate-x-0 opacity-100"
+                  : "translate-x-10 opacity-0"
+              }`}
             >
-              <div className="relative">
+              <div className="relative w-full max-w-[600px] mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-400 rounded-3xl transform rotate-6 scale-105 opacity-20"></div>
                 <img
-                  src="/images/OurHistory.jpg"
+                  src="/images/teachers.JPG"
                   alt="St. Mary's School"
-                  className="relative rounded-3xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
+                  className="relative rounded-3xl shadow-2xl w-full h-[500px] object-cover transform hover:scale-105 transition-transform duration-500"
                 />
-                {/* Floating Achievement Cards */}
-                <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-4 shadow-xl transform rotate-12 hover:rotate-0 transition-transform duration-300">
+
+                {/* Floating Cards */}
+                <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-5 shadow-xl transform rotate-12 hover:rotate-0 transition-transform duration-300">
                   <div className="text-center">
-                    <Award className="w-6 h-6 text-blue-600 mx-auto mb-1" />
-                    <div className="text-xs font-semibold text-gray-600">30+ Years</div>
+                    <Award className="w-7 h-7 text-blue-600 mx-auto mb-1" />
+                    <div className="text-sm font-semibold text-gray-600">
+                      30+ Years
+                    </div>
                   </div>
                 </div>
-                <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-xl transform -rotate-12 hover:rotate-0 transition-transform duration-300">
+                <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-5 shadow-xl transform -rotate-12 hover:rotate-0 transition-transform duration-300">
                   <div className="text-center">
-                    <Star className="w-6 h-6 text-yellow-500 mx-auto mb-1" />
-                    <div className="text-xs font-semibold text-gray-600">Excellence Award</div>
+                    <Star className="w-7 h-7 text-yellow-500 mx-auto mb-1" />
+                    <div className="text-sm font-semibold text-gray-600">
+                      Excellence Award
+                    </div>
                   </div>
                 </div>
               </div>
@@ -309,17 +475,21 @@ const About: React.FC = () => {
               <Heart className="w-4 h-4 mr-2" />
               Our Foundation
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Core Values</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Core Values
+            </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              These fundamental principles guide everything we do and shape the character of our school community across
-              all grade levels.
+              These fundamental principles guide everything we do and shape the
+              character of our school community across all grade levels.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <div
                 key={index}
-                className={`group relative bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 ${activeValue === index ? "scale-105 shadow-2xl" : ""}`}
+                className={`group relative bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 ${
+                  activeValue === index ? "scale-105 shadow-2xl" : ""
+                }`}
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-r ${value.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`}
@@ -333,9 +503,13 @@ const About: React.FC = () => {
                   <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
                     {value.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                  <p className="text-gray-600 leading-relaxed">
+                    {value.description}
+                  </p>
                   <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className={`h-1 bg-gradient-to-r ${value.color} rounded-full`}></div>
+                    <div
+                      className={`h-1 bg-gradient-to-r ${value.color} rounded-full`}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -352,7 +526,9 @@ const About: React.FC = () => {
               <GraduationCap className="w-4 h-4 mr-2" />
               Educational Excellence
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Comprehensive Education</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Comprehensive Education
+            </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Our approach spans from early years through senior secondary
             </p>
@@ -375,19 +551,28 @@ const About: React.FC = () => {
                     </div>
                     <div className="text-right">
                       <div className="text-sm text-gray-500">Students</div>
-                      <div className="text-lg font-bold text-gray-900">{level.students}</div>
+                      <div className="text-lg font-bold text-gray-900">
+                        {level.students}
+                      </div>
                     </div>
                   </div>
                   <div className="text-center mb-4">
-                    <div className="text-3xl font-bold text-blue-600 mb-2">{level.level}</div>
+                    <div className="text-3xl font-bold text-blue-600 mb-2">
+                      {level.level}
+                    </div>
                     <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                       {level.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600 mb-6 leading-relaxed text-center">{level.description}</p>
+                  <p className="text-gray-600 mb-6 leading-relaxed text-center">
+                    {level.description}
+                  </p>
                   <div className="space-y-2">
                     {level.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-center text-sm text-gray-600">
+                      <div
+                        key={featureIndex}
+                        className="flex items-center text-sm text-gray-600"
+                      >
                         <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                         {feature}
                       </div>
@@ -426,9 +611,13 @@ const About: React.FC = () => {
 
                 <p className="text-gray-600 text-base leading-relaxed">
                   St. Mary's School was established in 1990 by the{" "}
-                  <span className="font-semibold text-indigo-700">Franciscan Sisters of St. Joseph (FSSJ) Asumbi</span>.
-                  From 50 students to over 500, we've maintained our commitment to academic excellence while embracing
-                  modern educational approaches including Kenya's Competency-Based Education (CBE).
+                  <span className="font-semibold text-indigo-700">
+                    Franciscan Sisters of St. Joseph (FSSJ) Asumbi
+                  </span>
+                  . From 50 students to over 500, we've maintained our
+                  commitment to academic excellence while embracing modern
+                  educational approaches including Kenya's Competency-Based
+                  Education (CBE).
                 </p>
               </div>
 
@@ -439,9 +628,12 @@ const About: React.FC = () => {
 
                 <div className="space-y-4">
                   {milestones.map((milestone, index) => {
-                    const IconComponent = milestone.icon
+                    const IconComponent = milestone.icon;
                     return (
-                      <div key={index} className="flex items-start group relative">
+                      <div
+                        key={index}
+                        className="flex items-start group relative"
+                      >
                         {/* Timeline Dot */}
                         <div className="absolute left-5 w-3 h-3 bg-white border-2 border-indigo-300 rounded-full group-hover:border-indigo-500 transition-colors duration-300 z-10"></div>
 
@@ -464,10 +656,12 @@ const About: React.FC = () => {
                               {milestone.event}
                             </h4>
                           </div>
-                          <p className="text-gray-600 text-xs leading-relaxed">{milestone.description}</p>
+                          <p className="text-gray-600 text-xs leading-relaxed">
+                            {milestone.description}
+                          </p>
                         </div>
                       </div>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -494,10 +688,13 @@ const About: React.FC = () => {
 
                   {/* Image Overlay Content */}
                   <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                    <h3 className="font-bold text-gray-900 text-lg mb-2">34 Years of Excellence</h3>
+                    <h3 className="font-bold text-gray-900 text-lg mb-2">
+                      34 Years of Excellence
+                    </h3>
                     <p className="text-gray-600 text-sm">
-                      From a small institution to one of Kenya's most respected schools, our journey continues with
-                      unwavering commitment to educational excellence.
+                      From a small institution to one of Kenya's most respected
+                      schools, our journey continues with unwavering commitment
+                      to educational excellence.
                     </p>
                   </div>
                 </div>
@@ -506,7 +703,7 @@ const About: React.FC = () => {
               {/* Compact Floating Stats Cards */}
               <div className="absolute -top-4 -left-4 grid grid-cols-2 gap-2">
                 {stats.slice(0, 2).map((stat, index) => {
-                  const IconComponent = stat.icon
+                  const IconComponent = stat.icon;
                   return (
                     <div
                       key={index}
@@ -514,19 +711,25 @@ const About: React.FC = () => {
                     >
                       <div className="text-center">
                         <div className="flex items-center justify-center mb-1">
-                          <IconComponent className={`w-4 h-4 ${stat.color} mr-1`} />
-                          <div className={`text-lg font-bold ${stat.color}`}>{stat.number}</div>
+                          <IconComponent
+                            className={`w-4 h-4 ${stat.color} mr-1`}
+                          />
+                          <div className={`text-lg font-bold ${stat.color}`}>
+                            {stat.number}
+                          </div>
                         </div>
-                        <div className="text-xs text-gray-600 font-medium">{stat.label}</div>
+                        <div className="text-xs text-gray-600 font-medium">
+                          {stat.label}
+                        </div>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
 
               <div className="absolute -bottom-4 -right-4 grid grid-cols-2 gap-2">
                 {stats.slice(2).map((stat, index) => {
-                  const IconComponent = stat.icon
+                  const IconComponent = stat.icon;
                   return (
                     <div
                       key={index}
@@ -534,13 +737,19 @@ const About: React.FC = () => {
                     >
                       <div className="text-center">
                         <div className="flex items-center justify-center mb-1">
-                          <IconComponent className={`w-4 h-4 ${stat.color} mr-1`} />
-                          <div className={`text-lg font-bold ${stat.color}`}>{stat.number}</div>
+                          <IconComponent
+                            className={`w-4 h-4 ${stat.color} mr-1`}
+                          />
+                          <div className={`text-lg font-bold ${stat.color}`}>
+                            {stat.number}
+                          </div>
                         </div>
-                        <div className="text-xs text-gray-600 font-medium">{stat.label}</div>
+                        <div className="text-xs text-gray-600 font-medium">
+                          {stat.label}
+                        </div>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
 
@@ -567,7 +776,8 @@ const About: React.FC = () => {
               Mission & Vision
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Guiding principles that drive our educational excellence and shape tomorrow's leaders
+              Guiding principles that drive our educational excellence and shape
+              tomorrow's leaders
             </p>
           </div>
 
@@ -579,11 +789,16 @@ const About: React.FC = () => {
                 <div className="bg-gradient-to-r from-blue-500 to-indigo-600 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">
                   <Target className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="text-4xl font-bold text-blue-900 mb-8 text-center">Our Mission</h3>
+                <h3 className="text-4xl font-bold text-blue-900 mb-8 text-center">
+                  Our Mission
+                </h3>
                 <p className="text-gray-700 leading-relaxed text-lg text-center">
                   To provide an{" "}
-                  <span className="font-semibold text-blue-700">Excellent, Modern and God-Centered Environment</span>{" "}
-                  for Holistic Learning Development of Skills and Sound Character Formation.
+                  <span className="font-semibold text-blue-700">
+                    Excellent, Modern and God-Centered Environment
+                  </span>{" "}
+                  for Holistic Learning Development of Skills and Sound
+                  Character Formation.
                 </p>
                 <div className="mt-8 opacity-0 group-hover:opacity-100 transition-all duration-500">
                   <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
@@ -598,13 +813,16 @@ const About: React.FC = () => {
                 <div className="bg-gradient-to-r from-purple-500 to-pink-600 w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl">
                   <Lightbulb className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="text-4xl font-bold text-purple-900 mb-8 text-center">Our Vision</h3>
+                <h3 className="text-4xl font-bold text-purple-900 mb-8 text-center">
+                  Our Vision
+                </h3>
                 <p className="text-gray-700 leading-relaxed text-lg text-center">
                   To be a{" "}
                   <span className="font-semibold text-purple-700">
                     World Class Model Senior and Junior Secondary School
                   </span>{" "}
-                  that Empowers Learners to Excel in Academics and Skills Competencies.
+                  that Empowers Learners to Excel in Academics and Skills
+                  Competencies.
                 </p>
                 <div className="mt-8 opacity-0 group-hover:opacity-100 transition-all duration-500">
                   <div className="h-2 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
@@ -619,13 +837,17 @@ const About: React.FC = () => {
               <div className="bg-white/20 backdrop-blur-sm w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6">
                 <Heart className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-4xl font-bold text-white mb-4">Our Core Values</h3>
-              <p className="text-indigo-100 text-lg">The fundamental principles that guide our educational journey</p>
+              <h3 className="text-4xl font-bold text-white mb-4">
+                Our Core Values
+              </h3>
+              <p className="text-indigo-100 text-lg">
+                The fundamental principles that guide our educational journey
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {coreValues.map((value, index) => {
-                const IconComponent = value.icon
+                const IconComponent = value.icon;
                 return (
                   <div
                     key={index}
@@ -634,10 +856,14 @@ const About: React.FC = () => {
                     <div className="bg-white/20 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                       <IconComponent className="h-7 w-7 text-white" />
                     </div>
-                    <h4 className="text-white font-bold text-lg mb-2 text-center">{value.title}</h4>
-                    <p className="text-indigo-100 text-sm text-center leading-relaxed">{value.description}</p>
+                    <h4 className="text-white font-bold text-lg mb-2 text-center">
+                      {value.title}
+                    </h4>
+                    <p className="text-indigo-100 text-sm text-center leading-relaxed">
+                      {value.description}
+                    </p>
                   </div>
-                )
+                );
               })}
             </div>
 
@@ -663,7 +889,9 @@ const About: React.FC = () => {
               <Users className="w-4 h-4 mr-2" />
               Leadership Excellence
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Leadership Team</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Our Leadership Team
+            </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Meet the dedicated professionals leading our school community
             </p>
@@ -679,7 +907,7 @@ const About: React.FC = () => {
                     src={
                       leader.image
                         ? `/images/${leader.image}`
-                        : `https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop`
+                        : `/images/image.png`
                     }
                     alt={leader.name}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
@@ -693,7 +921,9 @@ const About: React.FC = () => {
                   <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
                     {leader.name}
                   </h3>
-                  <p className="text-blue-600 font-medium mb-4">{leader.position}</p>
+                  <p className="text-blue-600 font-medium mb-4">
+                    {leader.position}
+                  </p>
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
                   </div>
@@ -704,58 +934,197 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Enhanced Principal's Message */}
-      <section className="py-24 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white relative overflow-hidden">
+      {/* Leadership Section - Principal & Deputy */}
+      <section className="py-24 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white relative overflow-hidden font-sans">
         {/* Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+          <div className="absolute top-20 left-10 w-80 h-80 bg-blue-400 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-400 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse animation-delay-2000"></div>
         </div>
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
-              <img
-                src="/images/principal2.jpg"
-                alt="Principal"
-                className="relative rounded-3xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
-              />
-              {/* Floating Quote */}
-              <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-4 shadow-xl">
-                <div className="text-center">
-                  <Star className="w-6 h-6 text-yellow-500 mx-auto mb-1" />
-                  <div className="text-xs font-semibold text-gray-600">Excellence</div>
+          {/* Section Badge */}
+          <div className="flex justify-center mb-16">
+            <div className="inline-flex items-center bg-blue-500/20 text-blue-300 px-5 py-2 rounded-full text-sm font-medium backdrop-blur-sm shadow-md hover:scale-105 transition-transform duration-300">
+              <Heart className="w-4 h-4 mr-2" />
+              Leadership Message
+            </div>
+          </div>
+
+          {/* Grid Layout for Principal & Deputy */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-start">
+            {/* BOM Chair */}
+            <div className="space-y-8">
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-3xl transform -rotate-3 scale-105 opacity-20"></div>
+                <img
+                  src="/images/bom.JPG"
+                  alt="BOM Chair"
+                  className="relative rounded-3xl shadow-2xl w-full transform group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-4 shadow-xl">
+                  <div className="text-center">
+                    <Star className="w-6 h-6 text-yellow-500 mx-auto mb-1" />
+                    <div className="text-xs font-semibold text-gray-600">
+                      Stewardship
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center lg:text-left space-y-6">
+                <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight">
+                  Message from Our{" "}
+                  <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    BOM Chair
+                  </span>
+                </h2>
+
+                <blockquote className="text-lg italic text-gray-300 leading-relaxed border-l-4 border-blue-400 pl-6">
+                  “At St. Mary’s, we firmly believe that education is the
+                  foundation of a strong and prosperous society. As the Board of
+                  Management, we are committed to steering this institution with
+                  vision, integrity, and dedication. Guided by the
+                  Competency-Based Curriculum, our mission is to provide not
+                  only academic excellence but also life skills, innovation, and
+                  character formation that prepare our learners to thrive in an
+                  ever-changing world.”
+                </blockquote>
+
+                <p className="text-gray-200 leading-relaxed">
+                  Together with our devoted staff, supportive parents, and
+                  vibrant student community, we continue to invest in modern
+                  resources, advanced facilities, and holistic programs that
+                  ensure every learner has the opportunity to discover their
+                  potential and rise to greatness.
+                </p>
+
+                <div className="flex items-center justify-center lg:justify-start">
+                  <div>
+                    <p className="font-bold text-white text-lg">
+                      Dr. Alexander R.
+                    </p>
+                    <p className="text-blue-300">Chair, Board of Management</p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div>
-              <div className="inline-flex items-center bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
-                <Heart className="w-4 h-4 mr-2" />
-                Leadership Message
+
+            {/* Principal Message */}
+            <div className="space-y-8">
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
+                <img
+                  src="/images/sr.JPG"
+                  alt="Principal"
+                  className="relative rounded-3xl shadow-2xl w-full transform group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* Floating Quote */}
+                <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-4 shadow-xl">
+                  <div className="text-center">
+                    <Star className="w-6 h-6 text-yellow-500 mx-auto mb-1" />
+                    <div className="text-xs font-semibold text-gray-600">
+                      Excellence
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h2 className="text-4xl font-bold mb-8 leading-tight">
-                Message from Our
-                <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Principal
-                </span>
-              </h2>
-              <blockquote className="text-xl italic mb-8 text-gray-200 leading-relaxed border-l-4 border-blue-400 pl-6">
-                "At St. Mary's School, we believe that every child has unique talents and potential waiting to be
-                discovered and nurtured. Our dedicated team of educators works tirelessly to create an environment where
-                students can thrive academically, socially, and spiritually from their earliest years through Grade 10."
-              </blockquote>
-              <p className="text-gray-200 mb-6 leading-relaxed">
-                We are committed to preparing our students not just for examinations, but for life and university
-                success. Through our comprehensive curriculum spanning Junior-School through Grade 10, extracurricular
-                activities, and character development programs, we ensure that our graduates are well-rounded
-                individuals ready to make positive contributions to society.
-              </p>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <div className="flex items-center">
-                  <img src="/images/principal2.jpg" alt="Principal" className="w-16 h-16 rounded-full mr-4" />
-                  <div>
-                    <p className="font-bold text-white text-lg">Dr. Sr. Mary Gabriel C.</p>
-                    <p className="text-blue-300">Principal</p>
+
+              <div className="text-center lg:text-left space-y-6">
+                <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight">
+                  Message from Our{" "}
+                  <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Principal
+                  </span>
+                </h2>
+                <blockquote className="text-lg italic text-gray-200 leading-relaxed border-l-4 border-blue-400 pl-6 text-left">
+                  "At St. Mary's School, we believe that every child has unique
+                  talents and potential waiting to be discovered and nurtured.
+                  Our dedicated team of educators works tirelessly to create an
+                  environment where students can thrive academically, socially,
+                  and spiritually from their earliest years through Grade 10."
+                </blockquote>
+                <p className="text-gray-200 leading-relaxed">
+                  We are committed to preparing our students not just for
+                  examinations, but for life and university success. Through our
+                  comprehensive curriculum spanning Junior-School through Grade
+                  10, extracurricular activities, and character development
+                  programs, we ensure that our graduates are well-rounded
+                  individuals ready to make positive contributions to society.
+                </p>
+                {/* Principal Card */}
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg inline-block text-left">
+                  <div className="flex items-center">
+                    <img
+                      src="/images/sr.JPG"
+                      alt="Principal"
+                      className="w-16 h-16 rounded-full mr-4 border-2 border-blue-400"
+                    />
+                    <div>
+                      <p className="font-bold text-white text-lg">
+                        Sr. Dr. Mary Gabriel C.
+                      </p>
+                      <p className="text-blue-300">Principal</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Deputy Principal Message */}
+            <div className="space-y-8">
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-3xl transform -rotate-3 scale-105 opacity-20"></div>
+                <img
+                  src="/images/dp.JPG"
+                  alt="Deputy Principal"
+                  className="relative rounded-3xl shadow-2xl w-full transform group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* Floating Quote */}
+                <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-4 shadow-xl">
+                  <div className="text-center">
+                    <Star className="w-6 h-6 text-yellow-500 mx-auto mb-1" />
+                    <div className="text-xs font-semibold text-gray-600">
+                      Dedication
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center lg:text-left space-y-6">
+                <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight">
+                  Message from Our{" "}
+                  <span className="block bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                    Deputy Principal
+                  </span>
+                </h2>
+                <blockquote className="text-lg italic text-gray-200 leading-relaxed border-l-4 border-purple-400 pl-6 text-left">
+                  "At St. Mary's School, discipline, teamwork, and commitment
+                  form the foundation of our academic journey. Together with our
+                  staff, we strive to instill values that prepare learners to be
+                  responsible, resilient, and ethical leaders of tomorrow."
+                </blockquote>
+                <p className="text-gray-200 leading-relaxed">
+                  Beyond academics, we emphasize personal growth, mentorship,
+                  and a supportive environment that nurtures every learner’s
+                  well-being. With collaboration and guidance, our students
+                  discover their strengths and embrace opportunities that shape
+                  their future.
+                </p>
+                {/* Deputy Card */}
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg inline-block text-left">
+                  <div className="flex items-center">
+                    <img
+                      src="/images/dp.JPG"
+                      alt="Deputy Principal"
+                      className="w-16 h-16 rounded-full mr-4 border-2 border-purple-400"
+                    />
+                    <div>
+                      <p className="font-bold text-white text-lg">
+                        Md. Kiama MW.
+                      </p>
+                      <p className="text-purple-300">Deputy Principal</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -772,7 +1141,9 @@ const About: React.FC = () => {
               <Trophy className="w-4 h-4 mr-2" />
               Our Success
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Achievements</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Our Achievements
+            </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Celebrating excellence across all educational levels
             </p>
@@ -785,8 +1156,18 @@ const About: React.FC = () => {
                 icon: GraduationCap,
                 color: "from-blue-500 to-blue-600",
               },
-              { number: "95%", label: "KJSEA & KPLEA Excellence", icon: Award, color: "from-green-500 to-green-600" },
-              { number: "50+", label: "Awards & Recognition", icon: Trophy, color: "from-yellow-500 to-orange-500" },
+              {
+                number: "95%",
+                label: "KJSEA & KPLEA Excellence",
+                icon: Award,
+                color: "from-green-500 to-green-600",
+              },
+              {
+                number: "50+",
+                label: "Awards & Recognition",
+                icon: Trophy,
+                color: "from-yellow-500 to-orange-500",
+              },
               {
                 number: "100%",
                 label: "CBE Implementation",
@@ -798,7 +1179,9 @@ const About: React.FC = () => {
                 key={index}
                 className="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 overflow-hidden"
               >
-                <div className={`h-2 bg-gradient-to-r ${achievement.color}`}></div>
+                <div
+                  className={`h-2 bg-gradient-to-r ${achievement.color}`}
+                ></div>
                 <div className="p-8 text-center">
                   <div
                     className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${achievement.color} mb-6 group-hover:scale-110 transition-transform duration-300`}
@@ -808,9 +1191,13 @@ const About: React.FC = () => {
                   <div className="text-4xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
                     {achievement.number}
                   </div>
-                  <p className="text-gray-600 font-medium">{achievement.label}</p>
+                  <p className="text-gray-600 font-medium">
+                    {achievement.label}
+                  </p>
                   <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className={`h-1 bg-gradient-to-r ${achievement.color} rounded-full`}></div>
+                    <div
+                      className={`h-1 bg-gradient-to-r ${achievement.color} rounded-full`}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -837,8 +1224,8 @@ const About: React.FC = () => {
             </span>
           </h2>
           <p className="text-xl md:text-2xl mb-12 text-gray-200 max-w-4xl mx-auto leading-relaxed">
-            Join St. Mary's School and become part of a legacy of excellence that has been shaping young minds for over
-            three decades.
+            Join St. Mary's School and become part of a legacy of excellence
+            that has been shaping young minds for over three decades.
           </p>
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
@@ -872,7 +1259,7 @@ const About: React.FC = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;

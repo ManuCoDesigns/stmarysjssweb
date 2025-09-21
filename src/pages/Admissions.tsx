@@ -175,17 +175,17 @@ const Admissions: React.FC = () => {
   const feeStructure = [
     {
       grade: "Junior Secondary (Grade 7-9)",
-      term1Fee: "16,000",
-      term2Fee: "16,000",
-      term3Fee: "16,000",
-      yearFee: "48,000",
-    },
-    {
-      grade: "Senior Secondary (Grade 10)",
       term1Fee: "20,000",
       term2Fee: "20,000",
       term3Fee: "20,000",
       yearFee: "60,000",
+    },
+    {
+      grade: "Senior Secondary (Grade 10)",
+      term1Fee: "21,500",
+      term2Fee: "21,500",
+      term3Fee: "21,500",
+      yearFee: "64,500",
     },
   ];
 
@@ -197,7 +197,7 @@ const Admissions: React.FC = () => {
     { text: "Medical certificate", icon: Heart },
     { text: "Passport-size photographs (4 copies)", icon: User },
     { text: "Parent/Guardian ID copies", icon: Users },
-    { text: "Academic transcripts (for Grade 10 applicants)", icon: Trophy },
+    { text: "KJSEA Results (for Grade 10 applicants)", icon: Trophy },
   ];
 
   const achievements = [
@@ -776,8 +776,7 @@ const Admissions: React.FC = () => {
                   Payment plans available upon request
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                  Grade 10 fees include additional exam preparation costs
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />.
                 </li>
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
