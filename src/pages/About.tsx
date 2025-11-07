@@ -624,11 +624,10 @@ const About: React.FC = () => {
                   uplifting the girl child education in the region. It has
                   however, undergone expansion in the recent year year - 2023,
                   it started as a stand alone Junior Mixed School domicile in
-                  Senior School compound to cater for boy child too.
-                  . From 50 students to over 500, we've maintained our
-                  commitment to academic excellence while embracing modern
-                  educational approaches including Kenya's Competency-Based
-                  Education (CBE).
+                  Senior School compound to cater for boy child too. . From 50
+                  students to over 500, we've maintained our commitment to
+                  academic excellence while embracing modern educational
+                  approaches including Kenya's Competency-Based Education (CBE).
                 </p>
               </div>
 
@@ -969,7 +968,7 @@ const About: React.FC = () => {
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-3xl transform -rotate-3 scale-105 opacity-20"></div>
                 <img
-                  src="/images/bom.JPG"
+                  src="/images/bom1.jpg"
                   alt="BOM Chair"
                   className="relative rounded-3xl shadow-2xl w-full transform group-hover:scale-105 transition-transform duration-500"
                 />
@@ -1087,7 +1086,7 @@ const About: React.FC = () => {
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-3xl transform -rotate-3 scale-105 opacity-20"></div>
                 <img
-                  src="/images/dp.JPG"
+                  src="/images/dp1.jpg"
                   alt="Deputy Principal"
                   className="relative rounded-3xl shadow-2xl w-full transform group-hover:scale-105 transition-transform duration-500"
                 />
@@ -1126,7 +1125,7 @@ const About: React.FC = () => {
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg inline-block text-left">
                   <div className="flex items-center">
                     <img
-                      src="/images/dp.JPG"
+                      src="/images/dp1.jpg"
                       alt="Deputy Principal"
                       className="w-16 h-16 rounded-full mr-4 border-2 border-purple-400"
                     />

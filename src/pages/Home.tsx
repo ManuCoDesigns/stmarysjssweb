@@ -168,66 +168,46 @@ const Home: React.FC = () => {
   // Scrolling News Data
   const scrollingNews = [
     {
+      type: "interview",
+      icon: CalendarCheck,
+      text: "Entrance Interviews for New Students: 8th, 15th & 22nd November 2025 – Book Your Slot Early!",
+      link: "/admissions",
+    },
+    {
+      type: "announcement",
+      icon: Bell,
+      text: "Admissions Open for Grade 7–10, 2026 Academic Year – Apply Now!",
+      link: "/admissions",
+    },
+    {
       type: "opening",
       icon: CalendarCheck,
-      text: "School Opens on 26th August 2025 for Term 3– Grade 10 Admission Applications Now Open for 2025/2026 Academic Year",
-      link: "/admissions",
-    },
-    {
-      type: "achievement",
-      icon: Award,
-      text: "St. Mary's School Band Qualifies for Kenya Music Festivals National Finals 2025",
-      link: "/news",
-    },
-
-    {
-      type: "event",
-      icon: Calendar,
-      text: "Parent-Teacher Conference Scheduled for August 15, 2025",
-      link: "/events",
+      text: "School Reopens on 5th January 2026 for Term 1 – Welcome Back Students!",
+      link: "/calendar",
     },
     {
       type: "announcement",
       icon: Bell,
-      text: "New ICT Innovation Lab Opens - Enhancing Digital Learning Experience",
-      link: "/news",
-    },
-
-    {
-      type: "breaking",
-      icon: AlertCircle,
-      text: "Grade 10 Admission Applications Now Open for 2025/2026 Academic Year",
-      link: "/admissions",
-    },
-    {
-      type: "announcement",
-      icon: Bell,
-      text: "School Band Qualifies for Kenya Music Festivals National Finals 2025",
+      text: "Launch of New ICT Innovation Lab – Empowering Learners Through Digital Skills",
       link: "/news",
     },
     {
       type: "achievement",
       icon: Award,
-      text: "98% University Admission Rate for 2024 Grade 10 Graduates",
-      link: "/academics",
-    },
-    {
-      type: "event",
-      icon: Calendar,
-      text: "Parent-Teacher Conference Scheduled for August 15, 2025",
-      link: "/events",
-    },
-    {
-      type: "announcement",
-      icon: Bell,
-      text: "New ICT Innovation Lab Opens - Enhancing Digital Learning Experience",
+      text: "St. Mary’s Music Band Qualifies for Kenya Music Festival National Finals 2025",
       link: "/news",
     },
     {
       type: "achievement",
       icon: Star,
-      text: "St. Mary's Recognized as Top CBE Implementation School in Rift Valley Region",
+      text: "St. Mary’s Ranked Among Top CBC Implementing Schools in the Rift Valley Region",
       link: "/about",
+    },
+    {
+      type: "announcement",
+      icon: Bell,
+      text: "New Languages Introduced – French, German & Indigenous Language Program Now Available",
+      link: "/academics",
     },
   ];
 
