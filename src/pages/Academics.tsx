@@ -545,52 +545,6 @@ const Academics: React.FC = () => {
     },
   ];
 
-  const supportServices = [
-    {
-      title: "Learning Support",
-      description:
-        "Individualized support for students with different learning needs and styles",
-      icon: Heart,
-      features: [
-        "One-on-one tutoring",
-        "Learning disability support",
-        "Study skills training",
-      ],
-    },
-    {
-      title: "Remedial Classes",
-      description:
-        "Additional support classes for students who need extra help in specific subjects",
-      icon: BookOpen,
-      features: [
-        "After-school sessions",
-        "Weekend workshops",
-        "Peer tutoring programs",
-      ],
-    },
-    {
-      title: "Gifted Program",
-      description:
-        "Enrichment activities and advanced learning opportunities for exceptional students",
-      icon: Star,
-      features: [
-        "Advanced coursework",
-        "Research projects",
-        "Competition preparation",
-      ],
-    },
-    {
-      title: "University Prep",
-      description:
-        "Specialized preparation for university entrance exams and application processes",
-      icon: Target,
-      features: [
-        "SAT/ACT prep",
-        "Application guidance",
-        "Scholarship assistance",
-      ],
-    },
-  ];
 
   return (
     <div className="overflow-hidden">
