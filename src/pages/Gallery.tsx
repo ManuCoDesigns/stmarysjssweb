@@ -48,10 +48,11 @@ const SchoolGallery: React.FC = () => {
   // Enhanced albums data with more details
   const albums: Album[] = [
     {
-      id: "sports-day-2024",
-      title: "Annual Sports Day 2024",
-      description: "Exciting moments from our annual sports competitions featuring track and field events, team sports, and award ceremonies",
-      image: "https://images.pexels.com/photos/2105028/pexels-photo-2105028.jpeg?auto=compress&cs=tinysrgb&w=600",
+      id: "Thanksgiving-Day-2024",
+      title: "Thanks giving day celebrations for 2024 KCSE results",
+      description:
+        "Exciting moments from our annual sports competitions featuring track and field events, team sports, and award ceremonies",
+      image: "/public/images/band1.jpg",
       category: "Sports",
       date: "2024-03-15",
       location: "Main Athletic Field",
@@ -59,13 +60,14 @@ const SchoolGallery: React.FC = () => {
       views: 1247,
       likes: 89,
       imageCount: 42,
-      tags: ["sports", "athletics", "competition", "students"]
+      tags: ["sports", "athletics", "competition", "students"],
     },
     {
       id: "cultural-fest-2024",
       title: "Cultural Festival 2024",
-      description: "A vibrant celebration of music, dance, art, and diversity featuring performances from students across all grades",
-      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600",
+      description:
+        "A vibrant celebration of music, dance, art, and diversity featuring performances from students across all grades",
+      image: " ",
       category: "Culture",
       date: "2024-02-28",
       location: "Main Auditorium",
@@ -73,13 +75,14 @@ const SchoolGallery: React.FC = () => {
       views: 2156,
       likes: 167,
       imageCount: 78,
-      tags: ["culture", "performance", "music", "dance", "art"]
+      tags: ["culture", "performance", "music", "dance", "art"],
     },
     {
       id: "classroom-life-spring",
       title: "Spring Classroom Activities",
-      description: "Capturing daily learning moments, collaborative projects, and interactive learning sessions",
-      image: "https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=600",
+      description:
+        "Capturing daily learning moments, collaborative projects, and interactive learning sessions",
+      image: " ",
       category: "Academics",
       date: "2024-04-10",
       location: "Various Classrooms",
@@ -87,13 +90,14 @@ const SchoolGallery: React.FC = () => {
       views: 892,
       likes: 54,
       imageCount: 35,
-      tags: ["academics", "learning", "classroom", "education"]
+      tags: ["academics", "learning", "classroom", "education"],
     },
     {
       id: "science-museum-trip",
       title: "Science Museum Field Trip",
-      description: "An educational adventure exploring interactive exhibits and hands-on science demonstrations",
-      image: "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&w=600",
+      description:
+        "An educational adventure exploring interactive exhibits and hands-on science demonstrations",
+      image: " ",
       category: "Trips",
       date: "2024-03-22",
       location: "City Science Museum",
@@ -101,13 +105,14 @@ const SchoolGallery: React.FC = () => {
       views: 1543,
       likes: 112,
       imageCount: 64,
-      tags: ["field trip", "science", "museum", "learning", "exploration"]
+      tags: ["field trip", "science", "museum", "learning", "exploration"],
     },
     {
       id: "graduation-ceremony",
       title: "Graduation Ceremony 2024",
-      description: "A memorable day celebrating our graduating class with speeches, awards, and family moments",
-      image: "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=600",
+      description:
+        "A memorable day celebrating our graduating class with speeches, awards, and family moments",
+      image: " ",
       category: "Events",
       date: "2024-05-18",
       location: "Main Hall",
@@ -115,13 +120,14 @@ const SchoolGallery: React.FC = () => {
       views: 3421,
       likes: 298,
       imageCount: 156,
-      tags: ["graduation", "ceremony", "celebration", "achievement"]
+      tags: ["graduation", "ceremony", "celebration", "achievement"],
     },
     {
       id: "art-exhibition",
       title: "Student Art Exhibition",
-      description: "Showcasing creative works from our talented student artists across various mediums and styles",
-      image: "https://images.pexels.com/photos/1572386/pexels-photo-1572386.jpeg?auto=compress&cs=tinysrgb&w=600",
+      description:
+        "Showcasing creative works from our talented student artists across various mediums and styles",
+      image: " ",
       category: "Culture",
       date: "2024-04-05",
       location: "Art Gallery",
@@ -129,11 +135,18 @@ const SchoolGallery: React.FC = () => {
       views: 987,
       likes: 76,
       imageCount: 48,
-      tags: ["art", "exhibition", "creativity", "student work"]
-    }
+      tags: ["art", "exhibition", "creativity", "student work"],
+    },
   ];
 
-  const categories = ["All", "Sports", "Culture", "Academics", "Trips", "Events"];
+  const categories = [
+    "All",
+    "Sports",
+    "Culture",
+    "Academics",
+    "Trips",
+    "Events",
+  ];
 
   const mediaShortcuts = [
     { icon: ImageIcon, label: "Photos", link: "/gallery/photos", count: "2K+" },
@@ -141,7 +154,12 @@ const SchoolGallery: React.FC = () => {
     { icon: Music, label: "Audio", link: "/gallery/music", count: "80+" },
     { icon: Book, label: "Yearbook", link: "/gallery/yearbook", count: "12" },
     { icon: Globe, label: "Virtual Tours", link: "/gallery/tours", count: "5" },
-    { icon: FolderOpen, label: "Archives", link: "/gallery/archives", count: "500+" },
+    {
+      icon: FolderOpen,
+      label: "Archives",
+      link: "/gallery/archives",
+      count: "500+",
+    },
   ];
 
   // Enhanced state management
@@ -161,7 +179,9 @@ const SchoolGallery: React.FC = () => {
     let interval: NodeJS.Timeout;
     if (isPlaying && selectedIndex !== null) {
       interval = setInterval(() => {
-        setSelectedIndex((prev) => prev === null ? null : (prev + 1) % filteredAlbums.length);
+        setSelectedIndex((prev) =>
+          prev === null ? null : (prev + 1) % filteredAlbums.length
+        );
       }, 3000);
     }
     return () => clearInterval(interval);
@@ -195,10 +215,13 @@ const SchoolGallery: React.FC = () => {
 
   // Enhanced filtering and sorting
   const filteredAlbums = albums
-    .filter((album) =>
-      (activeCategory === "All" || album.category === activeCategory) &&
-      (album.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-       album.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())))
+    .filter(
+      (album) =>
+        (activeCategory === "All" || album.category === activeCategory) &&
+        (album.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          album.tags.some((tag) =>
+            tag.toLowerCase().includes(searchTerm.toLowerCase())
+          ))
     )
     .sort((a, b) => {
       switch (sortBy) {
@@ -214,7 +237,9 @@ const SchoolGallery: React.FC = () => {
 
   const handlePrev = useCallback(() => {
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex - 1 + filteredAlbums.length) % filteredAlbums.length);
+      setSelectedIndex(
+        (selectedIndex - 1 + filteredAlbums.length) % filteredAlbums.length
+      );
     }
   }, [selectedIndex, filteredAlbums.length]);
 
@@ -225,7 +250,7 @@ const SchoolGallery: React.FC = () => {
   }, [selectedIndex, filteredAlbums.length]);
 
   const toggleFavorite = (albumId: string) => {
-    setFavorites(prev => {
+    setFavorites((prev) => {
       const newFavorites = new Set(prev);
       if (newFavorites.has(albumId)) {
         newFavorites.delete(albumId);
@@ -255,10 +280,10 @@ const SchoolGallery: React.FC = () => {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -279,8 +304,9 @@ const SchoolGallery: React.FC = () => {
             </h1>
           </div>
           <p className="text-xl max-w-3xl mx-auto mb-8 text-gray-100 leading-relaxed">
-            Explore our vibrant school community through thousands of captured moments. 
-            From academic achievements to cultural celebrations, discover the memories that shape our story.
+            Explore our vibrant school community through thousands of captured
+            moments. From academic achievements to cultural celebrations,
+            discover the memories that shape our story.
           </p>
           <div className="flex items-center justify-center gap-6 text-sm text-pink-200">
             <div className="flex items-center gap-2">
@@ -306,7 +332,7 @@ const SchoolGallery: React.FC = () => {
             <div className="bg-gradient-to-br from-blue-500 to-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <ImageIcon className="h-8 w-8 text-white" />
             </div>
-            <h3 className="text-4xl font-bold text-gray-800 mb-2">2,847</h3>
+            <h3 className="text-4xl font-bold text-gray-800 mb-2">847</h3>
             <p className="text-gray-600 font-medium">Total Photos</p>
             <p className="text-xs text-gray-400 mt-1">+127 this month</p>
           </div>
@@ -360,7 +386,9 @@ const SchoolGallery: React.FC = () => {
                 <SortAsc className="h-4 w-4 text-gray-500" />
                 <select
                   value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as "date" | "likes" | "views")}
+                  onChange={(e) =>
+                    setSortBy(e.target.value as "date" | "likes" | "views")
+                  }
                   className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
                 >
                   <option value="date">Latest</option>
@@ -373,13 +401,21 @@ const SchoolGallery: React.FC = () => {
               <div className="flex items-center bg-white border border-gray-300 rounded-lg p-1">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-2 rounded transition-colors ${viewMode === "grid" ? "bg-purple-100 text-purple-600" : "text-gray-500 hover:text-gray-700"}`}
+                  className={`p-2 rounded transition-colors ${
+                    viewMode === "grid"
+                      ? "bg-purple-100 text-purple-600"
+                      : "text-gray-500 hover:text-gray-700"
+                  }`}
                 >
                   <Grid3X3 className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => setViewMode("masonry")}
-                  className={`p-2 rounded transition-colors ${viewMode === "masonry" ? "bg-purple-100 text-purple-600" : "text-gray-500 hover:text-gray-700"}`}
+                  className={`p-2 rounded transition-colors ${
+                    viewMode === "masonry"
+                      ? "bg-purple-100 text-purple-600"
+                      : "text-gray-500 hover:text-gray-700"
+                  }`}
                 >
                   <Filter className="h-4 w-4" />
                 </button>
@@ -400,7 +436,11 @@ const SchoolGallery: React.FC = () => {
                 onClick={() => setActiveCategory(cat)}
               >
                 {cat}
-                {cat === "All" && <span className="ml-2 text-xs opacity-75">({albums.length})</span>}
+                {cat === "All" && (
+                  <span className="ml-2 text-xs opacity-75">
+                    ({albums.length})
+                  </span>
+                )}
               </button>
             ))}
           </div>
@@ -413,15 +453,21 @@ const SchoolGallery: React.FC = () => {
           {filteredAlbums.length === 0 ? (
             <div className="text-center py-20">
               <Search className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-600 mb-2">No albums found</h3>
-              <p className="text-gray-400">Try adjusting your search or filter criteria</p>
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                No albums found
+              </h3>
+              <p className="text-gray-400">
+                Try adjusting your search or filter criteria
+              </p>
             </div>
           ) : (
-            <div className={`grid gap-8 ${
-              viewMode === "grid" 
-                ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
-                : "columns-1 md:columns-2 lg:columns-3 xl:columns-4"
-            }`}>
+            <div
+              className={`grid gap-8 ${
+                viewMode === "grid"
+                  ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                  : "columns-1 md:columns-2 lg:columns-3 xl:columns-4"
+              }`}
+            >
               {filteredAlbums.map((album, index) => (
                 <div
                   key={album.id}
@@ -439,17 +485,17 @@ const SchoolGallery: React.FC = () => {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
+
                     {/* Image Count Badge */}
                     <div className="absolute top-4 left-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
                       {album.imageCount} photos
                     </div>
-                    
+
                     {/* Category Badge */}
                     <div className="absolute top-4 right-4 bg-white/90 text-gray-800 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm">
                       {album.category}
                     </div>
-                    
+
                     {/* Hover Actions */}
                     <div className="absolute bottom-4 right-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <button
@@ -458,12 +504,16 @@ const SchoolGallery: React.FC = () => {
                           toggleFavorite(album.id);
                         }}
                         className={`p-2 rounded-full backdrop-blur-sm transition-colors ${
-                          favorites.has(album.id) 
-                            ? "bg-red-500 text-white" 
+                          favorites.has(album.id)
+                            ? "bg-red-500 text-white"
                             : "bg-white/80 text-gray-700 hover:bg-red-100"
                         }`}
                       >
-                        <Heart className={`h-4 w-4 ${favorites.has(album.id) ? "fill-current" : ""}`} />
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.has(album.id) ? "fill-current" : ""
+                          }`}
+                        />
                       </button>
                       <button
                         onClick={(e) => {
@@ -485,7 +535,7 @@ const SchoolGallery: React.FC = () => {
                     <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
                       {album.description}
                     </p>
-                    
+
                     {/* Metadata */}
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center text-xs text-gray-500">
@@ -501,7 +551,7 @@ const SchoolGallery: React.FC = () => {
                         <span>By {album.photographer}</span>
                       </div>
                     </div>
-                    
+
                     {/* Tags */}
                     <div className="flex flex-wrap gap-1 mb-4">
                       {album.tags.slice(0, 3).map((tag) => (
@@ -518,7 +568,7 @@ const SchoolGallery: React.FC = () => {
                         </span>
                       )}
                     </div>
-                    
+
                     {/* Stats */}
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                       <div className="flex items-center gap-4 text-sm text-gray-500">
@@ -527,7 +577,13 @@ const SchoolGallery: React.FC = () => {
                           <span>{album.views.toLocaleString()}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Heart className={`h-4 w-4 ${favorites.has(album.id) ? "text-red-500 fill-current" : ""}`} />
+                          <Heart
+                            className={`h-4 w-4 ${
+                              favorites.has(album.id)
+                                ? "text-red-500 fill-current"
+                                : ""
+                            }`}
+                          />
                           <span>{album.likes}</span>
                         </div>
                       </div>
@@ -585,9 +641,13 @@ const SchoolGallery: React.FC = () => {
                   className="p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
                   title={isPlaying ? "Pause slideshow" : "Start slideshow"}
                 >
-                  {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                  {isPlaying ? (
+                    <Pause className="h-5 w-5" />
+                  ) : (
+                    <Play className="h-5 w-5" />
+                  )}
                 </button>
-                
+
                 {/* Zoom Controls */}
                 <button
                   onClick={() => setZoomLevel(Math.max(0.5, zoomLevel - 0.25))}
@@ -606,18 +666,20 @@ const SchoolGallery: React.FC = () => {
                 >
                   <ZoomIn className="h-5 w-5" />
                 </button>
-                
+
                 {/* Thumbnails Toggle */}
                 <button
                   onClick={() => setShowThumbnails(!showThumbnails)}
                   className={`p-2 rounded-full transition-colors ${
-                    showThumbnails ? "bg-white/30 text-white" : "bg-white/20 text-white hover:bg-white/30"
+                    showThumbnails
+                      ? "bg-white/30 text-white"
+                      : "bg-white/20 text-white hover:bg-white/30"
                   }`}
                   title="Toggle thumbnails"
                 >
                   <Grid3X3 className="h-5 w-5" />
                 </button>
-                
+
                 {/* Actions */}
                 <button
                   onClick={() => shareAlbum(filteredAlbums[selectedIndex])}
@@ -626,7 +688,7 @@ const SchoolGallery: React.FC = () => {
                 >
                   <Share2 className="h-5 w-5" />
                 </button>
-                
+
                 {/* Close */}
                 <button
                   className="p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors ml-2"
@@ -652,7 +714,7 @@ const SchoolGallery: React.FC = () => {
           >
             <ChevronLeft className="h-8 w-8" />
           </button>
-          
+
           <button
             className="absolute right-6 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all duration-200 hover:scale-110"
             onClick={handleNext}
@@ -684,7 +746,9 @@ const SchoolGallery: React.FC = () => {
                   <div className="flex items-center gap-6 text-sm text-gray-400">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
-                      <span>{formatDate(filteredAlbums[selectedIndex].date)}</span>
+                      <span>
+                        {formatDate(filteredAlbums[selectedIndex].date)}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="h-4 w-4" />
@@ -699,13 +763,23 @@ const SchoolGallery: React.FC = () => {
                 <div className="flex items-center gap-4 text-sm">
                   <div className="flex items-center gap-1">
                     <Eye className="h-4 w-4" />
-                    <span>{filteredAlbums[selectedIndex].views.toLocaleString()}</span>
+                    <span>
+                      {filteredAlbums[selectedIndex].views.toLocaleString()}
+                    </span>
                   </div>
                   <button
-                    onClick={() => toggleFavorite(filteredAlbums[selectedIndex].id)}
+                    onClick={() =>
+                      toggleFavorite(filteredAlbums[selectedIndex].id)
+                    }
                     className="flex items-center gap-1 hover:text-red-400 transition-colors"
                   >
-                    <Heart className={`h-4 w-4 ${favorites.has(filteredAlbums[selectedIndex].id) ? "text-red-500 fill-current" : ""}`} />
+                    <Heart
+                      className={`h-4 w-4 ${
+                        favorites.has(filteredAlbums[selectedIndex].id)
+                          ? "text-red-500 fill-current"
+                          : ""
+                      }`}
+                    />
                     <span>{filteredAlbums[selectedIndex].likes}</span>
                   </button>
                 </div>
@@ -722,8 +796,8 @@ const SchoolGallery: React.FC = () => {
                     key={album.id}
                     onClick={() => setSelectedIndex(index)}
                     className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all duration-200 ${
-                      index === selectedIndex 
-                        ? "ring-2 ring-white scale-110" 
+                      index === selectedIndex
+                        ? "ring-2 ring-white scale-110"
                         : "opacity-60 hover:opacity-100"
                     }`}
                   >

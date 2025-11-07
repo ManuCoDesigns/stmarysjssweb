@@ -610,10 +610,21 @@ const About: React.FC = () => {
                 </h2>
 
                 <p className="text-gray-600 text-base leading-relaxed">
-                  St. Mary's School was established in 1990 by the{" "}
-                  <span className="font-semibold text-indigo-700">
-                    Franciscan Sisters of St. Joseph (FSSJ) Asumbi
-                  </span>
+                  St. Mary's Senior School - Bomet is a diverse Catholc
+                  Community engaged in offering Value-Based education, promote
+                  environmental where self-confidence, moral and trust are
+                  cultivated, spiritual and intellectual potential is realised
+                  for the integral development of each person. We believe that
+                  every member of our Community will practice faith in God,
+                  commit to excellence, seek knowledge, explore skills, promote
+                  accountability and act with global awareness. St. Mary's
+                  Senior School is a private school owned by Catholic Diocese of
+                  Kericho. The school was founded in 1990 by Rev. Fr. Ceasser
+                  and Rev. Sr. Francis Xavier Chebet F.S.S.J, with an aim of
+                  uplifting the girl child education in the region. It has
+                  however, undergone expansion in the recent year year - 2023,
+                  it started as a stand alone Junior Mixed School domicile in
+                  Senior School compound to cater for boy child too.
                   . From 50 students to over 500, we've maintained our
                   commitment to academic excellence while embracing modern
                   educational approaches including Kenya's Competency-Based

@@ -411,13 +411,33 @@ const Home: React.FC = () => {
               }`}
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-3xl transform rotate-6 scale-105 opacity-20"></div>
-                <img
-                  src="/images/students1.jpg"
-                  alt="St. Mary's School students"
-                  className="relative rounded-3xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-xl">
+                {/* Background accent */}
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 rounded-3xl transform rotate-6 scale-105 opacity-20"></div>
+
+                {/* Image slider with fade + zoom + overlay */}
+                <div className="relative rounded-3xl shadow-2xl w-full h-[420px] overflow-hidden border-4 border-transparent animate-glow">
+                  {/* Overlay gradient for cinematic look */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent z-10"></div>
+
+                  <img
+                    src="/images/students1.jpg"
+                    alt="St. Mary's School students"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom"
+                  />
+                  <img
+                    src="/images/gate.jpg"
+                    alt="St. Mary's School gate"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom delay-1"
+                  />
+                  <img
+                    src="/images/GRADE 9 KNEC AGN.jpg"
+                    alt="St. Mary's School gate"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom delay-1"
+                  />
+                </div>
+
+                {/* Floating stats card with pulse */}
+                <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-4 shadow-xl animate-pulse-slow">
                   <div className="flex items-center space-x-2">
                     <div className="flex -space-x-2">
                       {[1, 2, 3].map((i) => (
@@ -434,6 +454,41 @@ const Home: React.FC = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Embedded styles */}
+              <style>{`
+    /* Fade + zoom effect */
+    @keyframes fadeZoom {
+      0%, 100% { opacity: 0; transform: scale(1.1); }
+      10%, 45% { opacity: 1; transform: scale(1); }
+      55%, 90% { opacity: 0; transform: scale(1.1); }
+    }
+    .animate-fadeZoom {
+      animation: fadeZoom 12s infinite ease-in-out;
+    }
+    .animate-fadeZoom.delay-1 {
+      animation-delay: 10s;
+    }
+
+    /* Glowing border effect */
+    @keyframes glow {
+      0% { border-color: rgba(255, 215, 0, 0.4); box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+      50% { border-color: rgba(255, 140, 0, 0.6); box-shadow: 0 0 25px rgba(255, 140, 0, 0.5); }
+      100% { border-color: rgba(255, 215, 0, 0.4); box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+    }
+    .animate-glow {
+      animation: glow 6s infinite alternate;
+    }
+
+    /* Smooth pulse for card */
+    @keyframes pulseSlow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .animate-pulse-slow {
+      animation: pulseSlow 6s infinite ease-in-out;
+    }
+  `}</style>
             </div>
           </div>
         </div>
