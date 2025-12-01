@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
-import { Download, FileText, Calendar, Search, Filter } from 'lucide-react';
+import { Download, FileText, Calendar, Search, Filter, Eye, X } from 'lucide-react';
+
+interface DownloadFile {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  type: string;
+  size: string;
+  date: string;
+  downloads: number;
+  url: string;
+}
 
 const Downloads: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [previewFile, setPreviewFile] = useState<DownloadFile | null>(null);
 
-  const downloadFiles = [
+  const downloadFiles: DownloadFile[] = [
     {
       id: 1,
       title: "School Admission Form 2024",
@@ -164,13 +177,20 @@ const Downloads: React.FC = () => {
     }
   };
 
-  const handleOpen = (file: any) => {
+  const handleDownload = (file: DownloadFile) => {
     if (!file.url || file.url === '#') {
       alert('This file will be available soon. Please check back later!');
       return;
     }
-    // open in new tab to let Google Drive handle download
     window.open(file.url, '_blank');
+  };
+
+  const handlePreview = (file: DownloadFile) => {
+    if (!file.url || file.url === '#') {
+      alert('Preview not available for this file yet.');
+      return;
+    }
+    setPreviewFile(file);
   };
 
   return (
@@ -255,13 +275,22 @@ const Downloads: React.FC = () => {
                     <span className="font-medium">{file.downloads} downloads</span>
                   </div>
 
-                  <button
-                    onClick={() => handleOpen(file)}
-                    className="w-full bg-amber-700 hover:bg-amber-800 text-white py-3 px-4 rounded-lg flex items-center justify-center font-semibold shadow-md hover:shadow-xl transition duration-300"
-                  >
-                    <Download className="h-5 w-5 mr-2" />
-                    Download
-                  </button>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => handleDownload(file)}
+                      className="flex-1 bg-amber-700 hover:bg-amber-800 text-white py-3 px-4 rounded-lg flex items-center justify-center font-semibold shadow-md hover:shadow-xl transition duration-300"
+                    >
+                      <Download className="h-5 w-5 mr-2" />
+                      Download
+                    </button>
+                    <button
+                      onClick={() => handlePreview(file)}
+                      className="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg flex items-center justify-center font-semibold shadow-md hover:shadow-xl transition duration-300"
+                      title="Preview file"
+                    >
+                      <Eye className="h-5 w-5" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -285,7 +314,6 @@ const Downloads: React.FC = () => {
         </section>
       </div>
 
-      {/* Quick Links */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -316,7 +344,6 @@ const Downloads: React.FC = () => {
         </div>
       </section>
 
-      {/* Help Section */}
       <section className="py-20 bg-amber-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Need Help?</h2>
@@ -339,6 +366,54 @@ const Downloads: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {previewFile && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h2 className="text-2xl font-bold text-gray-900">{previewFile.title}</h2>
+              <button
+                onClick={() => setPreviewFile(null)}
+                className="text-gray-500 hover:text-gray-700 transition"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-hidden bg-gray-100">
+              {previewFile.url && previewFile.url !== '#' ? (
+                <iframe
+                  src={`https://drive.google.com/file/d/${previewFile.url.split('id=')[1]?.split('&')[0] || previewFile.url}/preview`}
+                  className="w-full h-full border-0"
+                  allow="autoplay"
+                  title={previewFile.title}
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="text-center">
+                    <FileText className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-600 text-lg">Preview not available for this file.</p>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="flex gap-3 p-6 border-t border-gray-200 bg-gray-50">
+              <button
+                onClick={() => handleDownload(previewFile)}
+                className="flex-1 bg-amber-700 hover:bg-amber-800 text-white py-3 px-4 rounded-lg flex items-center justify-center font-semibold shadow-md hover:shadow-xl transition duration-300"
+              >
+                <Download className="h-5 w-5 mr-2" />
+                Download
+              </button>
+              <button
+                onClick={() => setPreviewFile(null)}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 py-3 px-4 rounded-lg font-semibold shadow-md hover:shadow-xl transition duration-300"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
