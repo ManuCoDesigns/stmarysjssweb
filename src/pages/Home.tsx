@@ -25,32 +25,24 @@ import {
   Lightbulb,
   Target,
   ChevronDown,
-  Video,
-  Image as ImageIcon,
   Clock,
-  Zap,
   Facebook,
   Twitter,
   Instagram,
   Youtube,
   Trophy,
-  BookMarked,
   Microscope,
   Music,
-  Palette,
-  MessageSquare,
   Send,
 } from "lucide-react";
 
 const Home: React.FC = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [currentFacility, setCurrentFacility] = useState(0);
   const [email, setEmail] = useState("");
 
   useEffect(() => {
-    setIsVisible(true);
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
@@ -407,13 +399,11 @@ const Home: React.FC = () => {
   return (
     <div className="home-container">
       <style>{`
-        /* Global Styles */
         .home-container {
           overflow-x: hidden;
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* Hero Animations */
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-20px); }
@@ -422,12 +412,6 @@ const Home: React.FC = () => {
         @keyframes pulse-glow {
           0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
           50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.6); }
-        }
-
-        @keyframes gradient-shift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
         }
 
         @keyframes scroll-left {
@@ -463,28 +447,12 @@ const Home: React.FC = () => {
           50% { transform: translateY(-10px); }
         }
 
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-
-        @keyframes rotate-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        /* Utility Classes */
         .animate-float {
           animation: float 3s ease-in-out infinite;
         }
 
         .animate-pulse-glow {
           animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient-shift 6s ease infinite;
         }
 
         .animate-slide-up {
@@ -521,7 +489,6 @@ const Home: React.FC = () => {
           animation: glow-border 3s ease-in-out infinite;
         }
 
-        /* Card Hover Effects */
         .card-hover {
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -531,7 +498,6 @@ const Home: React.FC = () => {
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
-        /* Gradient Text */
         .gradient-text {
           background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #EF4444 100%);
           -webkit-background-clip: text;
@@ -539,7 +505,6 @@ const Home: React.FC = () => {
           background-clip: text;
         }
 
-        /* Glass Morphism */
         .glass {
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
@@ -552,7 +517,6 @@ const Home: React.FC = () => {
           border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Button Styles */
         .btn-primary {
           background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
           color: #1F2937;
@@ -590,19 +554,10 @@ const Home: React.FC = () => {
           border-color: rgba(255, 255, 255, 0.5);
         }
 
-        /* Section Spacing */
         .section {
           padding: 6rem 1rem;
         }
 
-        /* Responsive Grid */
-        .grid-responsive {
-          display: grid;
-          gap: 2rem;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-
-        /* Stat Counter Animation */
         .stat-number {
           font-size: 3rem;
           font-weight: 800;
@@ -614,7 +569,6 @@ const Home: React.FC = () => {
           transform: scale(1.15);
         }
 
-        /* Newsletter Input */
         .newsletter-input {
           padding: 1rem 1.5rem;
           border-radius: 0.75rem;
@@ -636,7 +590,6 @@ const Home: React.FC = () => {
           color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Social Media Icons */
         .social-icon {
           width: 48px;
           height: 48px;
@@ -652,7 +605,6 @@ const Home: React.FC = () => {
           transform: translateY(-5px) scale(1.1);
         }
 
-        /* Timeline Events */
         .event-card {
           background: white;
           border-radius: 1rem;
@@ -667,7 +619,6 @@ const Home: React.FC = () => {
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
         }
 
-        /* Facility Carousel */
         .facility-image {
           width: 100%;
           height: 400px;
@@ -680,7 +631,6 @@ const Home: React.FC = () => {
           transform: scale(1.05);
         }
 
-        /* Success Story Cards */
         .success-card {
           background: white;
           border-radius: 1.5rem;
@@ -705,15 +655,6 @@ const Home: React.FC = () => {
           box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
         }
 
-        /* Quote Styling */
-        .quote-mark {
-          font-size: 4rem;
-          line-height: 0;
-          color: #FCD34D;
-          opacity: 0.3;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
           .section {
             padding: 3rem 1rem;
@@ -727,27 +668,9 @@ const Home: React.FC = () => {
             height: 250px;
           }
         }
-
-        /* Loading Animation */
-        .shimmer-effect {
-          background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
-        }
-
-        /* Scroll Progress Bar */
-        .scroll-progress {
-          position: fixed;
-          top: 0;
-          left: 0;
-          height: 4px;
-          background: linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899);
-          z-index: 9999;
-          transition: width 0.2s ease;
-        }
       `}</style>
 
-      {/* Hero Section with Breaking News */}
+      {/* Hero Section */}
       <section
         className="relative min-h-screen text-white overflow-hidden pt-8"
         style={{
@@ -1515,7 +1438,9 @@ const Home: React.FC = () => {
               }}
             >
               <div className="text-center">
-                <div className="quote-mark">&ldquo;</div>
+                <div className="text-6xl text-yellow-400 leading-none mb-4">
+                  &ldquo;
+                </div>
                 <img
                   src={testimonials[currentTestimonial].image}
                   alt={testimonials[currentTestimonial].name}
