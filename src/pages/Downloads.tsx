@@ -15,7 +15,7 @@ const Downloads: React.FC = () => {
       size: "2.5 MB",
       date: "2024-01-15",
       downloads: 1250,
-      url: "#"
+      url: "https://drive.google.com/uc?export=download&id=1vG4NKqnXuzLCsIfu1OekqTqkMM1l8oMS"
     },
     {
       id: 2,
@@ -140,20 +140,14 @@ const Downloads: React.FC = () => {
     }
   ];
 
-  const categories = ['All', ...new Set(downloadFiles.map(file => file.category))];
+  const categories = ['All', ...Array.from(new Set(downloadFiles.map(file => file.category)))];
 
   const filteredFiles = downloadFiles.filter(file => {
-    const matchesSearch = file.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         file.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const lower = searchTerm.toLowerCase();
+    const matchesSearch = file.title.toLowerCase().includes(lower) || file.description.toLowerCase().includes(lower);
     const matchesCategory = selectedCategory === 'All' || file.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
-
-  const handleDownload = (file: any) => {
-    // In a real application, this would trigger the actual download
-    console.log(`Downloading: ${file.title}`);
-    alert(`Downloading ${file.title}...`);
-  };
 
   const getFileIcon = (type: string) => {
     switch (type.toLowerCase()) {
@@ -170,116 +164,126 @@ const Downloads: React.FC = () => {
     }
   };
 
+  const handleOpen = (file: any) => {
+    if (!file.url || file.url === '#') {
+      alert('This file will be available soon. Please check back later!');
+      return;
+    }
+    // open in new tab to let Google Drive handle download
+    window.open(file.url, '_blank');
+  };
+
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-amber-800 to-amber-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Downloads</h1>
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
-              Access important school documents, forms, and resources. Download admission forms, 
-              academic calendars, fee structures, and other essential documents.
+    <>
+      <div>
+        <section className="relative overflow-hidden py-28 bg-gradient-to-br from-amber-800 via-amber-700 to-amber-600 text-white">
+          <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-lg">
+              Downloads Center
+            </h1>
+            <p className="mt-6 text-xl md:text-2xl text-amber-100 max-w-2xl mx-auto">
+              Access all school documents, forms, policies, and academic resources.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Search and Filter */}
-      <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-6 items-center">
-            {/* Search Bar */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-              <input
-                type="text"
-                placeholder="Search documents..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-              />
-            </div>
+        <section className="py-10 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row gap-6 items-center">
 
-            {/* Category Filter */}
-            <div className="flex items-center space-x-2">
-              <Filter className="h-5 w-5 text-gray-600" />
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
-              >
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
+              <div className="relative flex-1 max-w-xl">
+                <input
+                  type="text"
+                  placeholder="Search documents..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 bg-white/80 backdrop-blur-md shadow-sm border border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-600 transition"
+                />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-amber-700 h-6 w-6" />
+              </div>
+
+              <div className="flex items-center space-x-3 bg-white/80 backdrop-blur-md shadow-sm px-4 py-3 border border-gray-200 rounded-xl">
+                <Filter className="h-5 w-5 text-amber-700" />
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="px-2 py-1 bg-transparent focus:ring-0 focus:outline-none text-gray-700 font-medium"
+                >
+                  {categories.map((category) => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Downloads Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredFiles.map((file) => (
-              <div key={file.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-2xl">{getFileIcon(file.type)}</span>
-                    <div>
-                      <span className="bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-xs font-medium">
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredFiles.map((file) => (
+                <div
+                  key={file.id}
+                  className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition duration-300 border border-gray-100"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <span className="text-3xl">{getFileIcon(file.type)}</span>
+                      <span className="bg-amber-200 text-amber-900 px-3 py-1 rounded-full text-xs font-semibold">
                         {file.category}
                       </span>
                     </div>
+                    <span className="text-gray-500 text-sm font-medium">{file.type}</span>
                   </div>
-                  <span className="text-gray-500 text-sm">{file.type}</span>
-                </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{file.title}</h3>
-                <p className="text-gray-600 text-sm mb-4">{file.description}</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2 leading-tight">
+                    {file.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-5 leading-relaxed">
+                    {file.description}
+                  </p>
 
-                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                  <div className="flex items-center space-x-4">
-                    <span>{file.size}</span>
-                    <span className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {new Date(file.date).toLocaleDateString()}
-                    </span>
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-5">
+                    <div className="flex items-center space-x-4">
+                      <span className="font-medium">{file.size}</span>
+                      <span className="flex items-center">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        {new Date(file.date).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <span className="font-medium">{file.downloads} downloads</span>
                   </div>
-                  <span>{file.downloads} downloads</span>
-                </div>
 
+                  <button
+                    onClick={() => handleOpen(file)}
+                    className="w-full bg-amber-700 hover:bg-amber-800 text-white py-3 px-4 rounded-lg flex items-center justify-center font-semibold shadow-md hover:shadow-xl transition duration-300"
+                  >
+                    <Download className="h-5 w-5 mr-2" />
+                    Download
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            {filteredFiles.length === 0 && (
+              <div className="text-center py-12">
+                <FileText className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-500 text-lg">No documents found matching your search criteria.</p>
                 <button
-                  onClick={() => handleDownload(file)}
-                  className="w-full bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700 transition-colors duration-200 flex items-center justify-center"
+                  onClick={() => {
+                    setSearchTerm('');
+                    setSelectedCategory('All');
+                  }}
+                  className="mt-4 text-amber-600 hover:text-amber-800 font-medium"
                 >
-                  <Download className="h-4 w-4 mr-2" />
-                  Download
+                  Clear filters
                 </button>
               </div>
-            ))}
+            )}
           </div>
-
-          {filteredFiles.length === 0 && (
-            <div className="text-center py-12">
-              <FileText className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500 text-lg">No documents found matching your search criteria.</p>
-              <button
-                onClick={() => {
-                  setSearchTerm('');
-                  setSelectedCategory('All');
-                }}
-                className="mt-4 text-amber-600 hover:text-amber-800 font-medium"
-              >
-                Clear filters
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Quick Links */}
       <section className="py-20 bg-gray-50">
@@ -296,11 +300,14 @@ const Downloads: React.FC = () => {
               { title: "Academic Calendar", category: "Academic", icon: "📅" },
               { title: "Parent Handbook", category: "General", icon: "📖" }
             ].map((item, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-4xl mb-4">{item.icon}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+              <div
+                key={index}
+                className="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-2xl transition duration-300 border border-gray-100"
+              >
+                <div className="text-5xl mb-4">{item.icon}</div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm mb-4">{item.category}</p>
-                <button className="text-amber-600 hover:text-amber-800 font-medium">
+                <button className="text-amber-700 hover:text-amber-900 font-semibold">
                   Download Now →
                 </button>
               </div>
@@ -313,26 +320,26 @@ const Downloads: React.FC = () => {
       <section className="py-20 bg-amber-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Need Help?</h2>
-          <p className="text-xl text-gray-200 mb-8">
+          <p className="text-xl text-amber-200 mb-8">
             Can't find the document you're looking for? Our office staff is ready to assist you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/contact"
-              className="bg-yellow-500 text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors duration-200"
+              className="bg-yellow-500 text-gray-900 px-8 py-3 rounded-xl font-semibold hover:bg-yellow-400 transition duration-200 shadow-md hover:shadow-xl"
             >
               Contact Office
             </a>
             <a
               href="tel:+254712345678"
-              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-amber-900 transition-colors duration-200"
+              className="border-2 border-white text-white px-8 py-3 rounded-xl font-semibold hover:bg-white hover:text-amber-900 transition duration-200 shadow-md hover:shadow-xl"
             >
               Call Us
             </a>
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
