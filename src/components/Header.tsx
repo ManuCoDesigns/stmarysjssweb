@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Academics', href: '/academics' },
-    { name: 'Admissions', href: '/admissions' },
-    { name: 'Life at St. Mary\'s', href: '/life-at-stmarys' },
-    { name: 'News', href: '/news' },
-    { name: 'Gallery', href: '/gallery' },
-    { name: 'Contact', href: '/contact' },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Academics", href: "/academics" },
+    { name: "Admissions", href: "/admissions" },
+    { name: "Exam Downloads", href: "/ExamDownloads" },
+    //{ name: "Life at St. Mary's", href: "/life-at-stmarys" },
+    { name: "News", href: "/news" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -25,8 +26,15 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 text-blue-900 hover:text-blue-700 transition-colors">
-            <img src="/images/JSS HD.png" alt="School Logo" className="h-8 w-8 object-contain" />
+          <Link
+            to="/"
+            className="flex items-center space-x-2 text-blue-900 hover:text-blue-700 transition-colors"
+          >
+            <img
+              src="/images/JSS HD.png"
+              alt="School Logo"
+              className="h-8 w-8 object-contain"
+            />
             <span className="font-bold text-xl">St. Mary's School</span>
           </Link>
 
@@ -41,10 +49,11 @@ const Header: React.FC = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${isActive(item.href)
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-gray-700 hover:text-blue-600 hover:border-b-2 hover:border-blue-600'
-                  }`}
+                className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                  isActive(item.href)
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-700 hover:text-blue-600 hover:border-b-2 hover:border-blue-600"
+                }`}
               >
                 {item.name}
               </Link>
@@ -67,7 +76,11 @@ const Header: React.FC = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -81,10 +94,11 @@ const Header: React.FC = () => {
                   key={item.name}
                   to={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${isActive(item.href)
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-                    }`}
+                  className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${
+                    isActive(item.href)
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                  }`}
                 >
                   {item.name}
                 </Link>
