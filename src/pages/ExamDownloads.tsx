@@ -1,3 +1,7 @@
+"use client";
+
+import type React from "react";
+
 import { useState, useEffect } from "react";
 import {
   Search,
@@ -13,6 +17,9 @@ import {
   Lock,
   AlertCircle,
   Sparkles,
+  Filter,
+  Clock,
+  Star,
 } from "lucide-react";
 
 interface Exam {
@@ -22,6 +29,12 @@ interface Exam {
   term: string;
   year: string;
   googleDriveLink: string;
+}
+
+interface DownloadHistory {
+  examId: number;
+  examTitle: string;
+  downloadedAt: Date;
 }
 
 interface GradeData {
@@ -192,23 +205,31 @@ const gradesData: GradeData[] = [
         title: "Advanced Mathematics",
         subject: "Mathematics",
         term: "Term 1",
-        year: "2024",
+        year: "2026",
         googleDriveLink: "https://drive.google.com/file/d/YOUR_FILE_ID/view",
       },
       {
         id: 11,
         title: "English Composition",
         subject: "English",
-        term: "Term 2",
-        year: "2024",
+        term: "Term 1",
+        year: "2026",
         googleDriveLink: "https://drive.google.com/file/d/YOUR_FILE_ID/view",
       },
       {
         id: 12,
         title: "Geography Paper",
         subject: "Geography",
-        term: "Term 3",
-        year: "2024",
+        term: "Term 1",
+        year: "2026",
+        googleDriveLink: "https://drive.google.com/file/d/YOUR_FILE_ID/view",
+      },
+      {
+        id: 12,
+        title: "Computer Paper",
+        subject: "Computer",
+        term: "Term 1",
+        year: "2026",
         googleDriveLink: "https://drive.google.com/file/d/YOUR_FILE_ID/view",
       },
     ],
@@ -924,41 +945,77 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: 13,
     color: "#94a3b8",
   },
+  yearBadge: {
+    //
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    fontSize: 12,
+    color: "#64748b",
+    backgroundColor: "#f1f5f9",
+    padding: "6px 12px",
+    borderRadius: 8,
+    fontWeight: 500,
+  },
+  cardMeta: {
+    //
+    display: "flex",
+    gap: 12,
+    fontSize: 13,
+    color: "#64748b",
+    marginTop: 12,
+  },
+  metaItem: {
+    //
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+  },
 };
 
-const ExamDownloads = () => {
+export default function ExamDownloads() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentStudent, setCurrentStudent] = useState<Student | null>(null);
   const [admissionNumber, setAdmissionNumber] = useState("");
   const [code, setCode] = useState("");
-  const [loginError, setLoginError] = useState("");
+  const [error, setError] = useState(""); // Renamed loginError to error
   const [isLoading, setIsLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [mounted, setMounted] = useState(false);
-  const [isLoadingExams, setIsLoadingExams] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // Renamed searchQuery to searchTerm
+  const [loadingExams, setLoadingExams] = useState(false);
+
+  const [selectedSubject, setSelectedSubject] = useState("all");
+  const [selectedTerm, setSelectedTerm] = useState("all");
+  const [selectedYear, setSelectedYear] = useState("all");
+  const [showFilters, setShowFilters] = useState(false);
+  const [downloadHistory, setDownloadHistory] = useState<DownloadHistory[]>([]);
+  const [favorites, setFavorites] = useState<number[]>([]);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   useEffect(() => {
-    setMounted(true);
-    const savedSession = sessionStorage.getItem("examPortalSession");
-    if (savedSession) {
-      const student = JSON.parse(savedSession);
+    const savedAuth = localStorage.getItem("examAuth");
+    const savedHistory = localStorage.getItem("downloadHistory");
+    const savedFavorites = localStorage.getItem("favorites");
+
+    if (savedAuth) {
+      const student = JSON.parse(savedAuth);
       setCurrentStudent(student);
       setIsAuthenticated(true);
+      setLoadingExams(true);
+      setTimeout(() => setLoadingExams(false), 800);
+    }
+
+    if (savedHistory) {
+      setDownloadHistory(JSON.parse(savedHistory));
+    }
+
+    if (savedFavorites) {
+      setFavorites(JSON.parse(savedFavorites));
     }
   }, []);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      setIsLoadingExams(true);
-      const timer = setTimeout(() => setIsLoadingExams(false), 1200);
-      return () => clearTimeout(timer);
-    }
-  }, [isAuthenticated]);
-
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoginError("");
+    setError("");
     setIsLoading(true);
 
     setTimeout(() => {
@@ -970,14 +1027,14 @@ const ExamDownloads = () => {
       if (student) {
         setCurrentStudent(student);
         setIsAuthenticated(true);
-        sessionStorage.setItem("examPortalSession", JSON.stringify(student));
+        localStorage.setItem("examAuth", JSON.stringify(student));
+        setLoadingExams(true);
+        setTimeout(() => setLoadingExams(false), 1200);
       } else {
-        setLoginError(
-          "Invalid admission number or access code. Please try again."
-        );
+        setError("Invalid admission number or code. Please try again.");
       }
       setIsLoading(false);
-    }, 800);
+    }, 1200);
   };
 
   const handleLogout = () => {
@@ -985,21 +1042,56 @@ const ExamDownloads = () => {
     setCurrentStudent(null);
     setAdmissionNumber("");
     setCode("");
-    sessionStorage.removeItem("examPortalSession");
+    setLoadingExams(false);
+    localStorage.removeItem("examAuth");
+    localStorage.removeItem("downloadHistory"); // Clear other stored data on logout
+    localStorage.removeItem("favorites");
   };
 
-  const currentGrade =
-    gradesData.find((g) => g.id === currentStudent?.grade) || gradesData[0];
-
-  const filteredExams = currentGrade.exams.filter(
-    (exam) =>
-      exam.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      exam.subject.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleDownload = (link: string) => {
-    window.open(link, "_blank", "noopener,noreferrer");
+  const handleDownload = (exam: Exam) => {
+    const newDownload: DownloadHistory = {
+      examId: exam.id,
+      examTitle: exam.title,
+      downloadedAt: new Date(),
+    };
+    // Keep the last 10 downloads
+    const updatedHistory = [newDownload, ...downloadHistory].slice(0, 10);
+    setDownloadHistory(updatedHistory);
+    localStorage.setItem("downloadHistory", JSON.stringify(updatedHistory));
+    window.open(exam.googleDriveLink, "_blank");
   };
+
+  const toggleFavorite = (examId: number, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click event
+    const updatedFavorites = favorites.includes(examId)
+      ? favorites.filter((id) => id !== examId)
+      : [...favorites, examId];
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+
+  // Get the current student's grade data
+  const studentGrade = gradesData.find((g) => g.id === currentStudent?.grade);
+  const allExams = studentGrade?.exams || [];
+
+  const filteredExams = allExams.filter((exam) => {
+    const matchesSearch =
+      exam.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      exam.subject.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSubject =
+      selectedSubject === "all" || exam.subject === selectedSubject;
+    const matchesTerm = selectedTerm === "all" || exam.term === selectedTerm;
+    const matchesYear = selectedYear === "all" || exam.year === selectedYear;
+
+    return matchesSearch && matchesSubject && matchesTerm && matchesYear;
+  });
+
+  const subjects = ["all", ...new Set(allExams.map((e) => e.subject))];
+  const terms = ["all", ...new Set(allExams.map((e) => e.term))];
+  const years = ["all", ...new Set(allExams.map((e) => e.year))];
+
+  // Get recent downloads (last 5)
+  const recentDownloads = downloadHistory.slice(0, 5);
 
   // Login Screen
   if (!isAuthenticated) {
@@ -1054,7 +1146,8 @@ const ExamDownloads = () => {
           <div
             style={{
               ...styles.loginCard,
-              animation: mounted ? "scaleIn 0.6s ease-out forwards" : "none",
+              // Removed animation for login screen, using hardcoded delay
+              // animation: mounted ? "scaleIn 0.6s ease-out forwards" : "none",
             }}
           >
             <div style={styles.cardGlow} />
@@ -1068,9 +1161,9 @@ const ExamDownloads = () => {
                   />
                 </div>
               </div>
-              <h1 style={styles.loginTitle}>Exam Downloads Portal</h1>
+              <h1 style={styles.loginTitle}>St. Mary's School</h1>
               <p style={styles.loginSubtitle}>
-                Enter your credentials to access examination papers
+                Access your exam papers and study materials securely
               </p>
             </div>
 
@@ -1105,12 +1198,12 @@ const ExamDownloads = () => {
                 />
               </div>
 
-              {loginError && (
+              {error && (
                 <div style={styles.errorBox}>
                   <AlertCircle
                     style={{ width: 18, height: 18, flexShrink: 0 }}
                   />
-                  <span>{loginError}</span>
+                  <span>{error}</span>
                 </div>
               )}
 
@@ -1163,7 +1256,7 @@ const ExamDownloads = () => {
               <div
                 style={{
                   ...styles.userAvatar,
-                  background: `linear-gradient(135deg, ${currentGrade.color}, ${currentGrade.color}99)`,
+                  background: studentGrade?.color || "#6366f1", // Use grade color or default
                 }}
               >
                 {currentStudent?.name.charAt(0)}
@@ -1171,7 +1264,7 @@ const ExamDownloads = () => {
               <div>
                 <h2 style={styles.userName}>{currentStudent?.name}</h2>
                 <p style={styles.userInfo}>
-                  {currentStudent?.admissionNumber} • {currentGrade.label}
+                  {studentGrade?.label} • {currentStudent?.admissionNumber}
                 </p>
               </div>
             </div>
@@ -1187,13 +1280,13 @@ const ExamDownloads = () => {
           <div
             style={{
               ...styles.heroOrb1,
-              background: `radial-gradient(circle, ${currentGrade.color}30, transparent 70%)`,
+              background: `radial-gradient(circle, ${studentGrade?.color}30, transparent 70%)`,
             }}
           />
           <div
             style={{
               ...styles.heroOrb2,
-              background: `radial-gradient(circle, ${currentGrade.color}20, transparent 70%)`,
+              background: `radial-gradient(circle, ${studentGrade?.color}20, transparent 70%)`,
             }}
           />
 
@@ -1201,193 +1294,699 @@ const ExamDownloads = () => {
             <div
               style={{
                 ...styles.badge,
-                background: `linear-gradient(135deg, ${currentGrade.color}15, ${currentGrade.color}05)`,
-                borderColor: `${currentGrade.color}30`,
-                animation: mounted ? "fadeInUp 0.5s ease-out forwards" : "none",
+                background: `linear-gradient(135deg, ${studentGrade?.color}15, ${studentGrade?.color}05)`,
+                borderColor: `${studentGrade?.color}30`,
+                // animation: mounted ? "fadeInUp 0.5s ease-out forwards" : "none", // Removed animation for consistency
+                opacity: 1, // Ensure visible
               }}
             >
-              <FolderOpen
-                style={{ width: 18, height: 18, color: currentGrade.color }}
+              <Sparkles // Changed icon
+                style={{ width: 18, height: 18, color: studentGrade?.color }}
               />
-              <span style={{ color: currentGrade.color, fontWeight: 600 }}>
-                {currentGrade.label}
+              <span style={{ color: studentGrade?.color, fontWeight: 600 }}>
+                {studentGrade?.description}
               </span>
               <span style={{ color: "#64748b" }}>•</span>
-              <span style={{ color: "#64748b" }}>
-                {currentGrade.description}
-              </span>
+              <span style={{ color: "#64748b" }}>{studentGrade?.label}</span>
             </div>
 
             <h1
               style={{
                 ...styles.title,
-                animation: mounted
-                  ? "fadeInUp 0.5s ease-out 0.1s forwards"
-                  : "none",
-                opacity: 0,
+                // animation: mounted ? "fadeInUp 0.5s ease-out 0.1s forwards" : "none", // Removed animation
+                opacity: 1, // Ensure visible
               }}
             >
-              Your{" "}
-              <span
-                style={{
-                  background: `linear-gradient(135deg, ${currentGrade.color}, #3b82f6, ${currentGrade.color})`,
-                  backgroundSize: "200% auto",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  animation: "gradientMove 3s ease infinite",
-                }}
-              >
-                Examination Papers
-              </span>
+              Exam Papers & Study Materials
             </h1>
 
             <p
               style={{
                 ...styles.subtitle,
-                animation: mounted
-                  ? "fadeInUp 0.5s ease-out 0.2s forwards"
-                  : "none",
-                opacity: 0,
+                // animation: mounted ? "fadeInUp 0.5s ease-out 0.2s forwards" : "none", // Removed animation
+                opacity: 1, // Ensure visible
               }}
             >
-              Download past papers to prepare for your upcoming exams. All files
-              open in Google Drive.
+              Access all your {studentGrade?.label} examination papers and
+              practice materials in one place
             </p>
 
             <div
               style={{
                 ...styles.searchContainer,
-                animation: mounted
-                  ? "fadeInUp 0.5s ease-out 0.3s forwards"
-                  : "none",
-                opacity: 0,
+                // animation: mounted ? "fadeInUp 0.5s ease-out 0.3s forwards" : "none", // Removed animation
+                opacity: 1, // Ensure visible
               }}
             >
-              <Search style={styles.searchIcon} />
+              <Search style={styles.searchIcon as React.CSSProperties} />
               <input
                 type="text"
-                placeholder="Search exams by title or subject..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by exam title or subject..."
+                value={searchTerm} //
+                onChange={(e) => setSearchTerm(e.target.value)} //
                 style={styles.searchInput}
               />
+            </div>
+
+            <div
+              style={{
+                marginTop: 20,
+                display: "flex",
+                gap: 12,
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "12px 24px",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: showFilters ? "#ffffff" : "#64748b",
+                  backgroundColor: showFilters
+                    ? studentGrade?.color
+                    : "#ffffff",
+                  border: `2px solid ${
+                    showFilters ? studentGrade?.color : "#e2e8f0"
+                  }`,
+                  borderRadius: 12,
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+                }}
+              >
+                <Filter size={16} />
+                {showFilters ? "Hide Filters" : "Show Filters"}
+              </button>
+
+              <button
+                onClick={() =>
+                  setViewMode(viewMode === "grid" ? "list" : "grid")
+                }
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "12px 24px",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: "#64748b",
+                  backgroundColor: "#ffffff",
+                  border: "2px solid #e2e8f0",
+                  borderRadius: 12,
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+                }}
+              >
+                {viewMode === "grid" ? (
+                  <FolderOpen size={16} />
+                ) : (
+                  <BookOpen size={16} />
+                )}
+                {viewMode === "grid" ? "List View" : "Grid View"}
+              </button>
             </div>
           </div>
         </section>
 
-        <main style={styles.mainContent}>
-          <p style={styles.resultsCount}>
-            {isLoadingExams ? (
-              <span style={{ color: "#94a3b8" }}>Loading papers...</span>
-            ) : (
-              <>
-                <span style={{ fontWeight: 700, color: currentGrade.color }}>
-                  {filteredExams.length}
-                </span>{" "}
-                examination papers available
-              </>
-            )}
-          </p>
+        {showFilters && (
+          <div
+            style={{
+              maxWidth: 1200,
+              margin: "0 auto",
+              padding: "24px",
+              animation: "fadeInUp 0.3s ease-out",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                borderRadius: 16,
+                padding: 24,
+                border: "1px solid #e2e8f0",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: 20,
+                }}
+              >
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: "#0f172a" }}>
+                  Filter Options
+                </h3>
+                <button
+                  onClick={() => {
+                    setSelectedSubject("all");
+                    setSelectedTerm("all");
+                    setSelectedYear("all");
+                  }}
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: studentGrade?.color,
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  Clear All
+                </button>
+              </div>
 
-          <div style={styles.grid}>
-            {isLoadingExams
-              ? Array.from({ length: 6 }).map((_, index) => (
-                  <SkeletonCard
-                    key={index}
-                    color={currentGrade.color}
-                    index={index}
-                  />
-                ))
-              : filteredExams.map((exam, index) => (
-                  <article
-                    key={exam.id}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                  gap: 16,
+                }}
+              >
+                <div>
+                  <label
                     style={{
-                      ...styles.card,
-                      animation: `fadeInUp 0.5s ease-out ${
-                        0.1 * index
-                      }s forwards`,
-                      opacity: 0,
-                      borderTop: `4px solid ${currentGrade.color}`,
-                      ...(hoveredCard === exam.id
-                        ? {
-                            transform: "translateY(-8px) scale(1.02)",
-                            boxShadow: `0 25px 50px -12px ${currentGrade.color}30, 0 0 0 1px ${currentGrade.color}20`,
-                          }
-                        : {}),
+                      display: "block",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "#64748b",
+                      marginBottom: 8,
                     }}
-                    onMouseEnter={() => setHoveredCard(exam.id)}
-                    onMouseLeave={() => setHoveredCard(null)}
                   >
-                    <div style={styles.cardHeader}>
-                      <div
+                    Subject
+                  </label>
+                  <select
+                    value={selectedSubject}
+                    onChange={(e) => setSelectedSubject(e.target.value)}
+                    style={{
+                      width: "100%",
+                      padding: "10px 14px",
+                      fontSize: 14,
+                      border: "2px solid #e2e8f0",
+                      borderRadius: 10,
+                      backgroundColor: "#ffffff",
+                      cursor: "pointer",
+                      outline: "none",
+                    }}
+                  >
+                    {subjects.map((subject) => (
+                      <option key={subject} value={subject}>
+                        {subject === "all" ? "All Subjects" : subject}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "#64748b",
+                      marginBottom: 8,
+                    }}
+                  >
+                    Term
+                  </label>
+                  <select
+                    value={selectedTerm}
+                    onChange={(e) => setSelectedTerm(e.target.value)}
+                    style={{
+                      width: "100%",
+                      padding: "10px 14px",
+                      fontSize: 14,
+                      border: "2px solid #e2e8f0",
+                      borderRadius: 10,
+                      backgroundColor: "#ffffff",
+                      cursor: "pointer",
+                      outline: "none",
+                    }}
+                  >
+                    {terms.map((term) => (
+                      <option key={term} value={term}>
+                        {term === "all" ? "All Terms" : term}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "#64748b",
+                      marginBottom: 8,
+                    }}
+                  >
+                    Year
+                  </label>
+                  <select
+                    value={selectedYear}
+                    onChange={(e) => setSelectedYear(e.target.value)}
+                    style={{
+                      width: "100%",
+                      padding: "10px 14px",
+                      fontSize: 14,
+                      border: "2px solid #e2e8f0",
+                      borderRadius: 10,
+                      backgroundColor: "#ffffff",
+                      cursor: "pointer",
+                      outline: "none",
+                    }}
+                  >
+                    {years.map((year) => (
+                      <option key={year} value={year}>
+                        {year === "all" ? "All Years" : year}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Main Content */}
+        <main style={styles.mainContent}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: 20,
+              marginBottom: 32,
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                borderRadius: 16,
+                padding: 20,
+                border: "1px solid #e2e8f0",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  marginBottom: 10,
+                }}
+              >
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 10,
+                    background: `${studentGrade?.color}15`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <FileText size={20} color={studentGrade?.color} />
+                </div>
+                <div>
+                  <div
+                    style={{ fontSize: 24, fontWeight: 700, color: "#0f172a" }}
+                  >
+                    {allExams.length}
+                  </div>
+                  <div style={{ fontSize: 13, color: "#64748b" }}>
+                    Total Exams
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                borderRadius: 16,
+                padding: 20,
+                border: "1px solid #e2e8f0",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  marginBottom: 10,
+                }}
+              >
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 10,
+                    background: "#10b98115",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Download size={20} color="#10b981" />
+                </div>
+                <div>
+                  <div
+                    style={{ fontSize: 24, fontWeight: 700, color: "#0f172a" }}
+                  >
+                    {downloadHistory.length}
+                  </div>
+                  <div style={{ fontSize: 13, color: "#64748b" }}>
+                    Downloads
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                borderRadius: 16,
+                padding: 20,
+                border: "1px solid #e2e8f0",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  marginBottom: 10,
+                }}
+              >
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 10,
+                    background: "#f59e0b15",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Star size={20} color="#f59e0b" />
+                </div>
+                <div>
+                  <div
+                    style={{ fontSize: 24, fontWeight: 700, color: "#0f172a" }}
+                  >
+                    {favorites.length}
+                  </div>
+                  <div style={{ fontSize: 13, color: "#64748b" }}>
+                    Favorites
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {recentDownloads.length > 0 && (
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                borderRadius: 16,
+                padding: 24,
+                border: "1px solid #e2e8f0",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
+                marginBottom: 32,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  marginBottom: 16,
+                }}
+              >
+                <Clock size={20} color={studentGrade?.color} />
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: "#0f172a" }}>
+                  Recent Downloads
+                </h3>
+              </div>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: 12 }}
+              >
+                {recentDownloads.map((item, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: 12,
+                      backgroundColor: "#f8fafc",
+                      borderRadius: 10,
+                    }}
+                  >
+                    <div
+                      style={{ display: "flex", alignItems: "center", gap: 10 }}
+                    >
+                      <FileText size={16} color="#64748b" />
+                      <span
                         style={{
-                          ...styles.subjectBadge,
-                          background: `linear-gradient(135deg, ${currentGrade.color}15, ${currentGrade.color}05)`,
-                          color: currentGrade.color,
-                          border: `1px solid ${currentGrade.color}20`,
+                          fontSize: 14,
+                          color: "#0f172a",
+                          fontWeight: 500,
                         }}
                       >
-                        <BookOpen style={{ width: 14, height: 14 }} />
-                        {exam.subject}
+                        {item.examTitle}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: 12, color: "#94a3b8" }}>
+                      {new Date(item.downloadedAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 20,
+            }}
+          >
+            <p style={styles.resultsCount}>
+              Showing <strong>{filteredExams.length}</strong> of{" "}
+              {allExams.length} exams
+            </p>
+          </div>
+
+          {loadingExams ? (
+            <div
+              style={
+                viewMode === "grid"
+                  ? styles.grid
+                  : { display: "flex", flexDirection: "column", gap: 16 }
+              }
+            >
+              {[...Array(6)].map((_, i) => (
+                <SkeletonCard
+                  key={i}
+                  color={studentGrade?.color || "#6366f1"}
+                  index={i}
+                />
+              ))}
+            </div>
+          ) : filteredExams.length === 0 ? (
+            <div
+              style={{
+                textAlign: "center",
+                padding: "60px 20px",
+                backgroundColor: "#ffffff",
+                borderRadius: 20,
+                border: "1px solid #e2e8f0",
+              }}
+            >
+              <BookOpen
+                size={48}
+                color="#cbd5e1"
+                style={{ marginBottom: 16 }}
+              />
+              <h3
+                style={{
+                  fontSize: 18,
+                  fontWeight: 600,
+                  color: "#0f172a",
+                  marginBottom: 8,
+                }}
+              >
+                No exams found
+              </h3>
+              <p style={{ fontSize: 14, color: "#64748b" }}>
+                Try adjusting your search or filters
+              </p>
+            </div>
+          ) : (
+            <div
+              style={
+                viewMode === "grid"
+                  ? styles.grid
+                  : { display: "flex", flexDirection: "column", gap: 16 }
+              }
+            >
+              {filteredExams.map((exam, index) => {
+                const isFavorite = favorites.includes(exam.id);
+
+                return (
+                  <article // Changed div to article for semantic correctness
+                    key={exam.id}
+                    onClick={() => handleDownload(exam)}
+                    style={{
+                      ...styles.card,
+                      borderTop: `4px solid ${studentGrade?.color}40`,
+                      animation: `fadeInUp 0.3s ease-out ${
+                        0.05 * index
+                      }s forwards`,
+                      opacity: 0,
+                      ...(viewMode === "list" && {
+                        display: "grid",
+                        gridTemplateColumns: "auto 1fr auto",
+                        alignItems: "center",
+                        gap: 20,
+                      }),
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-8px)";
+                      e.currentTarget.style.boxShadow = `0 20px 40px ${studentGrade?.color}20`;
+                      e.currentTarget.style.borderColor = `${studentGrade?.color}60`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow =
+                        "0 4px 20px rgba(0,0,0,0.03)";
+                      e.currentTarget.style.borderColor = "#e2e8f0";
+                    }}
+                  >
+                    {viewMode === "list" && (
+                      <div
+                        style={{
+                          width: 48,
+                          height: 48,
+                          borderRadius: 12,
+                          background: `${studentGrade?.color}15`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <FileText size={24} color={studentGrade?.color} />
                       </div>
-                      <div style={styles.termBadge}>
-                        <Calendar style={{ width: 12, height: 12 }} />
-                        {exam.term} • {exam.year}
+                    )}
+
+                    <div>
+                      <div style={styles.cardHeader}>
+                        <span
+                          style={{
+                            ...styles.subjectBadge,
+                            backgroundColor: `${studentGrade?.color}15`,
+                            color: studentGrade?.color,
+                          }}
+                        >
+                          {exam.subject}
+                        </span>
+                        <span
+                          style={{
+                            ...styles.yearBadge, // Using the new style for year badge
+                            backgroundColor: "#f1f5f9",
+                            color: "#64748b",
+                          }}
+                        >
+                          {exam.year}
+                        </span>
+                      </div>
+
+                      <h3 style={styles.cardTitle}>{exam.title}</h3>
+
+                      <div style={styles.cardMeta}>
+                        {" "}
+                        {/* Using new cardMeta style */}
+                        <span style={styles.metaItem}>
+                          {" "}
+                          {/* Using new metaItem style */}
+                          <Calendar size={15} />
+                          {exam.term}
+                        </span>
                       </div>
                     </div>
 
-                    <h3 style={styles.cardTitle}>{exam.title}</h3>
-
-                    <div style={styles.cardFooter}>
-                      <div style={styles.driveIndicator}>
-                        <img
-                          src="https://www.gstatic.com/images/branding/product/1x/drive_2020q4_48dp.png"
-                          alt="Google Drive"
-                          style={{ width: 22, height: 22 }}
-                        />
-                        <span style={styles.driveText}>Google Drive</span>
-                      </div>
-
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: 8,
+                        ...(viewMode === "grid" && {
+                          borderTop: "1px solid #f1f5f9",
+                          paddingTop: 18,
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }),
+                      }}
+                    >
                       <button
-                        onClick={() => handleDownload(exam.googleDriveLink)}
+                        onClick={(e) => toggleFavorite(exam.id, e)}
                         style={{
-                          ...styles.downloadButton,
-                          background: `linear-gradient(135deg, ${currentGrade.color}, ${currentGrade.color}dd)`,
-                          ...(hoveredCard === exam.id
-                            ? {
-                                boxShadow: `0 8px 25px ${currentGrade.color}40`,
-                                transform: "scale(1.05)",
-                              }
-                            : {}),
+                          padding: "10px",
+                          border: `2px solid ${
+                            isFavorite ? "#f59e0b" : "#e2e8f0"
+                          }`,
+                          borderRadius: 12,
+                          background: isFavorite ? "#f59e0b15" : "#ffffff",
+                          cursor: "pointer",
+                          transition: "all 0.2s ease",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                         }}
                       >
-                        <Download style={{ width: 16, height: 16 }} />
-                        Download
-                        <ExternalLink
-                          style={{ width: 14, height: 14, opacity: 0.7 }}
+                        <Star
+                          size={18}
+                          color="#f59e0b"
+                          fill={isFavorite ? "#f59e0b" : "none"}
                         />
+                      </button>
+
+                      <button
+                        style={{
+                          ...styles.downloadButton,
+                          backgroundColor: `${studentGrade?.color}`,
+                          flex: viewMode === "list" ? "0 0 auto" : 1,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = "scale(1.05)";
+                          e.currentTarget.style.boxShadow = `0 8px 25px ${studentGrade?.color}40`;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = "scale(1)";
+                          e.currentTarget.style.boxShadow = `0 4px 15px ${studentGrade?.color}25`;
+                        }}
+                      >
+                        <Download size={18} />
+                        <span>Download</span>
+                        <ExternalLink size={14} />
                       </button>
                     </div>
                   </article>
-                ))}
-          </div>
-
-          {!isLoadingExams && filteredExams.length === 0 && (
-            <div style={styles.emptyState}>
-              <div
-                style={{
-                  ...styles.emptyIcon,
-                  background: `linear-gradient(135deg, ${currentGrade.color}15, ${currentGrade.color}05)`,
-                }}
-              >
-                <FileText
-                  style={{ width: 36, height: 36, color: currentGrade.color }}
-                />
-              </div>
-              <h3 style={styles.emptyTitle}>No exams found</h3>
-              <p style={styles.emptyText}>
-                Try adjusting your search criteria.
-              </p>
+                );
+              })}
             </div>
           )}
         </main>
@@ -1396,7 +1995,7 @@ const ExamDownloads = () => {
           <div style={styles.footerContent}>
             <p>
               © {new Date().getFullYear()} St. Mary's School Bomet - Exam
-              Downloads Portal • All papers are for educational purposes only • 
+              Downloads Portal • All papers are for educational purposes only •
               Developed by Manuwebdesigns
             </p>
           </div>
@@ -1404,6 +2003,4 @@ const ExamDownloads = () => {
       </div>
     </>
   );
-};
-
-export default ExamDownloads;
+}
