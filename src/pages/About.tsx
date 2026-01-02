@@ -164,7 +164,7 @@ const About: React.FC = () => {
     {
       name: "Md. Kiama M.W",
       position: "Deputy Principal",
-      image: "dp1.JPG",
+      image: "dp1.jpg",
       department: "Administration",
     },
     {

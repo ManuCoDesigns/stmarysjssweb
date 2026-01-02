@@ -453,7 +453,7 @@ const Home: React.FC = () => {
   return (
     <div className="home-container">
       <style>
-        {`
+{`
 .home-container {
   overflow-x: hidden;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -504,7 +504,6 @@ const Home: React.FC = () => {
   transform: translateZ(0);
   backface-visibility: hidden;
 }
-/* Pause on hover (desktop) */
 .slideshow:hover .animate-fadeZoom {
   animation-play-state: paused;
 }
@@ -518,7 +517,6 @@ const Home: React.FC = () => {
 @media (max-width: 480px) {
   .animate-fadeZoom { animation-duration: 18s; }
 }
-/* Accessibility: reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-fadeZoom {
     animation: none;
@@ -654,6 +652,18 @@ const Home: React.FC = () => {
 }
 
 /* =========================
+   SECTION SPACING (RESTORED)
+   ========================= */
+.section {
+  padding: 6rem 1rem;
+}
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+}
+
+/* =========================
    MEDIA QUERIES
    ========================= */
 @media (max-width: 768px) {
@@ -661,7 +671,8 @@ const Home: React.FC = () => {
   .facility-image { height: 250px; }
 }
 `}
-      </style>
+</style>
+
 
       {/* Hero Section */}
       <section
