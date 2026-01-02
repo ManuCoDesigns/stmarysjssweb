@@ -138,7 +138,7 @@ const About: React.FC = () => {
       ],
     },
     {
-      level: "Form 2-4",
+      level: "Form 3-4",
       title: "8-4-4 Secondary",
       description:
         "University preparation with specialized pathways and advanced research projects",
@@ -164,20 +164,14 @@ const About: React.FC = () => {
     {
       name: "Md. Kiama M.W",
       position: "Deputy Principal",
-      image: "dp.JPG",
+      image: "dp1.JPG",
       department: "Administration",
     },
     {
       name: "Dr. Johnson Bulowa",
-      position: "Senior Teacher",
+      position: "Guidance & Counselling",
       image: "",
       department: "Academic",
-    },
-    {
-      name: "Md. Bevaline C.",
-      position: "Head of JSS",
-      image: "",
-      department: "Junior Secondary",
     },
     {
       name: "Mr. Cyrus L.",
@@ -198,46 +192,10 @@ const About: React.FC = () => {
       department: "Examinations",
     },
     {
-      name: "Md. Eunice G.",
-      position: "Director Of Studies High School",
-      image: "",
-      department: "High School",
-    },
-    {
-      name: "Mr. Fred O.",
-      position: "H.O.D - Sciences",
-      image: "",
-      department: "Guidance",
-    },
-    {
-      name: "Md. Kellong",
-      position: "Guidance and Counselling",
-      image: "",
-      department: "Guidance",
-    },
-    {
-      name: "Md. Felista C.",
-      position: "Class Teacher - Form 3",
-      image: "",
-      department: "Languages",
-    },
-    {
-      name: "Mr. Geoffrey B.",
-      position: "Boarding Master",
-      image: "",
-      department: "Boarding",
-    },
-    {
       name: "Md. Marble K.",
       position: "Boarding Mistress",
       image: "",
       department: "Boarding",
-    },
-    {
-      name: "Md. Martha O.",
-      position: "",
-      image: "",
-      department: "Technicals",
     },
     {
       name: "Mr. Korir D.",
@@ -1109,18 +1067,25 @@ const About: React.FC = () => {
                   </span>
                 </h2>
                 <blockquote className="text-lg italic text-gray-200 leading-relaxed border-l-4 border-purple-400 pl-6 text-left">
-                  "At St. Mary's School, discipline, teamwork, and commitment
-                  form the foundation of our academic journey. Together with our
-                  staff, we strive to instill values that prepare learners to be
-                  responsible, resilient, and ethical leaders of tomorrow."
+                  "At St. Mary's School, professionalism, discipline, teamwork,
+                  and commitment form the cornerstone of our academic and social
+                  journey. From the office of the Deputy Principal, we uphold
+                  high standards to ensure a safe, respectful, and nurturing
+                  environment where every learner is guided towards excellence.
+                  Together with our dedicated staff, we strive to instill values
+                  that prepare learners to be responsible, resilient, and
+                  ethical leaders of tomorrow."
                 </blockquote>
                 <p className="text-gray-200 leading-relaxed">
                   Beyond academics, we emphasize personal growth, mentorship,
-                  and a supportive environment that nurtures every learner’s
-                  well-being. With collaboration and guidance, our students
-                  discover their strengths and embrace opportunities that shape
-                  their future.
+                  and a culture of respect and responsibility. Our office is
+                  committed to fostering discipline, maintaining order, and
+                  supporting the holistic development of each student. Through
+                  collaboration, guidance, and firm yet compassionate
+                  leadership, our students discover their strengths, embrace
+                  challenges, and seize opportunities that shape their future.
                 </p>
+
                 {/* Deputy Card */}
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-lg inline-block text-left">
                   <div className="flex items-center">

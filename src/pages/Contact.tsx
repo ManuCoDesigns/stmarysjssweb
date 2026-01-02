@@ -73,9 +73,9 @@ Message: ${message}`;
       icon: MapPin,
       title: "Address",
       details: [
-        "St. Mary's Girls Secondary School",
+        "St. Mary's Mixed Junior & Senior School",
         "Bomet, Kenya",
-        "P.O. Box 301-20300",
+        "P.O. Box 329-20300",
       ],
     },
     {
@@ -86,7 +86,7 @@ Message: ${message}`;
     {
       icon: Mail,
       title: "Email",
-      details: ["info@stmarysschool.ac.ke", "admissions@stmarysschool.ac.ke"],
+      details: ["stmaryssecbomet@gmail.com", "stmaryssecbomet@gmail.com"],
     },
     {
       icon: Clock,
@@ -100,12 +100,12 @@ Message: ${message}`;
   ];
 
   const departments = [
-    { name: "General Inquiry", email: "info@stmarysschool.ac.ke" },
-    { name: "Admissions", email: "admissions@stmarysschool.ac.ke" },
-    { name: "Academic Affairs", email: "academic@stmarysschool.ac.ke" },
-    { name: "Finance Department", email: "finance@stmarysschool.ac.ke" },
-    { name: "Transport Services", email: "transport@stmarysschool.ac.ke" },
-    { name: "Principal's Office", email: "principal@stmarysschool.ac.ke" },
+    { name: "General Inquiry", email: "stmaryssecbomet@gmail.com" },
+    { name: "Admissions", email: "stmaryssecbomet@gmail.com" },
+    { name: "Academic Affairs", email: "stmaryssecbomet@gmail.com" },
+    { name: "Finance Department", email: "stmaryssecbomet@gmail.com" },
+    { name: "Transport Services", email: "stmaryssecbomet@gmail.com" },
+    { name: "Principal's Office", email: "gabmache@gmail.com" },
   ];
 
   return (
@@ -396,7 +396,7 @@ Message: ${message}`;
           <FaTwitter size={22} />
         </a>
         <a
-          href="https://tiktok.com"
+          href="https://tiktok.com/@stmarysseniorschoolbomet?_r=1&_t=ZM-92jkLr2pZ9f"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-black text-white p-4 rounded-full shadow-lg hover:scale-110 transition"

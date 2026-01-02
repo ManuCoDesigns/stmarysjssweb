@@ -6,7 +6,6 @@ import {
   Clock,
   CheckCircle,
   Users,
-  Send,
   Star,
   Award,
   BookOpen,
@@ -175,22 +174,22 @@ Application submitted on: ${new Date().toLocaleString()}`;
     },
   ];
 
-  const feeStructure = [
-    {
-      grade: "Junior Secondary (Grade 7-9)",
-      term1Fee: "20,000",
-      term2Fee: "20,000",
-      term3Fee: "20,000",
-      yearFee: "60,000",
-    },
-    {
-      grade: "Senior Secondary (Grade 10)",
-      term1Fee: "21,500",
-      term2Fee: "21,500",
-      term3Fee: "21,500",
-      yearFee: "64,500",
-    },
-  ];
+  // const feeStructure = [
+  //   {
+  //     grade: "Junior Secondary (Grade 7-9)",
+  //     term1Fee: "20,000",
+  //     term2Fee: "20,000",
+  //     term3Fee: "20,000",
+  //     yearFee: "60,000",
+  //   },
+  //   {
+  //     grade: "Senior Secondary (Grade 10)",
+  //     term1Fee: "21,500",
+  //     term2Fee: "21,500",
+  //     term3Fee: "21,500",
+  //     yearFee: "64,500",
+  //   },
+  // ];
 
   const requirements = [
     { text: "Completed application form", icon: FileText },
@@ -683,7 +682,7 @@ Application submitted on: ${new Date().toLocaleString()}`;
             <div className="mt-8 w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto rounded-full"></div>
           </div>
 
-          <div className="bg-gradient-to-br from-white to-cyan-50 rounded-3xl shadow-2xl overflow-hidden border-2 border-cyan-100">
+          {/* <div className="bg-gradient-to-br from-white to-cyan-50 rounded-3xl shadow-2xl overflow-hidden border-2 border-cyan-100">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-600 text-white">
@@ -731,7 +730,7 @@ Application submitted on: ${new Date().toLocaleString()}`;
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> */}
 
           <div className="mt-12 bg-gradient-to-r from-emerald-50 to-teal-50 p-8 rounded-2xl border-2 border-emerald-200">
             <h3 className="font-bold text-gray-900 mb-4 text-xl flex items-center">

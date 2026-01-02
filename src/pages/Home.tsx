@@ -31,9 +31,15 @@ import {
   Instagram,
   Youtube,
   Trophy,
-  Microscope,
   Music,
   Send,
+  Utensils,
+  FlaskConical,
+  Monitor,
+  HeartHandshake,
+  UserCheck,
+  BadgeCheck,
+  HandHeart,
 } from "lucide-react";
 
 const Home: React.FC = () => {
@@ -147,7 +153,7 @@ const Home: React.FC = () => {
     },
     {
       title: "High School - Girls",
-      description: "The 8-4-4 system cohort, currently Form 2-4",
+      description: "The 8-4-4 system cohort, currently Form 3-4",
       grades: "8-4-4",
       icon: Heart,
       features: [
@@ -163,7 +169,7 @@ const Home: React.FC = () => {
   const testimonials = [
     {
       name: "Ann Jepngetich",
-      role: "Parent of Grade 10 Student",
+      role: "Parent of Grade 9 Student",
       content:
         "St. Mary's has transformed my daughter's approach to learning. The CBE program has given her confidence and critical thinking skills that will serve her well in university.",
       rating: 5,
@@ -171,7 +177,7 @@ const Home: React.FC = () => {
     },
     {
       name: "Abiagel Chemutai",
-      role: "Grade 10 Graduate",
+      role: "Grade 9 Graduate",
       content:
         "The STEM pathway at St. Mary's opened doors I never knew existed. I'm now studying Engineering at university, thanks to the solid foundation I received here.",
       rating: 5,
@@ -191,25 +197,25 @@ const Home: React.FC = () => {
     {
       title: "Kenya Music Festivals, Band-National Level",
       year: "2025",
-      icon: Award,
+      icon: Music, // Icon representing music or band
       gradient: "from-yellow-400 to-orange-500",
     },
     {
       title: "Best CBE Implementation",
       year: "2025",
-      icon: Star,
+      icon: BadgeCheck, // Represents recognition, quality, or certification
       gradient: "from-purple-400 to-pink-500",
     },
     {
       title: "Community Service Excellence",
       year: "2025",
-      icon: Heart,
+      icon: HandHeart, // Represents service, care, and community help
       gradient: "from-red-400 to-rose-500",
     },
     {
       title: "Top 5 performing school-KCSE 2024-Bomet region",
       year: "2024",
-      icon: TrendingUp,
+      icon: Trophy, // Represents winning and achievement in performance
       gradient: "from-blue-400 to-cyan-500",
     },
   ];
@@ -218,7 +224,7 @@ const Home: React.FC = () => {
     {
       type: "interview",
       icon: CalendarCheck,
-      text: "Entrance Interviews for New Students: 8th, 15th & 22nd November 2025 – Book Your Slot Early!",
+      text: "Entrance Interviews for New Students: January 2026 – Book Your Slot Early!",
       link: "/admissions",
     },
     {
@@ -262,31 +268,63 @@ const Home: React.FC = () => {
   const facilities = [
     {
       name: "ICT Innovation Lab",
-      description: "State-of-the-art computer lab with latest technology",
-      icon: Microscope,
+      description: "A modern hub for digital skills, research, and innovation.",
+      icon: Monitor,
       image: "/images/students1.jpg",
-      features: ["50+ Computers", "High-Speed Internet", "Coding Classes"],
+      features: [
+        "Computer Literacy",
+        "Internet-Based Research",
+        "Basic Coding & Digital Skills",
+      ],
     },
     {
       name: "Science Laboratories",
-      description: "Fully equipped labs for Physics, Chemistry, and Biology",
-      icon: Microscope,
-      image: "/images/gate.jpg",
-      features: ["Modern Equipment", "Safety Standards", "Practical Learning"],
+      description:
+        "Hands-on science learning through safe, guided experiments.",
+      icon: FlaskConical,
+      image: "/images/sciencelab.jpg",
+      features: [
+        "Biology Practicals",
+        "Chemistry Experiments",
+        "Physics Investigations",
+      ],
     },
     {
-      name: "Music & Arts Center",
-      description: "Professional facilities for music and creative arts",
+      name: "Music & Creative Arts Centre",
+      description: "A vibrant space for talent, creativity, and performance.",
       icon: Music,
       image: "/images/band1.jpg",
-      features: ["Instruments", "Recording Studio", "Art Supplies"],
+      features: [
+        "Choir & Band Practice",
+        "Instrument Training",
+        "Creative Arts Activities",
+      ],
     },
     {
-      name: "Sports Complex",
-      description: "Comprehensive sports facilities for all activities",
-      icon: Trophy,
-      image: "/images/band2.jpg",
-      features: ["Football Field", "Basketball Court", "Athletics Track"],
+      name: "Home Science Laboratory",
+      description:
+        "Well-equipped learning space supporting practical skills in nutrition, textile studies, and home management.",
+      icon: Utensils,
+      image: "/images/homesc.jpg",
+      features: [
+        "Food & Nutrition Practicals",
+        "Textile & Garment Construction",
+        "Home Management Skills",
+      ],
+    },
+    {
+      name: "Guidance & Counselling Hub",
+      description: "Support centre for learner wellbeing and career guidance.",
+      icon: UserCheck,
+      image: "/images/counselling.jpg",
+      features: ["One-on-one guidance", "Career advisory", "Personal support"],
+    },
+    {
+      name: "Learner Support Centre",
+      description: "Academic coaching & enrichment programmes.",
+      icon: HeartHandshake,
+      image: "/images/learner-support.jpg",
+      features: ["Tutoring zones", "Remedial sessions", "Study groups"],
     },
   ];
 
@@ -297,6 +335,7 @@ const Home: React.FC = () => {
       time: "9:00 AM - 3:00 PM",
       type: "Admissions",
       color: "from-blue-500 to-blue-600",
+      icon: UserCheck, // Represents interview or user verification
     },
     {
       date: "15 Nov",
@@ -304,6 +343,7 @@ const Home: React.FC = () => {
       time: "9:00 AM - 3:00 PM",
       type: "Admissions",
       color: "from-blue-500 to-blue-600",
+      icon: UserCheck,
     },
     {
       date: "22 Nov",
@@ -311,6 +351,7 @@ const Home: React.FC = () => {
       time: "9:00 AM - 3:00 PM",
       type: "Admissions",
       color: "from-blue-500 to-blue-600",
+      icon: UserCheck,
     },
     {
       date: "5 Jan",
@@ -318,29 +359,30 @@ const Home: React.FC = () => {
       time: "7:00 AM",
       type: "Academic",
       color: "from-green-500 to-green-600",
+      icon: CalendarCheck, // Represents start of academic term/calendar event
     },
   ];
 
   const successStories = [
     {
-      name: "James Kipchoge",
-      achievement: "Full Scholarship to MIT",
-      year: "2024",
+      name: "Dominic Kipyegon",
+      achievement: "Attaining good performance level across all learning areas",
+      year: "2025",
       pathway: "STEM",
       quote:
-        "St. Mary's STEM program prepared me for the world's best universities.",
+        "St. Mary's STEM program prepared me for the world's best C1 schools.",
       image: "/placeholder.svg",
     },
     {
-      name: "Sarah Chebet",
+      name: "June Mitchelle",
       achievement: "National Debate Champion",
-      year: "2024",
+      year: "2025",
       pathway: "Social Sciences",
       quote: "The critical thinking skills I learned here are invaluable.",
       image: "/placeholder.svg",
     },
     {
-      name: "David Mutai",
+      name: "Onesmus Mogoko",
       achievement: "National Athletics Gold Medal",
       year: "2025",
       pathway: "Sports & Arts",
@@ -384,10 +426,10 @@ const Home: React.FC = () => {
   ];
 
   const partners = [
-    { name: "Kenya Institute of Curriculum Development" },
-    { name: "Cambridge Assessment" },
-    { name: "UNESCO Associated Schools" },
-    { name: "Microsoft Education" },
+    { name: "Catholic Diocese of Kericho" },
+    { name: "Fransiscan Sisters of St. Joseph-Asumbi" },
+    // { name: "UNESCO Associated Schools" },
+    // { name: "Microsoft Education" },
   ];
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -844,15 +886,45 @@ const Home: React.FC = () => {
                   <img
                     src="/images/students1.jpg"
                     alt="St. Mary's students"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
                   />
                   <img
                     src="/images/gate.jpg"
                     alt="School gate"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-1"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
                   />
                   <img
                     src="/images/GRADE 9 KNEC AGN.jpg"
+                    alt="Campus"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
+                  />
+                  <img
+                    src="/images/update_1-Bandjss.jpg"
+                    alt="Campus"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
+                  />
+                  <img
+                    src="/images/update2_g10.jpg"
+                    alt="Campus"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
+                  />
+                  <img
+                    src="/images/update3-banhs.jpg"
+                    alt="Campus"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
+                  />
+                  <img
+                    src="/images/update4-hs.jpg"
+                    alt="Campus"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
+                  />
+                  <img
+                    src="/images/update5.jpg"
+                    alt="Campus"
+                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
+                  />
+                  <img
+                    src="/images/update6.jpg"
                     alt="Campus"
                     className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
                   />
@@ -1601,8 +1673,8 @@ const Home: React.FC = () => {
                 }}
               ></div>
               <img
-                src="/images/band1.jpg"
-                alt="School band"
+                src="/images/GRADE10.jpg"
+                alt="Grade 10 learners"
                 className="relative rounded-3xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
               />
 
@@ -1626,7 +1698,7 @@ const Home: React.FC = () => {
                     className="text-2xl font-black"
                     style={{ color: "#10B981" }}
                   >
-                    A
+                    E.E 1
                   </div>
                   <div className="text-xs" style={{ color: "#6B7280" }}>
                     Average Grade

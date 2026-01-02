@@ -133,7 +133,7 @@ const Academics: React.FC = () => {
       duration: "3 Year",
     },
     {
-      title: "High School (Form 2-4)",
+      title: "High School (Form 3-4)",
       description: "8-4-4 learning system for girls",
       features: [
         "University entrance preparation",
@@ -544,7 +544,6 @@ const Academics: React.FC = () => {
       color: "text-cyan-600",
     },
   ];
-
 
   return (
     <div className="overflow-hidden">
@@ -1122,11 +1121,18 @@ const Academics: React.FC = () => {
 
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-blue-400 rounded-3xl transform rotate-3 scale-105 opacity-20"></div>
-              <img
-                src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Student assessment"
+
+              <video
+                src="/images/CBC AGRIC 2.mp4" // ensure correct video path
                 className="relative rounded-3xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
-              />
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-label="Student assessment video"
+              >
+                Sorry, your browser does not support the video tag.
+              </video>
 
               {/* Floating Stats */}
               <div className="absolute -top-6 -left-6 bg-white rounded-2xl p-4 shadow-xl">
