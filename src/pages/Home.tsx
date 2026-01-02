@@ -452,258 +452,216 @@ const Home: React.FC = () => {
 
   return (
     <div className="home-container">
-      <style>{`
-    .home-container {
-      overflow-x: hidden;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
+      <style>
+        {`
+.home-container {
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
-    /* =========================
-       FLOATING / MOTION EFFECTS
-       ========================= */
+/* =========================
+   FLOATING / MOTION EFFECTS
+   ========================= */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
+/* =========================
+   GLOW & BORDER EFFECTS
+   ========================= */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(251,191,36,0.3); }
+  50% { box-shadow: 0 0 40px rgba(251,191,36,0.6); }
+}
+@keyframes glow-border {
+  0% { box-shadow: 0 0 15px rgba(251,191,36,0.3); }
+  50% { box-shadow: 0 0 30px rgba(251,191,36,0.6); }
+  100% { box-shadow: 0 0 15px rgba(251,191,36,0.3); }
+}
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-glow-border { animation: glow-border 3s ease-in-out infinite; }
 
-    @keyframes bounce-slow {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
+/* =========================
+   SLIDESHOW (HERO IMAGES)
+   ========================= */
+@keyframes fadeZoom {
+  0% { opacity: 0; transform: scale(1.08); }
+  8% { opacity: 1; transform: scale(1); }
+  30% { opacity: 1; }
+  38% { opacity: 0; transform: scale(1.08); }
+  100% { opacity: 0; }
+}
+.animate-fadeZoom {
+  animation: fadeZoom 45s infinite ease-in-out;
+  will-change: opacity, transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+/* Pause on hover (desktop) */
+.slideshow:hover .animate-fadeZoom {
+  animation-play-state: paused;
+}
 
-    .animate-float {
-      animation: float 3s ease-in-out infinite;
-    }
+/* =========================
+   MOBILE / SMALL SCREENS – FASTER START
+   ========================= */
+@media (max-width: 640px) {
+  .animate-fadeZoom { animation-duration: 24s; }
+}
+@media (max-width: 480px) {
+  .animate-fadeZoom { animation-duration: 18s; }
+}
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fadeZoom {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    position: relative;
+  }
+}
 
-    .animate-bounce-slow {
-      animation: bounce-slow 2s ease-in-out infinite;
-    }
+/* =========================
+   SCROLLING CONTENT
+   ========================= */
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.scroll-left { animation: scroll-left 30s linear infinite; }
+.scroll-left:hover { animation-play-state: paused; }
 
-    /* =========================
-       GLOW & BORDER EFFECTS
-       ========================= */
+/* =========================
+   ENTRANCE ANIMATIONS
+   ========================= */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
 
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(251,191,36,0.3); }
-      50% { box-shadow: 0 0 40px rgba(251,191,36,0.6); }
-    }
+/* =========================
+   CARDS & HOVER EFFECTS
+   ========================= */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+}
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+.stat-card:hover .stat-number {
+  transform: scale(1.15);
+}
 
-    @keyframes glow-border {
-      0% { box-shadow: 0 0 15px rgba(251,191,36,0.3); }
-      50% { box-shadow: 0 0 30px rgba(251,191,36,0.6); }
-      100% { box-shadow: 0 0 15px rgba(251,191,36,0.3); }
-    }
+/* =========================
+   GLASS EFFECTS
+   ========================= */
+.glass {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.glass-dark {
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
 
-    .animate-pulse-glow {
-      animation: pulse-glow 2s ease-in-out infinite;
-    }
+/* =========================
+   BUTTONS
+   ========================= */
+.btn-primary {
+  background: linear-gradient(135deg, #FCD34D, #F59E0B);
+  color: #1F2937;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 25px -5px rgba(245,158,11,0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 20px 35px -5px rgba(245,158,11,0.6);
+}
+.btn-secondary {
+  background: transparent;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  border: 2px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+}
 
-    .animate-glow-border {
-      animation: glow-border 3s ease-in-out infinite;
-    }
+/* =========================
+   INPUTS & FORMS
+   ========================= */
+.newsletter-input {
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+.newsletter-input:focus {
+  outline: none;
+  border-color: #FCD34D;
+  background: rgba(255,255,255,0.15);
+}
+.newsletter-input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
 
-    /* =========================
-       SLIDESHOW (FIXED)
-       ========================= */
+/* =========================
+   SOCIAL ICONS
+   ========================= */
+.social-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.social-icon:hover {
+  transform: translateY(-5px) scale(1.1);
+}
 
-    @keyframes fadeZoom {
-      0% {
-        opacity: 0;
-        transform: scale(1.08);
-      }
-      8% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      30% {
-        opacity: 1;
-      }
-      38% {
-        opacity: 0;
-        transform: scale(1.08);
-      }
-      100% {
-        opacity: 0;
-      }
-    }
-
-    .animate-fadeZoom {
-      animation: fadeZoom 45s infinite ease-in-out;
-      will-change: opacity, transform;
-    }
-
-    /* =========================
-       SCROLLING CONTENT
-       ========================= */
-
-    @keyframes scroll-left {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    .scroll-left {
-      animation: scroll-left 30s linear infinite;
-    }
-
-    .scroll-left:hover {
-      animation-play-state: paused;
-    }
-
-    /* =========================
-       ENTRANCE ANIMATIONS
-       ========================= */
-
-    @keyframes slide-up {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate-slide-up {
-      animation: slide-up 0.6s ease-out forwards;
-    }
-
-    /* =========================
-       CARDS & HOVER EFFECTS
-       ========================= */
-
-    .card-hover {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .card-hover:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-    }
-
-    .stat-number {
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1;
-      transition: transform 0.3s ease;
-    }
-
-    .stat-card:hover .stat-number {
-      transform: scale(1.15);
-    }
-
-    /* =========================
-       GLASS EFFECTS
-       ========================= */
-
-    .glass {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .glass-dark {
-      background: rgba(0,0,0,0.2);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    /* =========================
-       BUTTONS
-       ========================= */
-
-    .btn-primary {
-      background: linear-gradient(135deg, #FCD34D, #F59E0B);
-      color: #1F2937;
-      padding: 1rem 2rem;
-      border-radius: 0.75rem;
-      font-weight: 700;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 10px 25px -5px rgba(245,158,11,0.4);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 20px 35px -5px rgba(245,158,11,0.6);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 0.75rem;
-      font-weight: 700;
-      border: 2px solid rgba(255,255,255,0.3);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.5);
-    }
-
-    /* =========================
-       INPUTS & FORMS
-       ========================= */
-
-    .newsletter-input {
-      padding: 1rem 1.5rem;
-      border-radius: 0.75rem;
-      border: 2px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.1);
-      color: white;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .newsletter-input:focus {
-      outline: none;
-      border-color: #FCD34D;
-      background: rgba(255,255,255,0.15);
-    }
-
-    .newsletter-input::placeholder {
-      color: rgba(255,255,255,0.6);
-    }
-
-    /* =========================
-       SOCIAL ICONS
-       ========================= */
-
-    .social-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .social-icon:hover {
-      transform: translateY(-5px) scale(1.1);
-    }
-
-    /* =========================
-       MEDIA QUERIES
-       ========================= */
-
-    @media (max-width: 768px) {
-      .stat-number {
-        font-size: 2rem;
-      }
-
-      .facility-image {
-        height: 250px;
-      }
-    }
-  `}</style>
+/* =========================
+   MEDIA QUERIES
+   ========================= */
+@media (max-width: 768px) {
+  .stat-number { font-size: 2rem; }
+  .facility-image { height: 250px; }
+}
+`}
+      </style>
 
       {/* Hero Section */}
       <section
@@ -876,21 +834,25 @@ const Home: React.FC = () => {
                     }}
                   ></div>
 
-                  <div className="relative rounded-3xl shadow-2xl w-full h-[420px] overflow-hidden border-4 border-transparent animate-glow-border">
+                  <div className="relative w-full h-[420px] rounded-3xl overflow-hidden shadow-2xl border-4 border-transparent animate-glow-border slideshow">
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
 
                     {images.map((image, index) => (
                       <img
                         key={image.src}
                         src={image.src}
                         alt={image.alt}
-                        className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom"
+                        className={`absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom ${
+                          index === 0 ? "opacity-100" : "opacity-0"
+                        }`}
                         style={{
                           animationDelay: `${index * 5}s`,
                           zIndex: index,
                         }}
                         loading={index === 0 ? "eager" : "lazy"}
+                        decoding="async"
+                        draggable="false"
                       />
                     ))}
                   </div>
