@@ -168,12 +168,6 @@ const About: React.FC = () => {
       department: "Administration",
     },
     {
-      name: "Dr. Johnson Bulowa",
-      position: "Guidance & Counselling",
-      image: "",
-      department: "Academic",
-    },
-    {
       name: "Mr. Cyrus L.",
       position: "Director Of Studies JSS",
       image: "langat.JPG",
