@@ -425,6 +425,18 @@ const Home: React.FC = () => {
     },
   ];
 
+  const images = [
+    { src: "/images/students1.jpg", alt: "St. Mary's students" },
+    { src: "/images/gate.jpg", alt: "School gate" },
+    { src: "/images/GRADE 9 KNEC AGN.jpg", alt: "Grade 9 students" },
+    { src: "/images/update_1-Bandjss.jpg", alt: "School activities" },
+    { src: "/images/update2_g10.jpg", alt: "Grade 10 students" },
+    { src: "/images/update3-banhs.jpg", alt: "School environment" },
+    { src: "/images/update4-hs.jpg", alt: "High school students" },
+    { src: "/images/update5.jpg", alt: "School life" },
+    { src: "/images/update6.jpg", alt: "School activities" },
+  ];
+
   const partners = [
     { name: "Catholic Diocese of Kericho" },
     { name: "Fransiscan Sisters of St. Joseph-Asumbi" },
@@ -441,276 +453,257 @@ const Home: React.FC = () => {
   return (
     <div className="home-container">
       <style>{`
-        .home-container {
-          overflow-x: hidden;
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
+    .home-container {
+      overflow-x: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
 
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
+    /* =========================
+       FLOATING / MOTION EFFECTS
+       ========================= */
 
-        @keyframes pulse-glow {
-          0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
-          50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.6); }
-        }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
 
-        @keyframes scroll-left {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-        @keyframes fadeZoom {
-          0%, 100% { opacity: 0; transform: scale(1.1); }
-          10%, 45% { opacity: 1; transform: scale(1); }
-          55%, 90% { opacity: 0; transform: scale(1.1); }
-        }
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
 
-        @keyframes glow-border {
-          0% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
-          50% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.6); }
-          100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); }
-        }
+    .animate-bounce-slow {
+      animation: bounce-slow 2s ease-in-out infinite;
+    }
 
-        @keyframes slide-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
+    /* =========================
+       GLOW & BORDER EFFECTS
+       ========================= */
 
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(251,191,36,0.3); }
+      50% { box-shadow: 0 0 40px rgba(251,191,36,0.6); }
+    }
 
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
+    @keyframes glow-border {
+      0% { box-shadow: 0 0 15px rgba(251,191,36,0.3); }
+      50% { box-shadow: 0 0 30px rgba(251,191,36,0.6); }
+      100% { box-shadow: 0 0 15px rgba(251,191,36,0.3); }
+    }
 
-        .animate-pulse-glow {
-          animation: pulse-glow 2s ease-in-out infinite;
-        }
+    .animate-pulse-glow {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
 
-        .animate-slide-up {
-          animation: slide-up 0.6s ease-out forwards;
-        }
+    .animate-glow-border {
+      animation: glow-border 3s ease-in-out infinite;
+    }
 
-        .animate-bounce-slow {
-          animation: bounce-slow 2s ease-in-out infinite;
-        }
+    /* =========================
+       SLIDESHOW (FIXED)
+       ========================= */
 
-        .scroll-left {
-          animation: scroll-left 30s linear infinite;
-        }
+    @keyframes fadeZoom {
+      0% {
+        opacity: 0;
+        transform: scale(1.08);
+      }
+      8% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      30% {
+        opacity: 1;
+      }
+      38% {
+        opacity: 0;
+        transform: scale(1.08);
+      }
+      100% {
+        opacity: 0;
+      }
+    }
 
-        .scroll-left:hover {
-          animation-play-state: paused;
-        }
+    .animate-fadeZoom {
+      animation: fadeZoom 45s infinite ease-in-out;
+      will-change: opacity, transform;
+    }
 
-        .animate-fadeZoom {
-          animation: fadeZoom 12s infinite ease-in-out;
-        }
+    /* =========================
+       SCROLLING CONTENT
+       ========================= */
 
-        .animate-fadeZoom-delay-1 {
-          animation: fadeZoom 12s infinite ease-in-out;
-          animation-delay: 4s;
-        }
+    @keyframes scroll-left {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
 
-        .animate-fadeZoom-delay-2 {
-          animation: fadeZoom 12s infinite ease-in-out;
-          animation-delay: 8s;
-        }
+    .scroll-left {
+      animation: scroll-left 30s linear infinite;
+    }
 
-        .animate-glow-border {
-          animation: glow-border 3s ease-in-out infinite;
-        }
+    .scroll-left:hover {
+      animation-play-state: paused;
+    }
 
-        .card-hover {
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    /* =========================
+       ENTRANCE ANIMATIONS
+       ========================= */
 
-        .card-hover:hover {
-          transform: translateY(-12px) scale(1.02);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
+    @keyframes slide-up {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .gradient-text {
-          background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #EF4444 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
+    .animate-slide-up {
+      animation: slide-up 0.6s ease-out forwards;
+    }
 
-        .glass {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+    /* =========================
+       CARDS & HOVER EFFECTS
+       ========================= */
 
-        .glass-dark {
-          background: rgba(0, 0, 0, 0.2);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .btn-primary {
-          background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
-          color: #1F2937;
-          padding: 1rem 2rem;
-          border-radius: 0.75rem;
-          font-weight: 700;
-          transition: all 0.3s ease;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
-        }
+    .card-hover:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    }
 
-        .btn-primary:hover {
-          transform: translateY(-2px) scale(1.05);
-          box-shadow: 0 20px 35px -5px rgba(245, 158, 11, 0.6);
-        }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      transition: transform 0.3s ease;
+    }
 
-        .btn-secondary {
-          background: transparent;
-          color: white;
-          padding: 1rem 2rem;
-          border-radius: 0.75rem;
-          font-weight: 700;
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          transition: all 0.3s ease;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          backdrop-filter: blur(10px);
-        }
+    .stat-card:hover .stat-number {
+      transform: scale(1.15);
+    }
 
-        .btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: rgba(255, 255, 255, 0.5);
-        }
+    /* =========================
+       GLASS EFFECTS
+       ========================= */
 
-        .section {
-          padding: 6rem 1rem;
-        }
+    .glass {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
 
-        .stat-number {
-          font-size: 3rem;
-          font-weight: 800;
-          line-height: 1;
-          transition: transform 0.3s ease;
-        }
+    .glass-dark {
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
 
-        .stat-card:hover .stat-number {
-          transform: scale(1.15);
-        }
+    /* =========================
+       BUTTONS
+       ========================= */
 
-        .newsletter-input {
-          padding: 1rem 1.5rem;
-          border-radius: 0.75rem;
-          border: 2px solid rgba(255, 255, 255, 0.2);
-          background: rgba(255, 255, 255, 0.1);
-          color: white;
-          backdrop-filter: blur(10px);
-          width: 100%;
-          transition: all 0.3s ease;
-        }
+    .btn-primary {
+      background: linear-gradient(135deg, #FCD34D, #F59E0B);
+      color: #1F2937;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 10px 25px -5px rgba(245,158,11,0.4);
+    }
 
-        .newsletter-input:focus {
-          outline: none;
-          border-color: #FCD34D;
-          background: rgba(255, 255, 255, 0.15);
-        }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 20px 35px -5px rgba(245,158,11,0.6);
+    }
 
-        .newsletter-input::placeholder {
-          color: rgba(255, 255, 255, 0.6);
-        }
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      border: 2px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
 
-        .social-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.3s ease;
-          cursor: pointer;
-        }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.5);
+    }
 
-        .social-icon:hover {
-          transform: translateY(-5px) scale(1.1);
-        }
+    /* =========================
+       INPUTS & FORMS
+       ========================= */
 
-        .event-card {
-          background: white;
-          border-radius: 1rem;
-          padding: 1.5rem;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-          transition: all 0.3s ease;
-          border-left: 4px solid transparent;
-        }
+    .newsletter-input {
+      padding: 1rem 1.5rem;
+      border-radius: 0.75rem;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
 
-        .event-card:hover {
-          transform: translateX(8px);
-          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
-        }
+    .newsletter-input:focus {
+      outline: none;
+      border-color: #FCD34D;
+      background: rgba(255,255,255,0.15);
+    }
 
-        .facility-image {
-          width: 100%;
-          height: 400px;
-          object-fit: cover;
-          border-radius: 1.5rem;
-          transition: transform 0.3s ease;
-        }
+    .newsletter-input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
 
-        .facility-image:hover {
-          transform: scale(1.05);
-        }
+    /* =========================
+       SOCIAL ICONS
+       ========================= */
 
-        .success-card {
-          background: white;
-          border-radius: 1.5rem;
-          overflow: hidden;
-          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-          transition: all 0.4s ease;
-          position: relative;
-        }
+    .social-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
 
-        .success-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899);
-        }
+    .social-icon:hover {
+      transform: translateY(-5px) scale(1.1);
+    }
 
-        .success-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
-        }
+    /* =========================
+       MEDIA QUERIES
+       ========================= */
 
-        @media (max-width: 768px) {
-          .section {
-            padding: 3rem 1rem;
-          }
+    @media (max-width: 768px) {
+      .stat-number {
+        font-size: 2rem;
+      }
 
-          .stat-number {
-            font-size: 2rem;
-          }
-
-          .facility-image {
-            height: 250px;
-          }
-        }
-      `}</style>
+      .facility-image {
+        height: 250px;
+      }
+    }
+  `}</style>
 
       {/* Hero Section */}
       <section
@@ -883,51 +876,24 @@ const Home: React.FC = () => {
                     }}
                   ></div>
 
-                  <img
-                    src="/images/students1.jpg"
-                    alt="St. Mary's students"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
-                  />
-                  <img
-                    src="/images/gate.jpg"
-                    alt="School gate"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
-                  />
-                  <img
-                    src="/images/GRADE 9 KNEC AGN.jpg"
-                    alt="Campus"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
-                  />
-                  <img
-                    src="/images/update_1-Bandjss.jpg"
-                    alt="Campus"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
-                  />
-                  <img
-                    src="/images/update2_g10.jpg"
-                    alt="Campus"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
-                  />
-                  <img
-                    src="/images/update3-banhs.jpg"
-                    alt="Campus"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
-                  />
-                  <img
-                    src="/images/update4-hs.jpg"
-                    alt="Campus"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
-                  />
-                  <img
-                    src="/images/update5.jpg"
-                    alt="Campus"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
-                  />
-                  <img
-                    src="/images/update6.jpg"
-                    alt="Campus"
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom-delay-2"
-                  />
+                  <div className="relative rounded-3xl shadow-2xl w-full h-[420px] overflow-hidden border-4 border-transparent animate-glow-border">
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/60 to-transparent" />
+
+                    {images.map((image, index) => (
+                      <img
+                        key={image.src}
+                        src={image.src}
+                        alt={image.alt}
+                        className="absolute inset-0 w-full h-full object-cover rounded-3xl animate-fadeZoom"
+                        style={{
+                          animationDelay: `${index * 5}s`,
+                          zIndex: index,
+                        }}
+                        loading={index === 0 ? "eager" : "lazy"}
+                      />
+                    ))}
+                  </div>
                 </div>
 
                 {/* Floating Stats Card */}
