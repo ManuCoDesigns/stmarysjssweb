@@ -1,11 +1,12 @@
-const express = require('express');
-const Grade = require('../models/Grade');
-const { auth, authorize } = require('../middleware/auth');
+import express from 'express';
+import Grade from '../models/Grade.js';
+import Parent from '../models/Parent.js';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Get grades
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const { 
       page = 1, 
@@ -41,7 +42,6 @@ router.get('/', auth, async (req, res) => {
       query.isPublished = true; // Students can only see published grades
     } else if (req.user.role === 'parent') {
       // Parents can only see their children's grades
-      const Parent = require('../models/Parent');
       const parent = await Parent.findOne({ user: req.user.userId });
       if (parent) {
         const childrenIds = parent.children.map(child => child.student);
@@ -80,9 +80,9 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get grade by ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
-    const grade = await Grade.findById(req.params.id)
+    const gradeData = await Grade.findById(req.params.id)
       .populate('student', 'user studentId')
       .populate('student.user', 'firstName lastName')
       .populate('subject', 'name code')
@@ -91,7 +91,7 @@ router.get('/:id', auth, async (req, res) => {
       .populate('publishedBy', 'firstName lastName')
       .populate('modificationHistory.modifiedBy', 'firstName lastName');
     
-    if (!grade) {
+    if (!gradeData) {
       return res.status(404).json({
         success: false,
         message: 'Grade not found'
@@ -99,7 +99,7 @@ router.get('/:id', auth, async (req, res) => {
     }
 
     // Check permissions
-    if (req.user.role === 'student' && grade.student.user.toString() !== req.user.userId) {
+    if (req.user.role === 'student' && gradeData.student.user.toString() !== req.user.userId) {
       return res.status(403).json({
         success: false,
         message: 'Access denied'
@@ -107,10 +107,9 @@ router.get('/:id', auth, async (req, res) => {
     }
 
     if (req.user.role === 'parent') {
-      const Parent = require('../models/Parent');
       const parent = await Parent.findOne({ user: req.user.userId });
       const hasAccess = parent && parent.children.some(
-        child => child.student.toString() === grade.student._id.toString()
+        child => child.student.toString() === gradeData.student._id.toString()
       );
       
       if (!hasAccess) {
@@ -123,7 +122,7 @@ router.get('/:id', auth, async (req, res) => {
 
     res.json({
       success: true,
-      grade
+      grade: gradeData
     });
   } catch (error) {
     res.status(500).json({
@@ -135,7 +134,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Create new grade
-router.post('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.post('/', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const {
       student, subject, class: classInfo, academicYear, term, assessmentType,
@@ -143,7 +142,7 @@ router.post('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
       feedback, remarks, skills, behavioralAssessment
     } = req.body;
 
-    const grade = new Grade({
+    const gradeData = new Grade({
       student,
       subject,
       teacher: req.user.teacherId,
@@ -162,9 +161,9 @@ router.post('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
       behavioralAssessment: behavioralAssessment ? JSON.parse(behavioralAssessment) : {}
     });
 
-    await grade.save();
+    await gradeData.save();
 
-    const populatedGrade = await Grade.findById(grade._id)
+    const populatedGrade = await Grade.findById(gradeData._id)
       .populate('student', 'user studentId')
       .populate('student.user', 'firstName lastName')
       .populate('subject', 'name code')
@@ -186,7 +185,7 @@ router.post('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
 });
 
 // Update grade
-router.put('/:id', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.put('/:id', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const existingGrade = await Grade.findById(req.params.id);
     
@@ -255,11 +254,11 @@ router.put('/:id', auth, authorize(['admin', 'teacher']), async (req, res) => {
 });
 
 // Delete grade
-router.delete('/:id', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.delete('/:id', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
-    const grade = await Grade.findById(req.params.id);
+    const gradeData = await Grade.findById(req.params.id);
     
-    if (!grade) {
+    if (!gradeData) {
       return res.status(404).json({
         success: false,
         message: 'Grade not found'
@@ -267,7 +266,7 @@ router.delete('/:id', auth, authorize(['admin', 'teacher']), async (req, res) =>
     }
 
     // Check if user is the teacher who created the grade or admin
-    if (grade.teacher.toString() !== req.user.teacherId && req.user.role !== 'admin') {
+    if (gradeData.teacher.toString() !== req.user.teacherId && req.user.role !== 'admin') {
       return res.status(403).json({
         success: false,
         message: 'Not authorized to delete this grade'
@@ -290,7 +289,7 @@ router.delete('/:id', auth, authorize(['admin', 'teacher']), async (req, res) =>
 });
 
 // Publish grades
-router.patch('/publish', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.patch('/publish', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const { gradeIds } = req.body;
     
@@ -321,7 +320,7 @@ router.patch('/publish', auth, authorize(['admin', 'teacher']), async (req, res)
 });
 
 // Get student grade summary
-router.get('/student/:studentId/summary', auth, async (req, res) => {
+router.get('/student/:studentId/summary', authenticate, async (req, res) => {
   try {
     const { academicYear, term } = req.query;
     
@@ -334,7 +333,6 @@ router.get('/student/:studentId/summary', auth, async (req, res) => {
     }
 
     if (req.user.role === 'parent') {
-      const Parent = require('../models/Parent');
       const parent = await Parent.findOne({ user: req.user.userId });
       const hasAccess = parent && parent.children.some(
         child => child.student.toString() === req.params.studentId
@@ -455,11 +453,11 @@ router.get('/student/:studentId/summary', auth, async (req, res) => {
 });
 
 // Mark grade as viewed by parent
-router.patch('/:id/parent-viewed', auth, authorize(['parent']), async (req, res) => {
+router.patch('/:id/parent-viewed', authenticate, authorize('parent'), async (req, res) => {
   try {
-    const grade = await Grade.findById(req.params.id);
+    const gradeData = await Grade.findById(req.params.id);
     
-    if (!grade) {
+    if (!gradeData) {
       return res.status(404).json({
         success: false,
         message: 'Grade not found'
@@ -467,10 +465,9 @@ router.patch('/:id/parent-viewed', auth, authorize(['parent']), async (req, res)
     }
 
     // Check if parent has access to this grade
-    const Parent = require('../models/Parent');
     const parent = await Parent.findOne({ user: req.user.userId });
     const hasAccess = parent && parent.children.some(
-      child => child.student.toString() === grade.student.toString()
+      child => child.student.toString() === gradeData.student.toString()
     );
     
     if (!hasAccess) {
@@ -480,9 +477,9 @@ router.patch('/:id/parent-viewed', auth, authorize(['parent']), async (req, res)
       });
     }
 
-    grade.parentViewed = true;
-    grade.parentViewedAt = new Date();
-    await grade.save();
+    gradeData.parentViewed = true;
+    gradeData.parentViewedAt = new Date();
+    await gradeData.save();
 
     res.json({
       success: true,
@@ -498,7 +495,7 @@ router.patch('/:id/parent-viewed', auth, authorize(['parent']), async (req, res)
 });
 
 // Get grade statistics for teacher
-router.get('/teacher/:teacherId/stats', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.get('/teacher/:teacherId/stats', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const { academicYear, term, subject } = req.query;
     
@@ -563,4 +560,4 @@ router.get('/teacher/:teacherId/stats', auth, authorize(['admin', 'teacher']), a
   }
 });
 
-module.exports = router;
+export default router;

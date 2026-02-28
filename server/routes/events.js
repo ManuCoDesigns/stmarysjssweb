@@ -1,11 +1,11 @@
-const express = require('express');
-const Event = require('../models/Event');
-const { auth, authorize } = require('../middleware/auth');
+import express from 'express';
+import Event from '../models/Event.js';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Get all events
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const { page = 1, limit = 10, type, status, month, year } = req.query;
     
@@ -45,7 +45,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get event by ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
     const event = await Event.findById(req.params.id)
       .populate('organizer', 'firstName lastName email phone')
@@ -72,7 +72,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Create new event
-router.post('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.post('/', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const {
       title, description, type, startDate, endDate, startTime, endTime,
@@ -115,7 +115,7 @@ router.post('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
 });
 
 // Update event
-router.put('/:id', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.put('/:id', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     
@@ -155,7 +155,7 @@ router.put('/:id', auth, authorize(['admin', 'teacher']), async (req, res) => {
 });
 
 // Register for event
-router.post('/:id/register', auth, async (req, res) => {
+router.post('/:id/register', authenticate, async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     
@@ -225,7 +225,7 @@ router.post('/:id/register', auth, async (req, res) => {
 });
 
 // Cancel registration
-router.delete('/:id/register', auth, async (req, res) => {
+router.delete('/:id/register', authenticate, async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     
@@ -257,7 +257,7 @@ router.delete('/:id/register', auth, async (req, res) => {
 });
 
 // Update event status
-router.patch('/:id/status', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.patch('/:id/status', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const { status } = req.body;
     
@@ -295,4 +295,4 @@ router.patch('/:id/status', auth, authorize(['admin', 'teacher']), async (req, r
   }
 });
 
-module.exports = router;
+export default router;

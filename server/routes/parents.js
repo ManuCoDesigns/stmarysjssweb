@@ -1,13 +1,13 @@
-const express = require('express');
-const Parent = require('../models/Parent');
-const User = require('../models/User');
-const Student = require('../models/Student');
-const { auth, authorize } = require('../middleware/auth');
+import express from 'express';
+import Parent from '../models/Parent.js';
+import User from '../models/User.js';
+import Student from '../models/Student.js';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Get all parents
-router.get('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.get('/', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const { page = 1, limit = 10, search, relationship } = req.query;
     
@@ -42,7 +42,7 @@ router.get('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
 });
 
 // Get parent by ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
     const parent = await Parent.findById(req.params.id)
       .populate('user', 'firstName lastName email phone profileImage address')
@@ -83,7 +83,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Create new parent
-router.post('/', auth, authorize(['admin']), async (req, res) => {
+router.post('/', authenticate, authorize('admin'), async (req, res) => {
   try {
     const {
       // User data
@@ -142,7 +142,7 @@ router.post('/', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Update parent
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', authenticate, async (req, res) => {
   try {
     const parent = await Parent.findById(req.params.id);
     
@@ -184,7 +184,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // Delete parent
-router.delete('/:id', auth, authorize(['admin']), async (req, res) => {
+router.delete('/:id', authenticate, authorize('admin'), async (req, res) => {
   try {
     const parent = await Parent.findByIdAndUpdate(
       req.params.id,
@@ -213,7 +213,7 @@ router.delete('/:id', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Add child to parent
-router.post('/:id/children', auth, authorize(['admin']), async (req, res) => {
+router.post('/:id/children', authenticate, authorize('admin'), async (req, res) => {
   try {
     const { studentId, relationship, isPrimaryContact } = req.body;
     
@@ -273,7 +273,7 @@ router.post('/:id/children', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Remove child from parent
-router.delete('/:id/children/:studentId', auth, authorize(['admin']), async (req, res) => {
+router.delete('/:id/children/:studentId', authenticate, authorize('admin'), async (req, res) => {
   try {
     const parent = await Parent.findById(req.params.id);
     if (!parent) {
@@ -304,7 +304,7 @@ router.delete('/:id/children/:studentId', auth, authorize(['admin']), async (req
 });
 
 // Schedule meeting
-router.post('/:id/meetings', auth, async (req, res) => {
+router.post('/:id/meetings', authenticate, async (req, res) => {
   try {
     const { date, type, teacher, student, purpose } = req.body;
     
@@ -356,7 +356,7 @@ router.post('/:id/meetings', auth, async (req, res) => {
 });
 
 // Update meeting status
-router.patch('/:id/meetings/:meetingId', auth, async (req, res) => {
+router.patch('/:id/meetings/:meetingId', authenticate, async (req, res) => {
   try {
     const { status, notes } = req.body;
     
@@ -396,7 +396,7 @@ router.patch('/:id/meetings/:meetingId', auth, async (req, res) => {
 });
 
 // Submit feedback
-router.post('/:id/feedback', auth, async (req, res) => {
+router.post('/:id/feedback', authenticate, async (req, res) => {
   try {
     const { category, subject, message, priority } = req.body;
     
@@ -441,7 +441,7 @@ router.post('/:id/feedback', auth, async (req, res) => {
 });
 
 // Respond to feedback
-router.patch('/:id/feedback/:feedbackId/respond', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.patch('/:id/feedback/:feedbackId/respond', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const { message, status } = req.body;
     
@@ -489,7 +489,7 @@ router.patch('/:id/feedback/:feedbackId/respond', auth, authorize(['admin', 'tea
 });
 
 // Get children's information for parent
-router.get('/:id/children-info', auth, async (req, res) => {
+router.get('/:id/children-info', authenticate, async (req, res) => {
   try {
     const parent = await Parent.findById(req.params.id)
       .populate({
@@ -535,7 +535,7 @@ router.get('/:id/children-info', auth, async (req, res) => {
 });
 
 // Update notification preferences
-router.patch('/:id/preferences', auth, async (req, res) => {
+router.patch('/:id/preferences', authenticate, async (req, res) => {
   try {
     const { preferences } = req.body;
     
@@ -572,4 +572,4 @@ router.patch('/:id/preferences', auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,7 +1,7 @@
-const express = require('express');
-const News = require('../models/News');
-const { auth, authorize } = require('../middleware/auth');
-const upload = require('../middleware/upload');
+import express from 'express';
+import News from '../models/News.js';
+import { authenticate, authorize } from '../middleware/auth.js';
+import upload from '../middleware/upload.js';
 
 const router = express.Router();
 
@@ -109,7 +109,7 @@ router.get('/:identifier', async (req, res) => {
 });
 
 // Create new news article
-router.post('/', auth, authorize(['admin', 'teacher']), upload.array('images', 5), async (req, res) => {
+router.post('/', authenticate, authorize('admin', 'teacher'), upload.array('images', 5), async (req, res) => {
   try {
     const {
       title, content, summary, category, tags, status, publishDate, expiryDate,
@@ -167,7 +167,7 @@ router.post('/', auth, authorize(['admin', 'teacher']), upload.array('images', 5
 });
 
 // Update news article
-router.put('/:id', auth, authorize(['admin', 'teacher']), upload.array('images', 5), async (req, res) => {
+router.put('/:id', authenticate, authorize('admin', 'teacher'), upload.array('images', 5), async (req, res) => {
   try {
     const article = await News.findById(req.params.id);
     
@@ -238,7 +238,7 @@ router.put('/:id', auth, authorize(['admin', 'teacher']), upload.array('images',
 });
 
 // Delete news article
-router.delete('/:id', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.delete('/:id', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const article = await News.findById(req.params.id);
     
@@ -273,7 +273,7 @@ router.delete('/:id', auth, authorize(['admin', 'teacher']), async (req, res) =>
 });
 
 // Like/Unlike article
-router.post('/:id/like', auth, async (req, res) => {
+router.post('/:id/like', authenticate, async (req, res) => {
   try {
     const article = await News.findById(req.params.id);
     
@@ -319,7 +319,7 @@ router.post('/:id/like', auth, async (req, res) => {
 });
 
 // Add comment to article
-router.post('/:id/comments', auth, async (req, res) => {
+router.post('/:id/comments', authenticate, async (req, res) => {
   try {
     const { content } = req.body;
     
@@ -361,7 +361,7 @@ router.post('/:id/comments', auth, async (req, res) => {
 });
 
 // Approve/Reject comment
-router.patch('/:id/comments/:commentId/approve', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.patch('/:id/comments/:commentId/approve', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const { isApproved } = req.body;
     
@@ -457,4 +457,4 @@ router.get('/breaking/news', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

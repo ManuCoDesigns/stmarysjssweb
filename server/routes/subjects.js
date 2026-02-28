@@ -1,11 +1,11 @@
-const express = require('express');
-const Subject = require('../models/Subject');
-const { auth, authorize } = require('../middleware/auth');
+import express from 'express';
+import Subject from '../models/Subject.js';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Get all subjects
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const { department, grade, type } = req.query;
     
@@ -31,7 +31,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get subject by ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
     const subject = await Subject.findById(req.params.id);
     
@@ -56,7 +56,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Create new subject
-router.post('/', auth, authorize(['admin']), async (req, res) => {
+router.post('/', authenticate, authorize('admin'), async (req, res) => {
   try {
     const {
       name, code, description, department, grades, type, credits,
@@ -93,7 +93,7 @@ router.post('/', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Update subject
-router.put('/:id', auth, authorize(['admin']), async (req, res) => {
+router.put('/:id', authenticate, authorize('admin'), async (req, res) => {
   try {
     const subject = await Subject.findByIdAndUpdate(
       req.params.id,
@@ -123,7 +123,7 @@ router.put('/:id', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Delete subject
-router.delete('/:id', auth, authorize(['admin']), async (req, res) => {
+router.delete('/:id', authenticate, authorize('admin'), async (req, res) => {
   try {
     const subject = await Subject.findByIdAndUpdate(
       req.params.id,
@@ -151,4 +151,4 @@ router.delete('/:id', auth, authorize(['admin']), async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
