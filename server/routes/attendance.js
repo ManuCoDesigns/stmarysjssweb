@@ -1,11 +1,11 @@
 import express from 'express';
 import Attendance from '../models/Attendance.js';
-import { auth, authorize } from '../middleware/auth.js';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Get attendance records
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const {
       page = 1,
@@ -81,7 +81,7 @@ router.get('/', auth, async (req, res) => {
 // I can convert the rest (all the other routes) fully for you if you want.
 
 // Get attendance by ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
     const attendance = await Attendance.findById(req.params.id)
       .populate('student', 'user studentId')
@@ -104,7 +104,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Create attendance record
-router.post('/', auth, authorize('teacher', 'admin'), async (req, res) => {
+router.post('/', authenticate, authorize('teacher', 'admin'), async (req, res) => {
   try {
     const { student, class: classInfo, date, periods } = req.body;
 
@@ -129,7 +129,7 @@ router.post('/', auth, authorize('teacher', 'admin'), async (req, res) => {
 });
 
 // Update attendance record
-router.put('/:id', auth, authorize('teacher', 'admin'), async (req, res) => {
+router.put('/:id', authenticate, authorize('teacher', 'admin'), async (req, res) => {
   try {
     const { periods, overallStatus } = req.body;
 
@@ -158,7 +158,7 @@ router.put('/:id', auth, authorize('teacher', 'admin'), async (req, res) => {
 });
 
 // Delete attendance record
-router.delete('/:id', auth, authorize('teacher', 'admin'), async (req, res) => {
+router.delete('/:id', authenticate, authorize('teacher', 'admin'), async (req, res) => {
   try {
     const attendance = await Attendance.findByIdAndDelete(req.params.id);
 

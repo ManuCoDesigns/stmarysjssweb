@@ -1,12 +1,16 @@
-const express = require('express');
-const Message = require('../models/Message');
-const { auth, authorize } = require('../middleware/auth');
-const upload = require('../middleware/upload');
+import express from 'express';
+import Message from '../models/Message.js';
+import User from '../models/User.js';
+import Student from '../models/Student.js';
+import Teacher from '../models/Teacher.js';
+import Parent from '../models/Parent.js';
+import { authenticate, authorize } from '../middleware/auth.js';
+import upload from '../middleware/upload.js';
 
 const router = express.Router();
 
 // Get messages for current user
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const { 
       page = 1, 
@@ -71,7 +75,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get message by ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
     const message = await Message.findById(req.params.id)
       .populate('sender', 'firstName lastName profileImage role')
@@ -119,7 +123,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Send new message
-router.post('/', auth, upload.array('attachments', 5), async (req, res) => {
+router.post('/', authenticate, upload.array('attachments', 5), async (req, res) => {
   try {
     const {
       recipients, subject, content, type, priority, category,
@@ -196,7 +200,7 @@ router.post('/', auth, upload.array('attachments', 5), async (req, res) => {
 });
 
 // Reply to message
-router.post('/:id/reply', auth, upload.array('attachments', 5), async (req, res) => {
+router.post('/:id/reply', authenticate, upload.array('attachments', 5), async (req, res) => {
   try {
     const { content, priority } = req.body;
     
@@ -264,7 +268,7 @@ router.post('/:id/reply', auth, upload.array('attachments', 5), async (req, res)
 });
 
 // Mark message as read/unread
-router.patch('/:id/read', auth, async (req, res) => {
+router.patch('/:id/read', authenticate, async (req, res) => {
   try {
     const { isRead } = req.body;
     
@@ -309,7 +313,7 @@ router.patch('/:id/read', auth, async (req, res) => {
 });
 
 // Archive/Unarchive message
-router.patch('/:id/archive', auth, async (req, res) => {
+router.patch('/:id/archive', authenticate, async (req, res) => {
   try {
     const { isArchived } = req.body;
     
@@ -348,7 +352,7 @@ router.patch('/:id/archive', auth, async (req, res) => {
 });
 
 // Delete message
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', authenticate, async (req, res) => {
   try {
     const message = await Message.findById(req.params.id);
     
@@ -395,7 +399,7 @@ router.delete('/:id', auth, async (req, res) => {
 });
 
 // Get unread message count
-router.get('/unread/count', auth, async (req, res) => {
+router.get('/unread/count', authenticate, async (req, res) => {
   try {
     const count = await Message.countDocuments({
       'recipients.user': req.user.userId,
@@ -417,18 +421,12 @@ router.get('/unread/count', auth, async (req, res) => {
 });
 
 // Broadcast message to multiple users
-router.post('/broadcast', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.post('/broadcast', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const {
       subject, content, targetAudience, specificGrades, specificSections,
       priority, category, scheduledFor
     } = req.body;
-
-    // Get recipients based on target audience
-    const User = require('../models/User');
-    const Student = require('../models/Student');
-    const Teacher = require('../models/Teacher');
-    const Parent = require('../models/Parent');
 
     let recipients = [];
 
@@ -513,4 +511,4 @@ router.post('/broadcast', auth, authorize(['admin', 'teacher']), async (req, res
   }
 });
 
-module.exports = router;
+export default router;

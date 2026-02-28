@@ -1,12 +1,12 @@
-const express = require('express');
-const Teacher = require('../models/Teacher');
-const User = require('../models/User');
-const { auth, authorize } = require('../middleware/auth');
+import express from 'express';
+import Teacher from '../models/Teacher.js';
+import User from '../models/User.js';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Get all teachers
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const { page = 1, limit = 10, department, subject } = req.query;
     
@@ -40,7 +40,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get teacher by ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
     const teacher = await Teacher.findById(req.params.id)
       .populate('user', 'firstName lastName email phone profileImage address');
@@ -66,7 +66,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Create new teacher
-router.post('/', auth, authorize(['admin']), async (req, res) => {
+router.post('/', authenticate, authorize('admin'), async (req, res) => {
   try {
     const {
       // User data
@@ -126,7 +126,7 @@ router.post('/', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Update teacher
-router.put('/:id', auth, authorize(['admin']), async (req, res) => {
+router.put('/:id', authenticate, authorize('admin'), async (req, res) => {
   try {
     const teacher = await Teacher.findByIdAndUpdate(
       req.params.id,
@@ -156,7 +156,7 @@ router.put('/:id', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Delete teacher
-router.delete('/:id', auth, authorize(['admin']), async (req, res) => {
+router.delete('/:id', authenticate, authorize('admin'), async (req, res) => {
   try {
     const teacher = await Teacher.findByIdAndUpdate(
       req.params.id,
@@ -185,7 +185,7 @@ router.delete('/:id', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Get teacher schedule
-router.get('/:id/schedule', auth, async (req, res) => {
+router.get('/:id/schedule', authenticate, async (req, res) => {
   try {
     const teacher = await Teacher.findById(req.params.id);
     if (!teacher) {
@@ -209,7 +209,7 @@ router.get('/:id/schedule', auth, async (req, res) => {
 });
 
 // Update teacher schedule
-router.put('/:id/schedule', auth, authorize(['admin']), async (req, res) => {
+router.put('/:id/schedule', authenticate, authorize('admin'), async (req, res) => {
   try {
     const { schedule } = req.body;
     
@@ -241,7 +241,7 @@ router.put('/:id/schedule', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Add performance review
-router.post('/:id/review', auth, authorize(['admin']), async (req, res) => {
+router.post('/:id/review', authenticate, authorize('admin'), async (req, res) => {
   try {
     const { reviewer, comments, rating } = req.body;
     
@@ -280,4 +280,4 @@ router.post('/:id/review', auth, authorize(['admin']), async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

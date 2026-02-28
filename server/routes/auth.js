@@ -1,7 +1,7 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const { auth } = require('../middleware/auth');
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+import { authenticate } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -124,7 +124,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Get current user
-router.get('/me', auth, async (req, res) => {
+router.get('/me', authenticate, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select('-password');
     res.json({
@@ -141,7 +141,7 @@ router.get('/me', auth, async (req, res) => {
 });
 
 // Update profile
-router.put('/profile', auth, async (req, res) => {
+router.put('/profile', authenticate, async (req, res) => {
   try {
     const { firstName, lastName, phone, address } = req.body;
     
@@ -166,7 +166,7 @@ router.put('/profile', auth, async (req, res) => {
 });
 
 // Change password
-router.put('/change-password', auth, async (req, res) => {
+router.put('/change-password', authenticate, async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
     
@@ -198,4 +198,4 @@ router.put('/change-password', auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

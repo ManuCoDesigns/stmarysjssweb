@@ -1,11 +1,11 @@
-const express = require('express');
-const Exam = require('../models/Exam');
-const { auth, authorize } = require('../middleware/auth');
+import express from 'express';
+import Exam from '../models/Exam.js';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Get all exams
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const { academicYear, term, grade, type } = req.query;
     
@@ -37,7 +37,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get exam by ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
     const exam = await Exam.findById(req.params.id)
       .populate('subjects.subject', 'name code')
@@ -68,7 +68,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Create new exam
-router.post('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.post('/', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const {
       name, type, academicYear, term, grades, subjects
@@ -105,7 +105,7 @@ router.post('/', auth, authorize(['admin', 'teacher']), async (req, res) => {
 });
 
 // Update exam
-router.put('/:id', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.put('/:id', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const exam = await Exam.findByIdAndUpdate(
       req.params.id,
@@ -136,7 +136,7 @@ router.put('/:id', auth, authorize(['admin', 'teacher']), async (req, res) => {
 });
 
 // Add exam results
-router.post('/:id/results', auth, authorize(['admin', 'teacher']), async (req, res) => {
+router.post('/:id/results', authenticate, authorize('admin', 'teacher'), async (req, res) => {
   try {
     const { results } = req.body;
     
@@ -198,7 +198,7 @@ router.post('/:id/results', auth, authorize(['admin', 'teacher']), async (req, r
 });
 
 // Publish exam results
-router.patch('/:id/publish', auth, authorize(['admin']), async (req, res) => {
+router.patch('/:id/publish', authenticate, authorize('admin'), async (req, res) => {
   try {
     const exam = await Exam.findByIdAndUpdate(
       req.params.id,
@@ -231,7 +231,7 @@ router.patch('/:id/publish', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Get student results
-router.get('/student/:studentId', auth, async (req, res) => {
+router.get('/student/:studentId', authenticate, async (req, res) => {
   try {
     const { academicYear, term } = req.query;
     
@@ -268,4 +268,4 @@ router.get('/student/:studentId', auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

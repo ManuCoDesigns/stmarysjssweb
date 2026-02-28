@@ -1,11 +1,11 @@
-const express = require('express');
-const Class = require('../models/Class');
-const { auth, authorize } = require('../middleware/auth');
+import express from 'express';
+import Class from '../models/Class.js';
+import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Get all classes
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const { academicYear, grade } = req.query;
     
@@ -35,7 +35,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get class by ID
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
     const classData = await Class.findById(req.params.id)
       .populate('classTeacher', 'user employeeId department')
@@ -66,7 +66,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Create new class
-router.post('/', auth, authorize(['admin']), async (req, res) => {
+router.post('/', authenticate, authorize('admin'), async (req, res) => {
   try {
     const {
       grade, section, academicYear, classTeacher, subjects, maxStrength, classroom
@@ -103,7 +103,7 @@ router.post('/', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Update class
-router.put('/:id', auth, authorize(['admin']), async (req, res) => {
+router.put('/:id', authenticate, authorize('admin'), async (req, res) => {
   try {
     const classData = await Class.findByIdAndUpdate(
       req.params.id,
@@ -134,7 +134,7 @@ router.put('/:id', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Add student to class
-router.post('/:id/students', auth, authorize(['admin']), async (req, res) => {
+router.post('/:id/students', authenticate, authorize('admin'), async (req, res) => {
   try {
     const { studentId } = req.body;
     
@@ -181,7 +181,7 @@ router.post('/:id/students', auth, authorize(['admin']), async (req, res) => {
 });
 
 // Remove student from class
-router.delete('/:id/students/:studentId', auth, authorize(['admin']), async (req, res) => {
+router.delete('/:id/students/:studentId', authenticate, authorize('admin'), async (req, res) => {
   try {
     const classData = await Class.findById(req.params.id);
     if (!classData) {
@@ -212,7 +212,7 @@ router.delete('/:id/students/:studentId', auth, authorize(['admin']), async (req
 });
 
 // Get class timetable
-router.get('/:id/timetable', auth, async (req, res) => {
+router.get('/:id/timetable', authenticate, async (req, res) => {
   try {
     const classData = await Class.findById(req.params.id)
       .populate('timetable.periods.teacher', 'user employeeId')
@@ -239,7 +239,7 @@ router.get('/:id/timetable', auth, async (req, res) => {
 });
 
 // Update class timetable
-router.put('/:id/timetable', auth, authorize(['admin']), async (req, res) => {
+router.put('/:id/timetable', authenticate, authorize('admin'), async (req, res) => {
   try {
     const { timetable } = req.body;
     
@@ -270,4 +270,4 @@ router.put('/:id/timetable', auth, authorize(['admin']), async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
